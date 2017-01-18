@@ -1,0 +1,42 @@
+{
+  "name": "smartfolio",
+  "version": "0.0.1",
+  "description": "An album app",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rjmohammad/Smartfolio.git"
+  },
+  "author": "RJ Mohammad & Michelle Carter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rjmohammad/Smartfolio/issues"
+  },
+  "homepage": "https://github.com/rjmohammad/Smartfolio#readme",
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-animate": "^1.6.1",
+    "angular-aria": "^1.6.1",
+    "angular-material": "^1.1.1",
+    "angular-messages": "^1.6.1",
+    "angular-mocks": "^1.6.1",
+    "angular-route": "^1.6.1",
+    "axios": "^0.15.3",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.16.0",
+    "express": "^4.14.0",
+    "jwt-simple": "^0.5.1",
+    "morgan": "^1.7.0",
+    "mysql": "^2.12.0",
+    "path": "^0.12.7",
+    "q": "^1.4.1",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.13.1",
+    "nodemon": "^1.11.0"
+  }
+}
