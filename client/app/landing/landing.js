@@ -43,5 +43,4 @@ angular.module('app.landing', ['ngMaterial',"ng","ngAnimate","ngAria"])
                 }
             }
         }
-
     })
