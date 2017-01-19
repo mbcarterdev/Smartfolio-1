@@ -1,9 +1,9 @@
+
 <md-toolbar>
 
 </md-toolbar>
-
-<div class="container"  layout="row" flex>
-<md-content id="content" layout="column" layout-align="center center"  flex>
+<form class="login">
+    <h1><Smartfolio></Smartfolio></h1>
     <md-input-container>
         <label>EmailAddress</label>
         <input type="email" ng-model="user.username" />
@@ -12,9 +12,12 @@
         <label>Password</label>
         <input type="password" ng-model="user.password" />
     </md-input-container>
-    <md-botton class="md-raised md-primary" ng-click="login()">Login</md-botton>
-</md-content>
-</div>
+    <div layout="row" layout-align="center center" style="padding-top:20px;">
+        <md-button class="btn btn-lg btn-primary btn-block" ng-click="login()">Login</md-button>
+        <div flex="flex"></div>
+        <md-button class="btn btn-lg btn-primary btn-block" ng-click="showDialog($event)" md-no-ink="md-no-ink">Sign Up</md-button>
+    </div>
+</form>
 <md-bottom-sheet>
 
 </md-bottom-sheet>

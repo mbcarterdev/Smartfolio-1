@@ -1,4 +1,5 @@
 angular.module('app', ['app.landing',
+    'app.factory',
     'app.home',
     'app.album',
     'app.settings',
