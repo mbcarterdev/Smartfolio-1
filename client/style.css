@@ -1,0 +1,15 @@
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+    background-color: rgb(0,0,0);
+    color: rgb(0,0,0);
+    opacity: 0.4;
+    height: 100px
+}
+md-bottom-sheet.md-default-theme:not(.md-menu-bottom-sheet), md-bottom-sheet:not(.md-menu-bottom-sheet) {
+    background-color: rgb(0,0,0);
+    color: rgb(0,0,0);
+    opacity: 0.4;
+    height: 50px
+}
+.blue {
+    background-color: blue;
+}
