@@ -22,7 +22,7 @@ md-bottom-sheet.md-default-theme:not(.md-menu-bottom-sheet), md-bottom-sheet:not
 /*}*/
 
 
-body{
+.landing{
     background-image: url("https://static.pexels.com/photos/17577/pexels-photo.jpg");
     background-size: cover;
     background-position: center;
