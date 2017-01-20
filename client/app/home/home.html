@@ -1,7 +1,48 @@
 <md-toolbar>
-
+    <div>
+    <md-button>
+        <md-tooltip>Menu</md-tooltip>
+        <md-icon class="md-default-theme" ng-click="toggleLeft()" class="material-icons">restaurant_menu</md-icon>
+    </md-button>
+    </div>
 </md-toolbar>
 
-<md-bottom-sheet>
 
-</md-bottom-sheet>
+    <md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="20">
+        <md-toolbar>
+            <h1 class="head" class="md-toolbar-tools" >Menu</h1>
+        </md-toolbar>
+        <md-content layout-margin="">
+            <md-button ng-click="toggleLeft()" class="md-accent">
+                Close this Sidenav
+            </md-button>
+        </md-content>
+    </md-sidenav>
+
+
+
+<ul class="flex-container wrap">
+    <li class="flex-item ripplelink" md-whiteframe="24" ng-repeat="image in images"><img class="thumbnail" src="{{image}}" ng-click="show()"></li>
+
+</ul>
+<script type="text/ng-template" id="modal.html">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Yes or No?</h4>
+                    <img src='http://img1.ak.crunchyroll.com/i/spire4/30eb07003c901066a9db027399c77ad41420598162_full.jpg' />
+                    <img src='https://upload.wikimedia.org/wikipedia/en/thumb/1/15/Kurau_Phantom_Memory.jpg/230px-Kurau_Phantom_Memory.jpg' />
+                </div>
+                <div class="modal-body">
+                    <p>It's your call...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

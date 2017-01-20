@@ -3,6 +3,8 @@ angular.module('app', ['app.landing',
     'app.home',
     'app.album',
     'app.settings',
+    'ui.grid',
+    'angularModalService',
     'ngRoute'])
     .config(function ($routeProvider, $httpProvider, $locationProvider) {
         $locationProvider.hashPrefix('');
@@ -23,4 +25,10 @@ angular.module('app', ['app.landing',
                 templateUrl: '/app/album/album.html',
                 controller: 'AlbumCtrl'
             })
-    });
+    }).controller('ModalController', function($scope, close) {
+
+    $scope.close = function(result) {
+        close(result, 500); // close, but give 500ms for bootstrap to animate
+    };
+
+} )
