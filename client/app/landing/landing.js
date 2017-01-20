@@ -1,10 +1,10 @@
 angular.module('app.landing', ['ngMaterial',"ng","ngAnimate","ngAria"])
-    .controller('LandCtrl', function ($scope, $location, $mdDialog, Auth){
+    .controller('LandCtrl', function ($scope, $location, $mdDialog, Auth, $rootScope){
+        $rootScope.back="landing"
         $scope.user = {}
         $scope.login = function () {
             Auth.login($scope.user)
         }
-
        $scope.showDialog = function($event) {
             var parentEl = angular.element(document.body);
             $mdDialog.show({

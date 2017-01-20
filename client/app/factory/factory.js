@@ -1,7 +1,6 @@
 angular.module('app.factory' , [])
     .factory('Auth', function ($http) {
         var login = function (user) {
-            console.log('here')
             return $http({
                 method: 'POST',
                 url: '/signin',
@@ -32,4 +31,6 @@ angular.module('app.factory' , [])
             isAuth,
             register
         };
-    });
+    })
+    .factory('Pics', function ($http) {
+    })
