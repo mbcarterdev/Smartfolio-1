@@ -33,4 +33,31 @@ angular.module('app.factory' , [])
         };
     })
     .factory('Pics', function ($http) {
+        var sendPhotos = function (files) {
+            return $http({
+                method: 'POST',
+                url: '/upload/photos',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: files
+            }).then(function (resp) {
+                console.log('done')
+            })
+        }
+
+        return ({
+            sendPhotos
+        })
     })
+    .factory('Collage', function () {
+        var imageObj
+        return ({
+            get: function () {
+                return imageObj
+            },
+            set: function (img) {
+                imageObj = img;
+            }
+        })
+})
