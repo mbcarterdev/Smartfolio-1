@@ -1,6 +1,7 @@
 angular.module('app.factory' , [])
     .factory('Auth', function ($http) {
-        var login = function (user) {
+          var login = function (user) {
+            console.log(user);
             return $http({
                 method: 'POST',
                 url: '/signin',
