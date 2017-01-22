@@ -7,8 +7,8 @@ var knex = require('knex')({
     database : 'smartfolio'
   }
 });
-
-// 
+module.exports = knex;
+//
 // create database smartfolio;
 // use smartfolio;
 //
