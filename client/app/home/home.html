@@ -1,26 +1,26 @@
 <md-toolbar>
-    <div>
+  <div>
     <md-button>
-        <md-tooltip>Menu</md-tooltip>
-        <md-icon class="md-default-theme" ng-click="toggleLeft()" class="material-icons">restaurant_menu</md-icon>
+      <md-tooltip>Menu</md-tooltip>
+      <md-icon class="md-default-theme" ng-click="toggleLeft()" class="material-icons">restaurant_menu</md-icon>
     </md-button>
-    </div>
+  </div>
 </md-toolbar>
-    <md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="20">
-        <md-toolbar>
-            <h1 class="head" class="md-toolbar-tools" >Menu</h1>
-        </md-toolbar>
-        <md-content layout-margin="">
-            <md-button ng-click="toggleLeft()" class="md-accent">
-                Close this Sidenav
-            </md-button>
-        </md-content>
-    </md-sidenav>
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="20">
+  <md-toolbar>
+    <h1 class="head" class="md-toolbar-tools">Menu</h1>
+  </md-toolbar>
+  <md-content layout-margin="">
+    <md-button ng-click="toggleLeft()" class="md-accent">
+      Close this Sidenav
+    </md-button>
+  </md-content>
+</md-sidenav>
 
 <ul class="flex-container wrap">
-    <li class="flex-item ripplelink" md-whiteframe="24" ng-repeat="image in images track by $index"><img class="thumbnail" src="{{image}}" ng-click="show($index)"> </li>
+  <li class="flex-item ripplelink" md-whiteframe="24" ng-repeat="image in images track by $index"><img class="thumbnail" src="{{image}}" ng-click="show($index)"> </li>
 </ul>
-<script type="text/ng-template" id="modal.html" >
+<script type="text/ng-template" id="modal.html">
     <div class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -40,7 +40,7 @@
     </div>
 </script>
 
-<script type="text/ng-template" id="uploader.html" >
+<script type="text/ng-template" id="uploader.html">
     <div class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">

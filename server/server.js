@@ -6,14 +6,17 @@ var multer = require('multer');
 
 var app = express();
 
-require('./routes.js')(app, express);
+
 
 app.use(bodyParser.json());
+app.use(morgan('dev'));
+
 app.use(express.static(path.join(__dirname, '/../client')));
 
+require('./routes.js')(app, express);
 var port = process.env.PORT || 8000;
 
-app.listen(port, function() {
+app.listen(port, function () {
   console.log('Listening on port ', port);
 })
 
