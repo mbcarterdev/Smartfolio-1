@@ -1,7 +1,8 @@
 angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularModalService'])
-  .controller('HomeCtrl', function ($scope, $mdSidenav, ModalService, Collage) {
+  .controller('HomeCtrl', function ($scope, $rootScope, $mdSidenav, ModalService, Collage) {
     $scope.toggleLeft = buildToggler('left');
-    $scope.toggleRight = buildToggler('right');
+    $rootScope.back = ""
+    // $scope.toggleRight = buildToggler('right');
 
     function buildToggler(componentId) {
       return function () {
