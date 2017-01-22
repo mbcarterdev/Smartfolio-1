@@ -3,6 +3,7 @@ angular.module('app.landing', ['ngMaterial',"ng","ngAnimate","ngAria"])
         $rootScope.back="landing"
         $scope.user = {}
         $scope.login = function () {
+            console.log($scope.user)
             Auth.login($scope.user)
         }
        $scope.showDialog = function($event) {
@@ -35,9 +36,10 @@ angular.module('app.landing', ['ngMaterial',"ng","ngAnimate","ngAria"])
                 controller: DialogController
             });
             function DialogController($scope, $mdDialog) {
-                console.log($scope)
                 $scope.user = {};
+
                 $scope.closeDialog = function() {
+                    console.log($scope.user)
                     Auth.register($scope.user)
                     $mdDialog.hide();
                 }

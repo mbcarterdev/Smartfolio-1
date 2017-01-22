@@ -1,5 +1,5 @@
 angular.module('app.home', ['ngMaterial',"ng","ngAnimate","ngAria",'angularModalService'])
-    .controller('HomeCtrl', function ($scope, $mdSidenav, ModalService) {
+    .controller('HomeCtrl', function ($scope, $mdSidenav, ModalService, Collage) {
         $scope.toggleLeft = buildToggler('left');
         $scope.toggleRight = buildToggler('right');
 
@@ -22,16 +22,25 @@ angular.module('app.home', ['ngMaterial',"ng","ngAnimate","ngAria",'angularModal
     'http://static.tvtropes.org/pmwiki/pub/images/rsz_capa.jpg'
 ]
 
-        $scope.show = function() {
+        $scope.show = function(index) {
+            console.log(index)
+            Collage.set({image1: $scope.images[index],
+                image2: $scope.images[index+1]
+            })
             ModalService.showModal({
                 templateUrl: 'modal.html',
                 controller: "ModalController"
-
             }).then(function(modal) {
                 modal.element.modal();
-                modal.close.then(function(result) {
-                    $scope.message = "You said " + result;
-                });
+            });
+        };
+
+        $scope.show2 = function(index) {
+            ModalService.showModal({
+                templateUrl: 'uploader.html',
+                controller: "UploadCtrl"
+            }).then(function(modal) {
+                modal.element.modal();
 
             });
         };
