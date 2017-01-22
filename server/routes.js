@@ -1,8 +1,12 @@
-var controller = require('./controllers/controller.js');
-
+var uController = require('./controllers/userController.js');
+var iController = require('./controllers/imgController.js');
+var multer = require('./config/multer')
 
 module.exports = function (app, express) {
-  //have questions if these paths are correct
-  app.post('/signin', controller.signin);
-  app.post('/register', controller.register);
+  app.post('/signin', uController.signin);
+  app.post('/register', uController.register);
+  app.get('/photos', iController.fetch);
+  app.post('/upload/photos', multer.upload.fields([{
+    name: 'front', maxcount: 1
+  }, {name: 'back', maxcount: 1}]), iController.upload);
 }

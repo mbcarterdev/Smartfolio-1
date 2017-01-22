@@ -42,22 +42,24 @@ angular.module('app.factory', [])
     };
     var get = function () {
       return imgObj
-    }
+    };
 
     return ({
       set,
       get
     })
   })
+
   .factory('Pics', function ($http) {
     var sendPhotos = function (files) {
       return $http({
         method: 'POST',
         url: '/upload/photos',
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': ''
         },
-        data: files
+        data: files,
+        transformRequest : angular.identity
       }).then(function (resp) {
         console.log('done')
       })
