@@ -35,6 +35,20 @@ angular.module('app.factory', [])
       register
     };
   })
+  .factory('Collage', function () {
+    var imgObj = {};
+    var set = function (img) {
+      imgObj = img;
+    };
+    var get = function () {
+      return imgObj
+    }
+
+    return ({
+      set,
+      get
+    })
+  })
   .factory('Pics', function ($http) {
     var sendPhotos = function (files) {
       return $http({
@@ -53,14 +67,4 @@ angular.module('app.factory', [])
       sendPhotos
     })
   })
-  .factory('Collage', function () {
-    var imageObj
-    return ({
-      get: function () {
-        return imageObj
-      },
-      set: function (img) {
-        imageObj = img;
-      }
-    })
-  })
+

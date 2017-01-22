@@ -25,18 +25,20 @@ angular.module('app', ['app.landing',
                 templateUrl: '/app/album/album.html',
                 controller: 'AlbumCtrl'
             })
-    }).controller('ModalController', function($scope, close ) {
-        console.log(typeof Collage)
-        $scope.url= Collage.get();
+    }).controller('ModalController', function($scope, close, Collage ) {
+    $scope.url= Collage.get();
     $scope.close = function(result) {
-        close(result, 500); // close, but give 500ms for bootstrap to animate
+        close(result, 500);
     };
 
-}).controller('UploadCtrl', function ($scope, close) {
+}).controller('UploadCtrl', function ($scope, close, Pics) {
     var fd = new FormData();
     $scope.uploadFile = function(fileType, files){
         fd.append(fileType , files)
     }
+  $scope.close = function(result) {
+    close(result, 500);
+  };
     $scope.con = function () {
         Pics.sendPhotos(fd)
     }

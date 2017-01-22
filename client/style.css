@@ -83,6 +83,14 @@ footer {
     margin: 0 0 0 445px;
 
 }
+img {max-width:100%;}
+.box {
+    display: flex;
+    border: 1px solid black;
+    justify-content: center;
+    height: 400px;
+    width: 400px;
+}
 .flex-item {
     padding: 0px;
     width: 200px;
