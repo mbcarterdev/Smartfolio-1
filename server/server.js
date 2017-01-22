@@ -6,6 +6,8 @@ var multer = require('multer');
 
 var app = express();
 
+require('./routes.js')(app, express);
+
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../client')));
 
