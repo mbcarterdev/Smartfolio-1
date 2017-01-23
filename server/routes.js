@@ -1,6 +1,6 @@
 var uController = require('./controllers/userController.js');
 var iController = require('./controllers/imgController.js');
-var helper = require('./authenticator');
+var helper = require('./authenticator/authenticator');
 
 module.exports = function (app, express) {
   app.post('/signin', uController.signin);
@@ -9,5 +9,5 @@ module.exports = function (app, express) {
   app.post('/upload/photos',helper.decode, iController.upload);
 
   app.use(helper.errorLogger);
-  ap.use(helper.errorHandler);
+  app.use(helper.errorHandler);
 }

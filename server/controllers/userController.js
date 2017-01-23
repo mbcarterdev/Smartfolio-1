@@ -1,4 +1,5 @@
 var db = require('./../config/db');
+var jwt = require('jwt-simple');
 
 module.exports = {
   signin: function (req, res) {
