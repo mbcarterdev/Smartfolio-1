@@ -49,7 +49,7 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
           console.log($scope.user)
           Auth.register($scope.user)
             .then(function (token) {
-              $window.localStorage.setItem('com.smartfolio',token)
+              $window.localStorage.setItem('com.smartfolio', token)
               $location.path('/home')
             })
           $mdDialog.hide();
