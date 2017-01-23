@@ -3,17 +3,20 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var path = require('path');
 var multer = require('multer');
-
+var bcrypt = require('bcrypt-nodejs');
+var path = require('path')
 
 var app = express();
-
+var imglocation = path.join(__dirname,'uploads');
 var storage = multer.diskStorage({
   destination: function (req, file, cb){
-    cb(null, '/Users/pheon/Desktop/Smartfolio-1/server/uploads')
+    cb(null, imglocation);
   },
   filename: function (req, file, cb){
-
-    cb(null, file.originalname)
+    bcrypt.hash(file.originalname, null, null, function (err, hash) {
+      var string = `${req.headers.username} ${file.originalname}`
+      cb(null, string)
+    })
   }
 })
 

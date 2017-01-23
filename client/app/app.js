@@ -29,7 +29,7 @@ angular.module('app', ['app.landing',
         authenticate: true
       })
 
-    //$httpProvider.interceptors.push('AttachTokens');
+    $httpProvider.interceptors.push('AttachTokens');
   })
   .controller('ModalController', function ($scope, close, Collage) {
     $scope.url = Collage.get();
@@ -45,11 +45,15 @@ angular.module('app', ['app.landing',
     $scope.connection = function () {
       Pics.sendPhotos(fd)
     }
+     $scope.close = function (result) {
+      close(result, 500);
+    };
   })
   .run(function ($rootScope, $location, Auth) {
-    $rootScope.$on('$rootChangeStart', function (evt, next) {
-      if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
-        $location.path('/landing');
+    $rootScope.$on('$routeChangeStart', function (evt, next, current) {
+    if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+      $location.path('/landing');
+    
       }
     });
   });

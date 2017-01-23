@@ -1,27 +1,44 @@
 angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularModalService'])
-  .controller('HomeCtrl', function ($scope, $rootScope, $mdSidenav, ModalService, Collage) {
+  .controller('HomeCtrl', function ($scope, $rootScope, $mdSidenav, ModalService, Collage, Pics, $window) {
     $scope.toggleLeft = buildToggler('left');
     $rootScope.back = ""
     // $scope.toggleRight = buildToggler('right');
+    $scope.images = [];
 
     function buildToggler(componentId) {
       return function () {
         $mdSidenav(componentId).toggle();
       }
     }
+   $scope.fetcher = function () {
+      Pics.imageList().then( function (result) {
+        result.forEach(function (imgObj) {
+          Pics.imageFetcher(imgObj.imghash)
+            .then((function (data) {
+              $scope.data = data
+            }));
+          Pics.imageFetcher(imgObj.backimghash)
+        })
+        $scope.images= result
+      })
+    }
 
-    $scope.images = [
-      'https://upload.wikimedia.org/wikipedia/en/thumb/1/15/Kurau_Phantom_Memory.jpg/230px-Kurau_Phantom_Memory.jpg',
-      'https://upload.wikimedia.org/wikipedia/en/a/a6/Kanon_second_anime_Funimation_box_set.jpg',
-      'https://upload.wikimedia.org/wikipedia/en/7/79/Please_Teacher_Vol_1_DVD.jpg',
-      'https://upload.wikimedia.org/wikipedia/en/5/5d/AKIRA_(1988_poster).jpg',
-      'http://vignette2.wikia.nocookie.net/doblaje/images/9/98/Love_hina.jpg/revision/latest?cb=20101128193919&path-prefix=es',
-      'https://s-media-cache-ak0.pinimg.com/originals/c0/1f/82/c01f82029206714ff7f2aeab24254e73.jpg',
-      'http://img1.ak.crunchyroll.com/i/spire4/30eb07003c901066a9db027399c77ad41420598162_full.jpg',
-      'https://upload.wikimedia.org/wikipedia/en/f/fe/FLCL_image.jpg',
-      'https://myanimelist.cdn-dena.com/images/anime/9/20134.jpg',
-      'http://static.tvtropes.org/pmwiki/pub/images/rsz_capa.jpg'
-    ]
+
+
+    $scope.fetcher()
+
+    // $scope.images = [
+    //   'https://upload.wikimedia.org/wikipedia/en/thumb/1/15/Kurau_Phantom_Memory.jpg/230px-Kurau_Phantom_Memory.jpg',
+    //   'https://upload.wikimedia.org/wikipedia/en/a/a6/Kanon_second_anime_Funimation_box_set.jpg',
+    //   'https://upload.wikimedia.org/wikipedia/en/7/79/Please_Teacher_Vol_1_DVD.jpg',
+    //   'https://upload.wikimedia.org/wikipedia/en/5/5d/AKIRA_(1988_poster).jpg',
+    //   'http://vignette2.wikia.nocookie.net/doblaje/images/9/98/Love_hina.jpg/revision/latest?cb=20101128193919&path-prefix=es',
+    //   'https://s-media-cache-ak0.pinimg.com/originals/c0/1f/82/c01f82029206714ff7f2aeab24254e73.jpg',
+    //   'http://img1.ak.crunchyroll.com/i/spire4/30eb07003c901066a9db027399c77ad41420598162_full.jpg',
+    //   'https://upload.wikimedia.org/wikipedia/en/f/fe/FLCL_image.jpg',
+    //   'https://myanimelist.cdn-dena.com/images/anime/9/20134.jpg',
+    //   'http://static.tvtropes.org/pmwiki/pub/images/rsz_capa.jpg'
+    // ]
 
     $scope.show = function (index) {
       console.log(index)

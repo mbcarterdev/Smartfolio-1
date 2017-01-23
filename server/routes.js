@@ -4,10 +4,11 @@ var helper = require('./authenticator/authenticator');
 
 module.exports = function (app, express) {
   app.post('/signin', uController.signin);
-  app.post('/register', uController.register);
-  app.get('/photos',helper.decode, iController.fetch);
+  app.post('/register/', uController.register);
+  app.get('/photos', iController.fetch);
   app.post('/upload/photos',helper.decode, iController.upload);
-
+  app.get('/photos/:imgurl',helper.decode, iController.serve)
+//TODO: add helper.decode to /photos, /upload
   app.use(helper.errorLogger);
   app.use(helper.errorHandler);
 }

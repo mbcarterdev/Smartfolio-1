@@ -8,7 +8,6 @@ module.exports = {
       .then(function (result) {
         if (result[0][0]) {
           bcrypt.compare(req.body.password, result[0][0].password, function (err, isMatch) {
-            console.log(err, result)
             if (err) {
               console.log('Error comparing hashed passwords')
             }
@@ -27,7 +26,6 @@ module.exports = {
   },
 
   register: function (req, res) {
-    // console.log(req.body)
    db.raw(`SELECT username from users where username = '${req.body.username}'`)
       .then(function (results) {
 

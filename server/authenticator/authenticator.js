@@ -10,7 +10,7 @@ module.exports =  {
     res.status(500).send({error: err.message});
   },
   decode: function (req, res, next) {
-    var token = req.header['x-access-token'];
+    var token = req.headers['x-access-token'];
     var user;
 
     if(!token) {
@@ -18,7 +18,9 @@ module.exports =  {
     }
 
     try {
+      console.log(token)
       user = jwt.decode(token, 'secret');
+      
       req.user = user;
       next();
     } catch (error) {

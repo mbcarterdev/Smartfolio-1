@@ -1,5 +1,5 @@
 angular.module('app.factory', [])
-  .factory('Auth', function ($http, $location) {
+  .factory('Auth', function ($http, $location, $window) {
     var login = function (user) {
       $http.defaults.headers.common['username'] = user.username
       return $http({
@@ -8,7 +8,7 @@ angular.module('app.factory', [])
         data: user
       })
         .then(function (resp) {
-          return resp.data.token;
+          return resp.data;
         });
     };
     var register = function (user) {
@@ -19,16 +19,18 @@ angular.module('app.factory', [])
         data: user
       })
         .then(function (resp) {
-          return resp.data.token;
+          return resp.data;
         });
     };
 
     var isAuth = function () {
-      return !!window.localStorage.getItem('com.smartfolio');
+      console.log($window.localStorage.getItem('com.smartfolio'))
+      return !!$window.localStorage.getItem('com.smartfolio');
     }
 
     var signout = function () {
       $window.localSotrage.removeItem('com.smartfolio');
+      $location.path('/landing')
     }
     return {
       login,
@@ -67,20 +69,43 @@ angular.module('app.factory', [])
       })
     }
 
+    var imageFetcher = function (imagename) {
+      return $http({
+        method: 'GET',
+        url: `/photos/${imagename}`
+      }).then(function (resp) {
+       return(resp.data)
+      })
+    };
+
+    var imageList = function () {
+
+      return $http({
+        method: 'GET',
+        url: '/photos'
+      }).then(function (res) {
+        console.log(res)
+        return res.data;
+      })
+    };
+
     return ({
-      sendPhotos
+      sendPhotos,
+      imageFetcher,
+      imageList,
     })
   }).factory('AttachTokens', function ($window) {
     var attach = {
       request: function (object) {
-        var jwt = $window.localStorage.getItem('com.smartfolio)');
-        if(jwt) {
-          object.header['x-access-token'] = jwt;
-        }
-        object.header['Allow-Control-Allow-Origin'] = '*';
-        return object;
-  }
+      var jwt = $window.localStorage.getItem('com.smartfolio');
+      if (jwt) {
+        object.headers['x-access-token'] = jwt;
+        object.headers['username'] = 'fs@fs.com'
+      }
+      object.headers['Allow-Control-Allow-Origin'] = '*';
+      return object;
+    }
   };
-    return attach;
+  return attach;
 })
 
