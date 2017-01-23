@@ -56,7 +56,7 @@ angular.module('app.factory', [])
         method: 'POST',
         url: '/upload/photos',
         headers: {
-          'Content-Type': ''
+          'Content-Type': undefined
         },
         data: files,
         transformRequest : angular.identity

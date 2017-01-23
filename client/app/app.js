@@ -34,9 +34,8 @@ angular.module('app', ['app.landing',
 }).controller('UploadCtrl', function ($scope, close, Pics) {
     var fd = new FormData();
     $scope.uploadFile = function(fileType, files){
-        fd.append(fileType , files[0])
+      fd.append(fileType, files[0])
     }
-
     $scope.con = function () {
         Pics.sendPhotos(fd)
     }

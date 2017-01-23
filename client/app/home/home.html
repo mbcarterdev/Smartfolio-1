@@ -49,11 +49,11 @@
     <div class="container">
     <h1>Upload Photos</h1>
     <form role="form" class="form" onsubmit="return false;">
-        <div class="form-group">
+        <div class="form-group" >
             <label for="file">File</label>
-            <input type="file" name="file" onchange="angular.element(this).scope().uploadFile('front',this.files)"/>
+            <input type="file" name="front" onchange="angular.element(this).scope().uploadFile('front',this.files)"/>
             <label for="file">File2</label>
-            <input type="file" name="file" onchange="angular.element(this).scope().uploadFile('back',this.files)"/>
+            <input type="file" name="back" onchange="angular.element(this).scope().uploadFile('back',this.files)"/>
         </div>
         <button id="upload" type="button" class="btn btn-primary" ng-click="con()">Upload</button>
     </form>
