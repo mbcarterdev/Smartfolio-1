@@ -15,28 +15,41 @@ angular.module('app', ['app.landing',
             })
             .when('/home',{
                 templateUrl: '/app/home/home.html',
-                controller: 'HomeCtrl'
+                controller: 'HomeCtrl',
+              authenticate: true
             })
             .when('/settings', {
                 templateUrl: '/app/settings/settings.html',
-                controller: 'SettingsCtrl'
+                controller: 'SettingsCtrl',
+                authenticate: true
             })
             .when('/album',{
                 templateUrl: '/app/album/album.html',
-                controller: 'AlbumCtrl'
+                controller: 'AlbumCtrl',
+                authenticate: true
             })
-    }).controller('ModalController', function($scope, close, Collage ) {
+
+      $httpProvider.interceptors.push('AttachTokens');
+    })
+  .controller('ModalController', function($scope, close, Collage ) {
     $scope.url= Collage.get();
     $scope.close = function(result) {
         close(result, 500);
     };
-
-}).controller('UploadCtrl', function ($scope, close, Pics) {
+})
+  .controller('UploadCtrl', function ($scope, close, Pics) {
     var fd = new FormData();
     $scope.uploadFile = function(fileType, files){
       fd.append(fileType, files[0])
     }
-    $scope.con = function () {
+    $scope.connection = function () {
         Pics.sendPhotos(fd)
     }
 })
+  .run(function ($rootScope, $location, Auth) {
+    $rootScope.on('$rootChangeStart', function (evt, next){
+      if(next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+        $location.path('/landing');
+      }
+    });
+});

@@ -8,9 +8,7 @@ angular.module('app.factory', [])
         data: user
       })
         .then(function (resp) {
-          //TODO:  return resp.data.token;
-          $location.path('/home');
-          //window.location.href= '/home'
+          return resp.data.token;
         });
     };
     var register = function (user) {
@@ -20,19 +18,22 @@ angular.module('app.factory', [])
         data: user
       })
         .then(function (resp) {
-          //TODO:  return resp.data.token;
-          $location.path('/home');
-          // window.location.href = '/landing'
+          return resp.data.token;
         });
     };
 
     var isAuth = function () {
       return !!window.localStorage.getItem('com.smartfolio');
     }
+
+    var signout = function () {
+      $window.localSotrage.removeItem('com.smartfolio');
+    }
     return {
       login,
       isAuth,
-      register
+      register,
+      signout
     };
   })
   .factory('Collage', function () {
@@ -68,5 +69,17 @@ angular.module('app.factory', [])
     return ({
       sendPhotos
     })
-  })
+  }).factory('AttachTokens', function ($window) {
+    var attach = {
+      request: function (object) {
+        var jwt = $window.localStorage.getItem('com.smartfolio)');
+        if(jet) {
+          object.header['x-access-token'] = jwt;
+        }
+        object.header['Allow-Control-Allow-Origin'] = '*';
+        return object;
+  }
+  };
+    return attach;
+})
 

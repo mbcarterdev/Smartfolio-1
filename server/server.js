@@ -12,7 +12,8 @@ var storage = multer.diskStorage({
     cb(null, '/Users/pheon/Desktop/Smartfolio-1/server/uploads')
   },
   filename: function (req, file, cb){
-    cb(null, file.fieldname)
+
+    cb(null, file.originalname)
   }
 })
 

@@ -6,6 +6,6 @@ module.exports = {
     console.log('here')
   },
   upload: function (req, res) {
-    console.log(req)
+
   }
 };
