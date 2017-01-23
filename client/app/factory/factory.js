@@ -73,7 +73,7 @@ angular.module('app.factory', [])
     var attach = {
       request: function (object) {
         var jwt = $window.localStorage.getItem('com.smartfolio)');
-        if(jet) {
+        if(jwt) {
           object.header['x-access-token'] = jwt;
         }
         object.header['Allow-Control-Allow-Origin'] = '*';

@@ -29,7 +29,7 @@ angular.module('app', ['app.landing',
         authenticate: true
       })
 
-    $httpProvider.interceptors.push('AttachTokens');
+    //$httpProvider.interceptors.push('AttachTokens');
   })
   .controller('ModalController', function ($scope, close, Collage) {
     $scope.url = Collage.get();
