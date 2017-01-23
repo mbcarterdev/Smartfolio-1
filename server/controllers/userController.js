@@ -7,13 +7,14 @@ module.exports = {
     db.raw(`SELECT username, password from users where username = '${req.body.username}'`)
       .then(function (result) {
         if (result[0][0]) {
-          bcrypt.compare(req.body.password, result[0][0].password, function (err, result) {
+          bcrypt.compare(req.body.password, result[0][0].password, function (err, isMatch) {
             console.log(err, result)
             if (err) {
               console.log('Error comparing hashed passwords')
             }
-            if (result) {
-              res.status(200).send();
+            if (isMatch) {
+              var token = jwt.encode(result[0][0], 'secret');
+              res.status(200).json(token);
             } else {
               res.status(401).send('Incorrect Password')
             }
@@ -35,13 +36,18 @@ module.exports = {
         } else {
 
           bcrypt.hash(req.body.password, null, null, function (err, hash) {
+            var hashPassword = hash
             if(err) {
               return console.log('Error hashing ' + err);
             }
             console.log('here', results)
-            db.raw(`INSERT INTO USERS VALUES (NULL, '${req.body.username}', '${hash}')`)
+            db.raw(`INSERT INTO USERS VALUES (NULL, '${req.body.username}', '${hash}');`)
               .then(function (results) {
-                res.status(200).send()
+                var username = req.body.username
+                var password = hashPassword
+                var user =  {username, password}
+                var token = jwt.encode(user, 'secret');
+                res.status(200).json(token);
               })
           })
 
