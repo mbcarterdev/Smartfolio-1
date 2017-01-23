@@ -1,7 +1,7 @@
 angular.module('app.factory', [])
   .factory('Auth', function ($http, $location) {
     var login = function (user) {
-      console.log(user);
+      $http.defaults.headers.common['username'] = user.username
       return $http({
         method: 'POST',
         url: '/signin',
@@ -12,6 +12,7 @@ angular.module('app.factory', [])
         });
     };
     var register = function (user) {
+      $http.defaults.headers.common['username'] = user.username
       return $http({
         method: 'POST',
         url: '/register',

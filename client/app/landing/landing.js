@@ -3,6 +3,7 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     $rootScope.back = "landing"
     $scope.user = {}
     $scope.login = function () {
+
       Auth.login($scope.user)
         .then(function (token) {
         $window.localStorage.setItem('com.smartfolio',token)
@@ -47,6 +48,7 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
         $scope.closeDialog = function () {
           console.log($scope.user)
+          $http.defaults.headers.common['username'] = $scope.username
           Auth.register($scope.user)
             .then(function (token) {
               $window.localStorage.setItem('com.smartfolio', token)
