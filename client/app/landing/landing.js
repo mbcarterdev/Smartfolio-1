@@ -1,17 +1,25 @@
-angular.module('app.landing', ['ngMaterial',"ng","ngAnimate","ngAria"])
-    .controller('LandCtrl', function ($scope, $location, $mdDialog, Auth, $rootScope){
-        $rootScope.back="landing"
-        $scope.user = {}
-        $scope.login = function () {
-            console.log($scope.user)
-            Auth.login($scope.user)
-        }
-       $scope.showDialog = function($event) {
-            var parentEl = angular.element(document.body);
-            $mdDialog.show({
-                parent: parentEl,
-                targetEvent: $event,
-                template: `
+angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
+  .controller('LandCtrl', function ($scope, $location, $window, $mdDialog, Auth, $rootScope) {
+    $rootScope.back = "landing"
+    $scope.user = {}
+    $scope.login = function () {
+
+      Auth.login($scope.user)
+        .then(function (token) {
+        $window.localStorage.setItem('com.smartfolio',token)
+        $location.path('/home');
+      })
+        .catch(function (error) {
+          console.error(error)
+        })
+    }
+
+    $scope.showDialog = function ($event) {
+      var parentEl = angular.element(document.body);
+      $mdDialog.show({
+        parent: parentEl,
+        targetEvent: $event,
+        template: `
                 <md-dialog aria-label="List dialog">
                  <md-dialog-content>
                     <form id="pop">
@@ -33,16 +41,21 @@ angular.module('app.landing', ['ngMaterial',"ng","ngAnimate","ngAria"])
                     </form>
                  </md-dialog-content>
                 </md-dialog>`,
-                controller: DialogController
-            });
-            function DialogController($scope, $mdDialog) {
-                $scope.user = {};
-
-                $scope.closeDialog = function() {
-                    console.log($scope.user)
-                    Auth.register($scope.user)
-                    $mdDialog.hide();
-                }
-            }
+        controller: DialogController
+      });
+      
+      function DialogController($scope, $mdDialog) {
+        $scope.user = {};
+        $scope.closeDialog = function () {
+          console.log($scope.user)
+          $http.defaults.headers.common['username'] = $scope.username
+          Auth.register($scope.user)
+            .then(function (token) {
+              $window.localStorage.setItem('com.smartfolio', token)
+              $location.path('/home')
+            })
+          $mdDialog.hide();
         }
-    })
+      }
+    }
+  })

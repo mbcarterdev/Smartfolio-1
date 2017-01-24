@@ -1,10 +1,11 @@
-var path = require('path');
+// var path = require('path');
 var knex = require('knex')({
-  client : 'mysql',
-  connection : {
-    host : 'localhost',
-    user : 'root',
-    database : 'smartfolio'
+  client: 'mysql',
+  connection: {
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'smartfolio'
   }
 });
 module.exports = knex;
