@@ -5,7 +5,8 @@ angular.module('app', ['app.landing',
   'app.settings',
   'ui.grid',
   'angularModalService',
-  'ngRoute'])
+  'ngRoute',
+  'ngAnimate'])
   .config(function ($routeProvider, $httpProvider, $locationProvider) {
     $locationProvider.hashPrefix('');
     $routeProvider
@@ -57,7 +58,7 @@ angular.module('app', ['app.landing',
   .run(function ($rootScope, $location, Auth) {
     $rootScope.$on('$routeChangeStart', function (evt, next, current) {
     if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
-      $location.path('/landing');
+      $location.path('/');
     
       }
     });

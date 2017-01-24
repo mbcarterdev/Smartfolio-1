@@ -1,8 +1,7 @@
 angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularModalService', 'ngMessages', 'material.svgAssetsCache'])
-  .controller('HomeCtrl', function ($scope, $rootScope, $mdSidenav, ModalService, Collage, Pics, $window) {
+  .controller('HomeCtrl', function ($scope, $rootScope, $mdSidenav, ModalService, Collage, Pics, $window, Auth) {
     $scope.toggleLeft = buildToggler('left');
-    $rootScope.back = "home";
-    // $scope.toggleRight = buildToggler('right');
+    $scope.pageClass = 'page home'
     $scope.images = [];
 
     function buildToggler(componentId) {
@@ -12,12 +11,11 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
     }
    $scope.fetcher = function () {
       Pics.imageList().then( function (result) {
-        console.log(result)
         $scope.images= result
       })
     }
 
-
+    $scope.logoff = Auth.signout;
 
     $scope.fetcher()
 

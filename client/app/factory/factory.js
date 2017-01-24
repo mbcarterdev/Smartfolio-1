@@ -29,8 +29,8 @@ angular.module('app.factory', [])
     }
 
     var signout = function () {
-      $window.localSotrage.removeItem('com.smartfolio');
-      $location.path('/landing')
+      $window.localStorage.removeItem('com.smartfolio');
+      $location.path('/')
     }
     return {
       login,

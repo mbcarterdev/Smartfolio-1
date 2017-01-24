@@ -1,14 +1,14 @@
 angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
   .controller('LandCtrl', function ($scope, $location, $window, $mdDialog, Auth, $rootScope) {
-    $rootScope.back = "landing"
+    $scope.pageClass = 'page landing'
     $scope.user = {}
     $scope.login = function () {
 
       Auth.login($scope.user)
         .then(function (token) {
-        $window.localStorage.setItem('com.smartfolio',token)
-        $location.path('/home');
-      })
+          $window.localStorage.setItem('com.smartfolio', token)
+          $location.path('/home');
+        })
         .catch(function (error) {
           console.error(error)
         })
@@ -33,7 +33,7 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
                             <input type="password" ng-model="user.password" />
                         </md-input-container>
                         <md-dialog-actions>
-                            <md-button ng-click="closeDialog()" class="md-primary">
+                            <md-button ng-click="closeDialog()" class="md-primary signup">
                               Sign Up
                             </md-button>
                         </md-dialog-actions>
@@ -43,18 +43,20 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
                 </md-dialog>`,
         controller: DialogController
       });
-      
-      function DialogController($scope, $mdDialog) {
+
+      function DialogController($scope, $mdDialog, $http) {
         $scope.user = {};
         $scope.closeDialog = function () {
-          console.log($scope.user)
-          $http.defaults.headers.common['username'] = $scope.username
-          Auth.register($scope.user)
-            .then(function (token) {
-              $window.localStorage.setItem('com.smartfolio', token)
-              $location.path('/home')
-            })
-          $mdDialog.hide();
+          if (Object.keys($scope.user).length > 1) {
+            $http.defaults.headers.common['username'] = $scope.username
+            Auth.register($scope.user)
+              .then(function (token) {
+                $window.localStorage.setItem('com.smartfolio', token)
+                $location.path('/home')
+              })
+          } else {
+            $mdDialog.hide();
+          }
         }
       }
     }

@@ -10,7 +10,10 @@
   <md-toolbar>
     <h1 class="head" class="md-toolbar-tools">Menu</h1>
   </md-toolbar>
-  <md-content layout-margin="">
+  <md-content layout-margin="" layout="column">
+    <md-button ng-click="logoff()" class="md-accent">
+     Log Off
+    </md-button>
     <md-button ng-click="toggleLeft()" class="md-accent">
       Close this Sidenav
     </md-button>
@@ -41,6 +44,7 @@ md-row-height-gt-md="1:1" md-row-height="2:2"
 <!--<ul class="flex-container wrap">
   <li class="flex-item ripplelink" md-whiteframe="24" ng-repeat="image in images track by $index"><img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" /></li>
 </ul>-->
+
 <script type="text/ng-template" id="modal.html">
   <div class="modal fade">
     <div class="modal-dialog fullscreen-dialog" >
