@@ -46,26 +46,24 @@ md-row-height-gt-md="1:1" md-row-height="2:2"
 </ul>-->
 
 <script type="text/ng-template" id="modal.html">
-  <div class="modal fade">
+<div class="modal fade">
     <div class="modal-dialog fullscreen-dialog" >
       <div class="modal-content">
-        <div class="modal-header">
-          <md-button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</md-button>
+          <div class="modal-body" layout="row">
+          <div class="box">
+            <img  ng-src="/photos/{{url.image1.imghash}}" />
           </div>
-          <div class="modal-body" layout="column">
-          <div>
-            <img ng-src="/photos/{{url.image1.imghash}}" />
-          </div>
-          <div >
-            <img ng-src="/photos/{{url.image2.backimghash}}" />
+          <div class="box">
+            <img   ng-src="/photos/{{url.image2.backimghash}}" />
           </div>
         </div>
-        <div class="modal-footer">
-          <md-button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal">Close</md-button>
-        </div>
+      
+          <md-button type="button" ng-click="close()" class="btn btn-primary add" data-dismiss="modal">Close</md-button>
+        
       </div>
     </div>
   </div>
+  
 </script>
 <script type="text/ng-template" id="uploader.html">
   <div class="modal fade">

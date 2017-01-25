@@ -9,9 +9,10 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
         $mdSidenav(componentId).toggle();
       }
     }
-   $scope.fetcher = function () {
-      Pics.imageList().then( function (result) {
-        $scope.images= result
+    
+    $scope.fetcher = function () {
+      Pics.imageList().then(function (result) {
+        $scope.images = result
       })
     }
 
@@ -33,7 +34,7 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
     // ]
 
     $scope.show = function (index) {
-     
+
       Collage.set({
         image1: $scope.images[index],
         image2: $scope.images[index]
@@ -43,7 +44,7 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
         controller: "ModalController"
       }).then(function (modal) {
         modal.element.modal();
-       
+
       });
     };
 
@@ -53,7 +54,7 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
         controller: "UploadCtrl"
       }).then(function (modal) {
         modal.element.modal();
-         
+
       });
     };
 
