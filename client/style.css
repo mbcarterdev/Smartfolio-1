@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Raleway', sans-serif;
 }
 
 body {
@@ -31,9 +32,9 @@ md-sidenav {
 }
 
 
-/*h1 {
-    background-color: rgb(0, 0, 0);
-}*/
+h1 {
+    color: rgb(255, 64, 129);
+}
 
 md-sidenav md-content {
     background-color: rgb(0, 0, 0);
@@ -57,7 +58,7 @@ md-grid-list md-grid-tile md-grid-tile-footer h3 {
 }
 
 md-toolbar:not(.md-menu-toolbar) md-icon {
-    color: rgb(241, 111, 0);
+   color: rgb(255, 64, 129);
     fill: rgb(221, 44, 0);
     height: auto;
     width: auto;
@@ -113,7 +114,8 @@ footer {
     z-index: 1;
     background-size: cover;
     background-repeat: no-repeat;
-    overflow-y: scroll
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .landing {

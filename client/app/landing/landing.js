@@ -7,6 +7,7 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
       Auth.login($scope.user)
         .then(function (token) {
           $window.localStorage.setItem('com.smartfolio', token)
+          $window.localStorage.setItem('username', $scope.user.username)
           $location.path('/home');
         })
         .catch(function (error) {
@@ -48,10 +49,10 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
         $scope.user = {};
         $scope.closeDialog = function () {
           if (Object.keys($scope.user).length > 1) {
-            $http.defaults.headers.common['username'] = $scope.username
             Auth.register($scope.user)
               .then(function (token) {
-                $window.localStorage.setItem('com.smartfolio', token)
+                $window.localStorage.setItem('com.smartfolio', token);
+                $window.localStorage.setItem('username', $scope.user.username);
                 $location.path('/home')
               })
           } else {

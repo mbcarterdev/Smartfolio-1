@@ -12,7 +12,7 @@
   </md-toolbar>
   <md-content layout-margin="" layout="column">
     <md-button ng-click="logoff()" class="md-accent">
-     Log Off
+      Log Off
     </md-button>
     <md-button ng-click="toggleLeft()" class="md-accent">
       Close this Sidenav
@@ -20,50 +20,43 @@
   </md-content>
 </md-sidenav>
 <div class="row">
-    <div class="col-sm-offset-5 col-sm-2 text-center">
-<md-button ng-click="show2()" class="add">Add Photos</md-button>
-    </div>
+  <div class="col-sm-offset-5 col-sm-2 text-center">
+    <md-button ng-click="show2()" class="add">Add Photos</md-button>
+  </div>
 </div>
-<div class="gridListdemoBasicUsage" >
+<div class="gridListdemoBasicUsage">
   <div>
-<md-grid-list md-cols-xs="1" 
-md-cols-sm="2" 
-md-cols-md="4" md-cols-gt-md="6" 
-md-row-height-gt-md="1:1" md-row-height="2:2"
- md-gutter="12px" md-gutter-gt-sm="8px" >
-    <md-grid-tile   md-whiteframe="10"  class="flex-item ripplelink" ng-repeat="image in images track by $index" >
-       <md-tooltip>{{image.imgname}}</md-tooltip>
-      <img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" />
-      <!--<md-grid-tile-footer>
+    <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2"
+      md-gutter="12px" md-gutter-gt-sm="8px">
+      <md-grid-tile md-whiteframe="24" class="flex-item ripplelink" ng-repeat="image in images track by $index">
+        <md-tooltip>{{image.imgname}}</md-tooltip>
+        <img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" />
+        <!--<md-grid-tile-footer>
         <h3>{{image.imgname}}</h3>
       </md-grid-tile-footer>-->
-    </md-grid-tile>
-     </md-grid-list>
+      </md-grid-tile>
+    </md-grid-list>
   </div>
 </div>
 <!--<ul class="flex-container wrap">
   <li class="flex-item ripplelink" md-whiteframe="24" ng-repeat="image in images track by $index"><img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" /></li>
 </ul>-->
-
 <script type="text/ng-template" id="modal.html">
-<div class="modal fade">
-    <div class="modal-dialog fullscreen-dialog" >
+  <div class="modal fade">
+    <div class="modal-dialog fullscreen-dialog">
       <div class="modal-content">
-          <div class="modal-body" layout="row">
+        <div class="modal-body" layout="row" layout-xs="column">
           <div class="box">
-            <img  ng-src="/photos/{{url.image1.imghash}}" />
+            <img ng-src="/photos/{{url.image1.imghash}}" />
           </div>
           <div class="box">
-            <img   ng-src="/photos/{{url.image2.backimghash}}" />
+            <img ng-src="/photos/{{url.image2.backimghash}}" />
           </div>
         </div>
-      
-          <md-button type="button" ng-click="close()" class="btn btn-primary add" data-dismiss="modal">Close</md-button>
-        
+        <md-button type="button" ng-click="close()" class="btn btn-primary add" data-dismiss="modal">Close</md-button>
       </div>
     </div>
   </div>
-  
 </script>
 <script type="text/ng-template" id="uploader.html">
   <div class="modal fade">
@@ -78,13 +71,13 @@ md-row-height-gt-md="1:1" md-row-height="2:2"
               <label for="file">File2</label>
               <input type="file" name="back" onchange="angular.element(this).scope().uploadFile('back',this.files)" />
             </div>
-            <md-button id="upload" type="button" class="btn btn-primary" ng-click="connection()" data-dismiss="modal">Upload</md-button>
+            <md-button id="upload" type="button" class="btn btn-primary add" ng-click="connection()" data-dismiss="modal">Upload</md-button>
           </form>
         </div>
         <div class="modal-footer">
-          <md-button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal">Close</md-button>
+           <md-button type="button" ng-click="close()" class="btn btn-primary add" data-dismiss="modal">Close</md-button>
         </div>
       </div>
     </div>
-  <script>
-  </script>
+    <script>
+    </script>
