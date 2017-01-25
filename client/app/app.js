@@ -1,11 +1,13 @@
 angular.module('app', ['app.landing',
-  'app.factory',
-  'app.home',
-  'app.album',
-  'app.settings',
-  'ui.grid',
-  'angularModalService',
-  'ngRoute'])
+    'app.factory',
+    'app.home',
+    'app.album',
+    'app.settings',
+    'ui.grid',
+    'angularModalService',
+    'ngRoute',
+    'ngAnimate'
+  ])
   .config(function ($routeProvider, $httpProvider, $locationProvider) {
     $locationProvider.hashPrefix('');
     $routeProvider
@@ -33,32 +35,33 @@ angular.module('app', ['app.landing',
   })
   .controller('ModalController', function ($scope, close, Collage) {
     $scope.url = Collage.get();
-    console.log($scope.url)
     $scope.close = function (result) {
       close(result, 500);
     };
   })
-  .controller('UploadCtrl', function ($scope, close, Pics) {
+  .controller('UploadCtrl', function ($scope, close, Pics, Collage) {
     var fd = new FormData();
     $scope.uploadFile = function (fileType, files) {
       fd.append(fileType, files[0])
     }
     $scope.connection = function () {
-     
+
       Pics.sendPhotos(fd)
-       $scope.close = function () {
-      close(500);
-    }();
+      .then(function () {
+        Collage.getFetcher()();
+      });
+      $scope.close = function () {
+        close(null,500);
+      }();
     }
 
-    
-     
+
+
   })
   .run(function ($rootScope, $location, Auth) {
     $rootScope.$on('$routeChangeStart', function (evt, next, current) {
-    if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
-      $location.path('/landing');
-    
+      if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+        $location.path('/');
       }
     });
   });
