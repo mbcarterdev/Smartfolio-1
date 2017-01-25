@@ -1,26 +1,24 @@
 angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularModalService', 'ngMessages', 'material.svgAssetsCache'])
-  .controller('HomeCtrl', function ($scope, $rootScope, $mdSidenav, ModalService, Collage, Pics, $window) {
+  .controller('HomeCtrl', function ($scope, $mdSidenav, ModalService, Collage, Pics, $window, Auth) {
     $scope.toggleLeft = buildToggler('left');
-    $rootScope.back = "home";
-    // $scope.toggleRight = buildToggler('right');
+    $scope.pageClass = 'page home';
     $scope.images = [];
 
     function buildToggler(componentId) {
       return function () {
         $mdSidenav(componentId).toggle();
       }
-    }
-   $scope.fetcher = function () {
-      Pics.imageList().then( function (result) {
-        console.log(result)
-        $scope.images= result
+    };
+
+    $scope.fetcher = function () {
+      Pics.imageList().then(function (result) {
+        $scope.images = result;
       })
-    }
+    };
 
-
-
-    $scope.fetcher()
-
+    $scope.logoff = Auth.signout;
+    $scope.fetcher();
+    Collage.setFetcher($scope.fetcher);
     // $scope.images = [
     //   'https://upload.wikimedia.org/wikipedia/en/thumb/1/15/Kurau_Phantom_Memory.jpg/230px-Kurau_Phantom_Memory.jpg',
     //   'https://upload.wikimedia.org/wikipedia/en/a/a6/Kanon_second_anime_Funimation_box_set.jpg',
@@ -35,17 +33,17 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
     // ]
 
     $scope.show = function (index) {
-     
+
       Collage.set({
         image1: $scope.images[index],
         image2: $scope.images[index]
-      })
+      });
       ModalService.showModal({
         templateUrl: 'modal.html',
         controller: "ModalController"
       }).then(function (modal) {
         modal.element.modal();
-       
+
       });
     };
 
@@ -55,7 +53,6 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
         controller: "UploadCtrl"
       }).then(function (modal) {
         modal.element.modal();
-         
       });
     };
 

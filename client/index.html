@@ -14,12 +14,20 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="{{back}}">
-  <div ng-view></div>
+<body>
+  <div ng-view class="{{pageClass}}"></div>
 
   <footer>
-
-  </footer>
+    <div id="social">
+        <ul class="social-icons">
+            <li><a href="" target="_blank"><img src="img/facebook.png" /></a></li>
+            <li><a href="" target="_blank"><img src="img/soundcloud.png" /></a></li>
+            <li><a href="" target="_blank"><img src="img/twitter.png" /></a></li>
+            <li><a href="" target="_blank"><img src="img/youtube.png" /></a></li>
+            <li><a href="" target="_blank"><img src="img/instagram.png" /></a></li>
+        </ul>
+    </div>
+</footer>
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"></script>

@@ -1,23 +1,21 @@
 angular.module('app.factory', [])
   .factory('Auth', function ($http, $location, $window) {
     var login = function (user) {
-      $http.defaults.headers.common['username'] = user.username
       return $http({
-        method: 'POST',
-        url: '/signin',
-        data: user
-      })
+          method: 'POST',
+          url: '/signin',
+          data: user
+        })
         .then(function (resp) {
           return resp.data;
         });
     };
     var register = function (user) {
-      $http.defaults.headers.common['username'] = user.username
       return $http({
-        method: 'POST',
-        url: '/register',
-        data: user
-      })
+          method: 'POST',
+          url: '/register',
+          data: user
+        })
         .then(function (resp) {
           return resp.data;
         });
@@ -29,8 +27,8 @@ angular.module('app.factory', [])
     }
 
     var signout = function () {
-      $window.localSotrage.removeItem('com.smartfolio');
-      $location.path('/landing')
+      $window.localStorage.removeItem('com.smartfolio');
+      $location.path('/')
     }
     return {
       login,
@@ -39,22 +37,7 @@ angular.module('app.factory', [])
       signout
     };
   })
-  .factory('Collage', function () {
-    var imgObj = {};
-    var set = function (img) {
-      imgObj = img;
-    };
-    var get = function () {
-      return imgObj
-    };
-
-    return ({
-      set,
-      get
-    })
-  })
-
-  .factory('Pics', function ($http) {
+   .factory('Pics', function ($http) {
     var sendPhotos = function (files) {
       return $http({
         method: 'POST',
@@ -63,9 +46,9 @@ angular.module('app.factory', [])
           'Content-Type': undefined
         },
         data: files,
-        transformRequest : angular.identity
+        transformRequest: angular.identity
       }).then(function (resp) {
-        console.log('done')
+        console.log('done sending pictures');
       })
     }
 
@@ -74,7 +57,7 @@ angular.module('app.factory', [])
         method: 'GET',
         url: `/photos/${imagename}`
       }).then(function (resp) {
-       return(resp.data)
+        return (resp.data)
       })
     };
 
@@ -94,18 +77,44 @@ angular.module('app.factory', [])
       imageFetcher,
       imageList,
     })
-  }).factory('AttachTokens', function ($window) {
+  })
+  .factory('Collage', function () {
+    var imgObj = {};
+    var fetch;
+    var set = function (img) {
+      imgObj = img;
+    };
+    var get = function () {
+      return imgObj;
+    };
+
+    var setFetcher = function (func) {
+      fetch = func;
+    }
+
+    var getFetcher = function () {
+      return fetch;
+    }
+
+    return ({
+      set,
+      get,
+      setFetcher,
+      getFetcher
+    })
+  })
+  .factory('AttachTokens', function ($window) {
     var attach = {
       request: function (object) {
-      var jwt = $window.localStorage.getItem('com.smartfolio');
-      if (jwt) {
-        object.headers['x-access-token'] = jwt;
-        object.headers['username'] = 'fs@fs.com'
+        var jwt = $window.localStorage.getItem('com.smartfolio');
+        var username = $window.localStorage.getItem('username');
+        if (jwt) {
+          object.headers['x-access-token'] = jwt;
+          object.headers['username'] = username;
+        }
+        object.headers['Allow-Control-Allow-Origin'] = '*';
+        return object;
       }
-      object.headers['Allow-Control-Allow-Origin'] = '*';
-      return object;
-    }
-  };
-  return attach;
-})
-
+    };
+    return attach;
+  })
