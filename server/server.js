@@ -4,9 +4,11 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var multer = require('multer');
 var bcrypt = require('bcrypt-nodejs');
-var path = require('path')
+var path = require('path');
 
 var app = express();
+
+//Multer Methofs
 var imglocation = path.join(__dirname,'uploads');
 var storage = multer.diskStorage({
   destination: function (req, file, cb){
@@ -25,11 +27,9 @@ var upload = multer({storage: storage}).fields([{
   name: 'front', maxcount: 1
 }, {name: 'back', maxcount: 1}]);
 
-
-
-
+//End Multer Mehtods
 app.use(bodyParser.json());
-app.use(upload)
+app.use(upload) //Multer Middleware
 
 app.use(morgan('dev'));
 

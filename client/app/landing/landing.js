@@ -24,7 +24,7 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
                 <md-dialog aria-label="List dialog">
                  <md-dialog-content>
                     <form id="pop">
-                        <h1><Smartfolio></Smartfolio></h1>
+                        <h1>Smartfolio</h1>
                         <md-input-container>
                             <label>EmailAddress</label>
                             <input type="email" ng-model="user.username" />
@@ -53,7 +53,8 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
               .then(function (token) {
                 $window.localStorage.setItem('com.smartfolio', token);
                 $window.localStorage.setItem('username', $scope.user.username);
-                $location.path('/home')
+                $location.path('/home');
+                $mdDialog.hide();
               })
           } else {
             $mdDialog.hide();
