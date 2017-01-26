@@ -16,7 +16,7 @@ module.exports =  {
     if(!token) {
       return res.sendStatus(403);
     }
-
+    
     try {
       user = jwt.decode(token, 'secret');
       req.user = user;

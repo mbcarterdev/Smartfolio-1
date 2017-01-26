@@ -31,7 +31,12 @@ module.exports = knex;
 //   `userid` INT NOT NULL,
 //   PRIMARY KEY (`idimages`));
 //
-//
+//  CREATE TABLE `smartfolio`.`tags` (
+//    `id` INT NOT NULL AUTO_INCREMENT,
+//    `imgid` INT NULL,
+//    `tag` TEXT NULL,
+//     PRIMARY KEY (`id`));
+
 //   ALTER TABLE `smartfolio`.`images`
 // ADD INDEX `iduser_idx` (`userid` ASC);
 // ALTER TABLE `smartfolio`.`images`

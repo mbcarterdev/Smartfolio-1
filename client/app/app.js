@@ -45,7 +45,6 @@ angular.module('app', ['app.landing',
       fd.append(fileType, files[0])
     }
     $scope.connection = function () {
-
       Pics.sendPhotos(fd)
       .then(function () {
         Collage.getFetcher()();
@@ -54,9 +53,6 @@ angular.module('app', ['app.landing',
         close(null,500);
       }();
     }
-
-
-
   })
   .run(function ($rootScope, $location, Auth) {
     $rootScope.$on('$routeChangeStart', function (evt, next, current) {
