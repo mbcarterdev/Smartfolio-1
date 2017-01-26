@@ -4,7 +4,7 @@ var db = require('../config/db');
 var path = require('path')
 
 var visual_recognition = watson.visual_recognition({
-  api_key: '790f804248571cb7af13e9260d0d47df019b4498',
+  api_key: '',
   version: 'v3',
   version_date: '2016-05-20'
 });
