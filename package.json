@@ -26,6 +26,7 @@
     "angular-mocks": "^1.6.1",
     "angular-modal-service": "^0.10.1",
     "angular-route": "^1.6.1",
+    "async": "^2.1.4",
     "axios": "^0.15.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.16.0",
