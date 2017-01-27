@@ -4,11 +4,15 @@
       <md-tooltip>Menu</md-tooltip>
       <md-icon class="md-default-theme" ng-click="toggleLeft()" class="material-icons">menu</md-icon>
     </md-button>
+    <md-input-container class="search" >
+      <label>Search</label>
+      <input type="text" ng-model="search" class="search_input">
+    </md-input-container>
   </div>
 </md-toolbar>
 <md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="24">
   <md-toolbar>
-    <h1 class="head" class="md-toolbar-tools">Menu</h1>
+    <h1  class="md-toolbar-tools head">Menu</h1>
   </md-toolbar>
   <md-content layout-margin="" layout="column">
     <md-button ng-click="logoff()" class="md-accent">
@@ -24,16 +28,16 @@
     <md-button ng-click="show2()" class="add">Add Photos</md-button>
   </div>
 </div>
-<div class="gridListdemoBasicUsage">
+<div class="gridList">
   <div>
     <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2"
       md-gutter="12px" md-gutter-gt-sm="8px">
-      <md-grid-tile md-whiteframe="24" class="flex-item ripplelink" ng-repeat="image in images track by $index">
+      <md-grid-tile md-whiteframe="24" class="flex-item ripplelink" ng-repeat="image in images |filter: search track by $index">
         <md-tooltip>{{image.imgname}}</md-tooltip>
         <img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" />
-        <!--<md-grid-tile-footer>
-        <h3>{{image.imgname}}</h3>
-      </md-grid-tile-footer>-->
+        <md-grid-tile-footer>
+        <i class="material-icons pic_menu" ng-click= "showMenu()">dehaze</i>
+      </md-grid-tile-footer>
       </md-grid-tile>
     </md-grid-list>
   </div>
