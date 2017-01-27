@@ -2,16 +2,16 @@
 var knex = require('knex')({
   client: 'mysql',
   connection: {
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
+    host: 'smartfolio-mysql.cx8udht8nimv.us-west-2.rds.amazonaws.com',
+    user: 'smartfolioadmin',
+    password: '$martfolio',
     database: 'smartfolio'
   }
 });
 module.exports = knex;
-//
-// create database smartfolio;
-// use smartfolio;
+
+// CREATE DATABASE smartfolio;
+// USE smartfolio;
 //
 // CREATE TABLE `smartfolio`.`users` (
 //   `idusers` INT NOT NULL AUTO_INCREMENT,
@@ -36,7 +36,7 @@ module.exports = knex;
 //    `imgid` INT NULL,
 //    `tag` TEXT NULL,
 //     PRIMARY KEY (`id`));
-
+//
 //   ALTER TABLE `smartfolio`.`images`
 // ADD INDEX `iduser_idx` (`userid` ASC);
 // ALTER TABLE `smartfolio`.`images`
