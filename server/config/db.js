@@ -7,13 +7,14 @@ console.log(host, user, password)
 var knex = require('knex')({
   client: 'mysql',
   connection: {
-    host,
-    user,
-    password,
+    host: 'smartfolio-mysql.cx8udht8nimv.us-west-2.rds.amazonaws.com',
+    user: 'smartfolioadmin',
+    password: '$martfolio',
     database: 'smartfolio'
   }
 });
 module.exports = knex;
+
 //
 // create database smartfolio;
 // use smartfolio;
@@ -41,7 +42,7 @@ module.exports = knex;
 //    `imgid` INT NULL,
 //    `tag` TEXT NULL,
 //     PRIMARY KEY (`id`));
-
+//
 //   ALTER TABLE `smartfolio`.`images`
 // ADD INDEX `iduser_idx` (`userid` ASC);
 // ALTER TABLE `smartfolio`.`images`
