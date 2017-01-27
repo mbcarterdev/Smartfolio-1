@@ -16,9 +16,11 @@ var knex = require('knex')({
   }
 });
 module.exports = knex;
+
 //
 // create database smartfolio;
 // use smartfolio;
+
 
 // CREATE TABLE `smartfolio`.`users` (
 //   `idusers` INT NOT NULL AUTO_INCREMENT,
@@ -43,7 +45,7 @@ module.exports = knex;
 //    `idimages` INT NULL,
 //    `tag` TEXT NULL,
 //     PRIMARY KEY (`id`));
-
+//
 //   ALTER TABLE `smartfolio`.`images`
 // ADD INDEX `iduser_idx` (`userid` ASC);
 // ALTER TABLE `smartfolio`.`images`
