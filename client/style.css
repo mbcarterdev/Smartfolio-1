@@ -76,7 +76,7 @@ md-toolbar:not(.md-menu-toolbar) md-icon {
     font-size: 60px
 }
 
-.gridListdemoBasicUsage md-grid-list {
+.gridList md-grid-list {
     margin: 30px 40px;
 }
 
@@ -197,4 +197,23 @@ img {
     box-shadow: rgba(0, 0, 0, 0.8) 0 16px 16px 0;
     -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 16px 16px 0;
     -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 16px 16px 0;
+}
+
+.search {
+    position: relative;
+    float: right;
+    margin: 4% auto;
+    width: 20%;
+}
+
+md-input-container label {
+    color: rgb(255, 64, 129);
+}
+
+search_input {
+    color: rgb(255, 64, 129);
+}
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+        color: rgb(255, 64, 129);
+        border-color: rgb(255, 64, 129);
 }
