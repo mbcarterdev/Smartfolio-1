@@ -1,8 +1,8 @@
 // var path = require('path');
 var host = process.env.host || 'localhost';
-var user = process.env.username || 'root';
+var user = process.env.user || 'root';
 var password = process.env.password || '1234';
-
+console.log(host, user, password)
 
 var knex = require('knex')({
   client: 'mysql',

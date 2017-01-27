@@ -34,6 +34,7 @@
     "knex": "^0.12.6",
     "morgan": "^1.7.0",
     "multer": "^1.2.1",
+    "mysql": "^2.13.0",
     "path": "^0.12.7",
     "watson-developer-cloud": "^2.15.2"
   },

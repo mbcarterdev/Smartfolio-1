@@ -4,7 +4,7 @@ var jwt = require('jwt-simple');
 
 module.exports = {
   signin: function (req, res) {
-    db.raw(`SELECT username, password from users where username = '${req.body.username}'`)
+    db.raw(`SELECT username, password from smartfolio.users where username = '${req.body.username}'`)
       .then(function (result) {
         if (result[0][0]) {
           bcrypt.compare(req.body.password, result[0][0].password, function (err, isMatch) {
@@ -26,7 +26,7 @@ module.exports = {
   },
 
   register: function (req, res) {
-   db.raw(`SELECT username from users where username = '${req.body.username}'`)
+   db.raw(`SELECT username from smartfolio.users where username = '${req.body.username}'`)
       .then(function (results) {
 
         if (!!results[0][0]) {
@@ -39,7 +39,7 @@ module.exports = {
               return console.log('Error hashing ' + err);
             }
             console.log('here', results)
-            db.raw(`INSERT INTO USERS VALUES (NULL, '${req.body.username}', '${hash}');`)
+            db.raw(`INSERT INTO smartfolio.users VALUES (NULL, '${req.body.username}', '${hash}');`)
               .then(function (results) {
                 var username = req.body.username
                 var password = hashPassword
