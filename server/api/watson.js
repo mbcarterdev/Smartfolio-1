@@ -10,10 +10,10 @@ var visual_recognition = watson.visual_recognition({
 });
 
 
-db.raw(`SELECT images.idimages from images where images.idimages not in  (select tags.idimages from tags)`)
+db.raw(`SELECT images.idimages from smartfolio.images where images.idimages not in  (select tags.idimages from smartfolio.tags)`)
   .then(function (results) {
     results[0].forEach(function (imgid) {
-      db.raw(`SELECT imghash from images where idimages  = ${imgid.idimages}`)
+      db.raw(`SELECT imghash from smartfolio.images where idimages  = ${imgid.idimages}`)
         .then(function (imgResult) {
           var imgName = imgResult[0][0].imghash;
           var params = {
@@ -31,14 +31,14 @@ db.raw(`SELECT images.idimages from images where images.idimages not in  (select
                 } else {
                   age = `age\: around ${face.age.min}`;
                 }
-                db.raw(`INSERT INTO tags VALUES (null, ${imgid.idimages} ,'${age}')`)
+                db.raw(`INSERT INTO smartfolio.tags VALUES (null, ${imgid.idimages} ,'${age}')`)
                 .then( function (results) {
                   console.log('more success')
                 })
                 .catch( function (err) {
                   console.log(err)
                 })
-                db.raw(`INSERT INTO tags VALUES (null, ${imgid.idimages} ,'${face.gender.gender}')`)
+                db.raw(`INSERT INTO smartfolio.tags VALUES (null, ${imgid.idimages} ,'${face.gender.gender}')`)
                 .then( function (results) {
                   console.log('success')
                 })
@@ -55,7 +55,7 @@ db.raw(`SELECT images.idimages from images where images.idimages not in  (select
         .catch(function (err) {
           console.log(err)
         })
-      db.raw(`SELECT imghash from images where idimages  = ${imgid.idimages}`)
+      db.raw(`SELECT imghash from smartfolio.images where idimages  = ${imgid.idimages}`)
         .then(function (imgResult) {
           var imgName = imgResult[0][0].imghash;
           var params = {
@@ -67,7 +67,7 @@ db.raw(`SELECT images.idimages from images where images.idimages not in  (select
             } else {
               res.images[0].classifiers[0].classes.forEach(function (tagClass) {
 
-                db.raw(`INSERT INTO tags VALUES (null, ${imgid.idimages}, '${tagClass.class}')`)
+                db.raw(`INSERT INTO smartfolio.tags VALUES (null, ${imgid.idimages}, '${tagClass.class}')`)
                   .then(function (results) {
                   })
                   .catch(function (err) {
