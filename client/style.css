@@ -59,7 +59,6 @@ md-grid-list md-grid-tile md-grid-tile-footer h3 {
 
 md-toolbar:not(.md-menu-toolbar) md-icon {
    color: rgb(255, 64, 129);
-    fill: rgb(221, 44, 0);
     height: auto;
     width: auto;
 }
@@ -73,7 +72,7 @@ md-toolbar:not(.md-menu-toolbar) md-icon {
 }
 
 .material-icons {
-    font-size: 60px
+    font-size: 40px;
 }
 
 .gridList md-grid-list {
@@ -204,6 +203,7 @@ img {
     float: right;
     margin: 4% auto;
     width: 20%;
+    margin-bottom: 0;
 }
 
 md-input-container label {
@@ -216,4 +216,8 @@ search_input {
 md-input-container:not(.md-input-invalid).md-input-focused .md-input {
         color: rgb(255, 64, 129);
         border-color: rgb(255, 64, 129);
+}
+
+md-grid-tile-footer{
+    justify-content: center;
 }

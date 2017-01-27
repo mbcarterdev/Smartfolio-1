@@ -1,7 +1,8 @@
 // var path = require('path');
-var host = process.env.host || 'localhost';
-var user = process.env.user || 'root';
-var password = process.env.password || '1234';
+var host =  process.env.RDS_HOSTNAME || 'localhost';
+var user =  process.env.RDS_USERNAME || 'root';
+var password = process.env.RDS_PASSWORD || '1234';
+var port = process.env.RDS_PORT || '3306'
 console.log(host, user, password)
 
 var knex = require('knex')({
@@ -10,6 +11,7 @@ var knex = require('knex')({
     host,
     user,
     password,
+    port,
     database: 'smartfolio'
   }
 });
@@ -38,7 +40,7 @@ module.exports = knex;
 
 //  CREATE TABLE `smartfolio`.`tags` (
 //    `id` INT NOT NULL AUTO_INCREMENT,
-//    `imgid` INT NULL,
+//    `idimages` INT NULL,
 //    `tag` TEXT NULL,
 //     PRIMARY KEY (`id`));
 

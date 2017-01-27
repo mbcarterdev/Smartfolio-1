@@ -35,9 +35,9 @@
       <md-grid-tile md-whiteframe="24" class="flex-item ripplelink" ng-repeat="image in images |filter: search track by $index">
         <md-tooltip>{{image.imgname}}</md-tooltip>
         <img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" />
-        <!--<md-grid-tile-footer>
-        <h3>{{image.imgname}}</h3>
-      </md-grid-tile-footer>-->
+        <md-grid-tile-footer>
+        <i class="material-icons pic_menu" ng-click= "showMenu()">dehaze</i>
+      </md-grid-tile-footer>
       </md-grid-tile>
     </md-grid-list>
   </div>
