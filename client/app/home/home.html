@@ -2,7 +2,7 @@
   <div>
     <md-button>
       <md-tooltip>Menu</md-tooltip>
-      <md-icon class="md-default-theme" ng-click="toggleLeft()" class="material-icons">menu</md-icon>
+      <md-icon class="md-default-theme material-icons" ng-click="toggleLeft()">menu</md-icon>
     </md-button>
     <md-input-container class="search" >
       <label>Search</label>
@@ -36,7 +36,20 @@
         <md-tooltip>{{image.imgname}}</md-tooltip>
         <img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" />
         <md-grid-tile-footer>
-        <i class="material-icons pic_menu" ng-click= "showMenu()">dehaze</i>
+          <md-menu>
+            <md-button class="md-default-theme material-icons"  ng-click= "openMenu($mdOpenMenu, $event)">
+              <md-icon>dehaze</md-icon>
+        <!--<i class="material-icons pic_menu">dehaze</i>-->
+            </md-button>
+            <md-menu-content width="4" class="menu_content">
+              <md-menu-item class="menu_button">
+                <md-button ng-click="showTags($index, $event)"> View Tags </md-button>
+              </md-menu-item>
+                <md-menu-item class="menu_button">
+                <md-button> View Tags </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
       </md-grid-tile-footer>
       </md-grid-tile>
     </md-grid-list>
@@ -70,16 +83,16 @@
           <h1>Upload Photos</h1>
           <form role="form" class="form" onsubmit="return false;">
             <div class="form-group">
-              <label for="file">File</label>
+              <label for="file">Front</label>
               <input type="file" name="front" onchange="angular.element(this).scope().uploadFile('front',this.files)" />
-              <label for="file">File2</label>
+              <label for="file">Back</label>
               <input type="file" name="back" onchange="angular.element(this).scope().uploadFile('back',this.files)" />
             </div>
-            <md-button id="upload" type="button" class="btn btn-primary add" ng-click="connection()" data-dismiss="modal">Upload</md-button>
+            <md-button id="upload" type="button" class="btn  add" ng-click="connection()" data-dismiss="modal">Upload</md-button>
           </form>
         </div>
-        <div class="modal-footer">
-           <md-button type="button" ng-click="close()" class="btn btn-primary add" data-dismiss="modal">Close</md-button>
+        <div class="modal-footer" style="border: none;">
+           <md-button type="button" ng-click="close()" class="btn  add" data-dismiss="modal">Close</md-button>
         </div>
       </div>
     </div>
