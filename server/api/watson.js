@@ -2,22 +2,23 @@ var watson = require('watson-developer-cloud');
 var fs = require('fs');
 var db = require('../config/db');
 var path = require('path')
-
+var location = path.join(__dirname,'../uploads');
 var visual_recognition = watson.visual_recognition({
-  api_key: '',
+  api_key: process.env.api_key,
   version: 'v3',
   version_date: '2016-05-20'
 });
 
 
-db.raw(`SELECT images.idimages from smartfolio.images where images.idimages not in  (select tags.idimages from smartfolio.tags)`)
+var watson = function () {
+  db.raw(`SELECT images.idimages from smartfolio.images where images.idimages not in  (select tags.idimages from smartfolio.tags)`)
   .then(function (results) {
     results[0].forEach(function (imgid) {
       db.raw(`SELECT imghash from smartfolio.images where idimages  = ${imgid.idimages}`)
         .then(function (imgResult) {
           var imgName = imgResult[0][0].imghash;
           var params = {
-            images_file: fs.createReadStream(`../uploads/${imgName}`)
+            images_file: fs.createReadStream(`${location}/${imgName}`)
           };
 
           visual_recognition.detectFaces(params, function (err, res) {
@@ -32,20 +33,20 @@ db.raw(`SELECT images.idimages from smartfolio.images where images.idimages not 
                   age = `age\: around ${face.age.min}`;
                 }
                 db.raw(`INSERT INTO smartfolio.tags VALUES (null, ${imgid.idimages} ,'${age}')`)
-                .then( function (results) {
-                  console.log('more success')
-                })
-                .catch( function (err) {
-                  console.log(err)
-                })
+                  .then(function (results) {
+                    console.log('more success')
+                  })
+                  .catch(function (err) {
+                    console.log(err)
+                  })
                 db.raw(`INSERT INTO smartfolio.tags VALUES (null, ${imgid.idimages} ,'${face.gender.gender}')`)
-                .then( function (results) {
-                  console.log('success')
-                })
-                .catch( function (error) {
-                  console.log('error')
-                })
-                
+                  .then(function (results) {
+                    console.log('success')
+                  })
+                  .catch(function (error) {
+                    console.log('error')
+                  })
+
               })
             }
 
@@ -59,7 +60,7 @@ db.raw(`SELECT images.idimages from smartfolio.images where images.idimages not 
         .then(function (imgResult) {
           var imgName = imgResult[0][0].imghash;
           var params = {
-            images_file: fs.createReadStream(`../uploads/${imgName}`)
+            images_file: fs.createReadStream(`${location}/${imgName}`)
           };
           visual_recognition.classify(params, function (err, res) {
             if (err) {
@@ -81,7 +82,8 @@ db.raw(`SELECT images.idimages from smartfolio.images where images.idimages not 
   }).catch(function (err) {
     console.log(err)
   })
-
+}
+module.exports = watson;
 // var params = {
 //   images_file: fs.createReadStream('../uploads/michelle@michelle.com download-free-coreldraw-tutorials-vector-design.png')
 // };

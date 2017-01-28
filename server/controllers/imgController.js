@@ -35,6 +35,7 @@ module.exports = {
         var userID = results[0][0].idusers;
         db.raw(`INSERT INTO smartfolio.images values (null, '${front}', '${`${username} ${front}`}',
         null, null, '${back}', '${`${username} ${back}`}', ${userID} )`).then(function () {
+          
             res.sendStatus(200)
           })
       })
