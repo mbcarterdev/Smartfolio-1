@@ -1,5 +1,5 @@
 angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularModalService', 'ngMessages', 'material.svgAssetsCache'])
-  .controller('HomeCtrl', function ($scope, $mdSidenav, ModalService, Collage, Pics, $window, Auth) {
+  .controller('HomeCtrl', function ($scope, $mdSidenav, ModalService, Collage, Pics, $window, Auth, $mdDialog) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
     $scope.images = [];
@@ -10,8 +10,15 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       }
     };
 
+    $scope.openMenu = function ($mdOpenMenu, ev) {
+      $mdOpenMenu(ev);
+    }
+
+
+    var data;
     $scope.fetcher = function () {
       Pics.imageList().then(function (result) {
+        data = result
         $scope.images = result;
       })
     };
@@ -55,6 +62,28 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
         modal.element.modal();
       });
     };
+
+    $scope.showTags = function (index, $event) {
+      console.log(index)
+      $mdDialog.show({
+        targetEvent: $event,
+        scope: $scope,
+        preserveScope: true,
+        template: `<div class="tags">
+             <md-chips ng-model="tags"></md-chips>
+               <div class="modal-footer">
+                 <md-button type="button" ng-click="close()" class="btn  add" data-dismiss="modal">Close</md-button>
+               </div>
+            </div> `,
+        controller: function DialogController($scope, $mdDialog) {
+          console.log()
+          $scope.tags = data[index].tags
+          $scope.close = function () {
+            $mdDialog.hide();
+          }
+        }
+      })
+    }
 
   });
 

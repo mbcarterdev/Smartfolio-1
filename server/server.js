@@ -5,7 +5,7 @@ var path = require('path');
 var multer = require('multer');
 var bcrypt = require('bcrypt-nodejs');
 var path = require('path');
-
+var watson = require('./api/watson');
 var app = express();
 
 //Multer Methofs
@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, '/lib')));
 
 require('./routes.js')(app, express);
 var port = process.env.PORT || 8000;
-
+setInterval(watson, 60000)
 app.listen(port, function () {
   console.log('Listening on port ', port);
 })
