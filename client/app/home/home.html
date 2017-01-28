@@ -2,13 +2,17 @@
   <div>
     <md-button>
       <md-tooltip>Menu</md-tooltip>
-      <md-icon class="md-default-theme" ng-click="toggleLeft()" class="material-icons">menu</md-icon>
+      <md-icon class="md-default-theme material-icons" ng-click="toggleLeft()">menu</md-icon>
     </md-button>
+    <md-input-container class="search" >
+      <label>Search</label>
+      <input type="text" ng-model="search" class="search_input">
+    </md-input-container>
   </div>
 </md-toolbar>
 <md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="24">
   <md-toolbar>
-    <h1 class="head" class="md-toolbar-tools">Menu</h1>
+    <h1  class="md-toolbar-tools head">Menu</h1>
   </md-toolbar>
   <md-content layout-margin="" layout="column">
     <md-button ng-click="logoff()" class="md-accent">
@@ -24,16 +28,29 @@
     <md-button ng-click="show2()" class="add">Add Photos</md-button>
   </div>
 </div>
-<div class="gridListdemoBasicUsage">
+<div class="gridList">
   <div>
     <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2"
       md-gutter="12px" md-gutter-gt-sm="8px">
-      <md-grid-tile md-whiteframe="24" class="flex-item ripplelink" ng-repeat="image in images track by $index">
+      <md-grid-tile md-whiteframe="24" class="flex-item ripplelink" ng-repeat="image in images |filter: search track by $index">
         <md-tooltip>{{image.imgname}}</md-tooltip>
         <img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" />
-        <!--<md-grid-tile-footer>
-        <h3>{{image.imgname}}</h3>
-      </md-grid-tile-footer>-->
+        <md-grid-tile-footer>
+          <md-menu>
+            <md-button class="md-default-theme material-icons"  ng-click= "openMenu($mdOpenMenu, $event)">
+              <md-icon>dehaze</md-icon>
+        <!--<i class="material-icons pic_menu">dehaze</i>-->
+            </md-button>
+            <md-menu-content width="4" class="menu_content">
+              <md-menu-item class="menu_button">
+                <md-button ng-click="showTags($index, $event)"> View Tags </md-button>
+              </md-menu-item>
+                <md-menu-item class="menu_button">
+                <md-button> View Tags </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+      </md-grid-tile-footer>
       </md-grid-tile>
     </md-grid-list>
   </div>
@@ -66,16 +83,16 @@
           <h1>Upload Photos</h1>
           <form role="form" class="form" onsubmit="return false;">
             <div class="form-group">
-              <label for="file">File</label>
+              <label for="file">Front</label>
               <input type="file" name="front" onchange="angular.element(this).scope().uploadFile('front',this.files)" />
-              <label for="file">File2</label>
+              <label for="file">Back</label>
               <input type="file" name="back" onchange="angular.element(this).scope().uploadFile('back',this.files)" />
             </div>
-            <md-button id="upload" type="button" class="btn btn-primary add" ng-click="connection()" data-dismiss="modal">Upload</md-button>
+            <md-button id="upload" type="button" class="btn  add" ng-click="connection()" data-dismiss="modal">Upload</md-button>
           </form>
         </div>
-        <div class="modal-footer">
-           <md-button type="button" ng-click="close()" class="btn btn-primary add" data-dismiss="modal">Close</md-button>
+        <div class="modal-footer" style="border: none;">
+           <md-button type="button" ng-click="close()" class="btn  add" data-dismiss="modal">Close</md-button>
         </div>
       </div>
     </div>

@@ -12,11 +12,13 @@ a:link,
 a:visited,
 a:hover,
 a:active {
+
     text-decoration: none;
     color: #f9f9f9;
 }
 
 ul {
+
     list-style: none;
 }
 
@@ -33,7 +35,7 @@ md-sidenav {
 
 
 h1 {
-    color: rgb(255, 64, 129);
+    color: rgb(241, 111, 0);
 }
 
 md-sidenav md-content {
@@ -44,7 +46,7 @@ md-sidenav md-content {
 .add {
     justify-content: center;
     background-color: black;
-    color: rgb(255, 64, 129);
+    color: rgb(241, 111, 0);
 }
 
 .imgbox {
@@ -58,8 +60,7 @@ md-grid-list md-grid-tile md-grid-tile-footer h3 {
 }
 
 md-toolbar:not(.md-menu-toolbar) md-icon {
-   color: rgb(255, 64, 129);
-    fill: rgb(221, 44, 0);
+   color: rgb(241, 111, 0);
     height: auto;
     width: auto;
 }
@@ -73,10 +74,12 @@ md-toolbar:not(.md-menu-toolbar) md-icon {
 }
 
 .material-icons {
-    font-size: 60px
+
+    font-size:33px;
+    color: rgb(241, 111, 0);
 }
 
-.gridListdemoBasicUsage md-grid-list {
+.gridList md-grid-list {
     margin: 30px 40px;
 }
 
@@ -127,7 +130,7 @@ footer {
 }
 
 .head {
-    color: rgb(255, 64, 129);
+    color: rgb(241, 111, 0);
     text-align: center;
     font-family: 'Raleway', sans-serif;
 }
@@ -198,3 +201,64 @@ img {
     -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 16px 16px 0;
     -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 16px 16px 0;
 }
+
+.search {
+    position: relative;
+    float: right;
+    margin: 4% auto;
+    width: 20%;
+    margin-bottom: 0;
+}
+
+md-input-container label {
+    color: rgb(241, 111, 0);
+}
+
+search_input {
+    color: rgb(241, 111, 0);
+}
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+        color: rgb(241, 111, 0);
+        border-color: rgb(241, 111, 0);
+}
+
+md-grid-tile-footer{
+    justify-content: center;
+}
+
+.menu {
+    font-size: x-large;
+}
+
+.menu_content{
+        background: rgba(0, 0, 0, 0.92);
+}
+
+.menu_button {
+     color: rgb(241, 111, 0);
+}
+.tags {
+    width: 100%;
+    background:rgba(0, 0, 0, 0)
+}
+
+.md-chips:not(.md-readonly){
+    background: rgba(0, 0, 0, 0);
+}
+md-dialog{
+     background: rgba(0, 0, 0, 0.5);
+}
+input[type=file] {
+    color: rgb(241, 111, 0);
+}
+
+label{
+    color: rgb(241, 111, 0);
+    /*font-size: 30px;*/
+}
+
+.md-button.md-accent{
+    color: rgb(241, 111, 0);
+}
+
+/*rgb(241, 111, 0)*/
