@@ -75,7 +75,7 @@ angular.module('app.factory', [])
     var imageDeleter = function(imagename) {
       return $http({
         method: 'DELETE',
-        url: `/photos/${imagename}`
+        url: `/photos/${imagehash}`
       }).then(function (resp) {
         return (resp.data);
       })
