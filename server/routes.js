@@ -7,10 +7,8 @@ module.exports = function (app, express) {
   app.post('/register/', uController.register);
   app.get('/photos',helper.decode, iController.fetch);
   app.post('/upload/photos',helper.decode, iController.upload);
-  app.get('/photos/:imgurl', iController.serve)
-  //app.delete to /photos for deleting a photo from the database
-    //will need to use helper.decode to verify token
-    //will need a method on iController for deleting the image
+  app.get('/photos/:imgurl', iController.serve);
+  app.delete('/photos/:imgurl', helper.decode, iController.delete);
   //app.put for changing the front or back img
     //will this go to /photos or /upload/photos?
     //will need a method on iController for updating images
