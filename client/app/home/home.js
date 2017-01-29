@@ -7,20 +7,20 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
     function buildToggler(componentId) {
       return function () {
         $mdSidenav(componentId).toggle();
-      }
-    };
+      };
+    }
 
     $scope.openMenu = function ($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
-    }
+    };
 
 
     var data;
     $scope.fetcher = function () {
       Pics.imageList().then(function (result) {
-        data = result
+        data = result;
         $scope.images = result;
-      })
+      });
     };
 
     $scope.logoff = Auth.signout;
@@ -64,7 +64,7 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
     };
 
     $scope.showTags = function (index, $event) {
-      console.log(index)
+      console.log(index);
       $mdDialog.show({
         targetEvent: $event,
         scope: $scope,
@@ -76,17 +76,19 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
                </div>
             </div> `,
         controller: function DialogController($scope, $mdDialog) {
-          console.log()
-          $scope.tags = data[index].tags
+          console.log();
+          $scope.tags = data[index].tags;
           $scope.close = function () {
             $mdDialog.hide();
-          }
+          };
         }
-      })
-    }
+      });
+    };
+    $scope.deleteImage = function (imghash) {
+      Pics.imageDeleter(imghash)
+      .then(function () {
+        Collage.getFetcher()();
+      });
 
-  });
-
-
-
-
+  };
+});

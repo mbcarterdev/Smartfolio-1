@@ -57,7 +57,7 @@ module.exports = {
     var imghash = req.body.imghash;
     var data = []
     db.raw(`DELETE from smartfolio.images where imghash =  '${imghash}'`) //then delete the tags for that imghash
-      .then(function () {
+      .then(function (results) {
         db.raw(`DELETE from smartfolio.tags where idimages = ${image.idimages}`)//check w/ RJ on this
         .then(function() {
           res.sendStatus(200)
