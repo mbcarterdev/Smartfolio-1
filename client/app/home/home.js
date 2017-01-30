@@ -1,5 +1,5 @@
 angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularModalService', 'ngMessages', 'material.svgAssetsCache'])
-  .controller('HomeCtrl', function ($scope, $mdSidenav, ModalService, Collage, Pics, $window, Auth, $mdDialog) {
+  .controller('HomeCtrl', function ($scope, $mdSidenav, ModalService, Collage, Pics, $window, Auth, $mdDialog, $location) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
     $scope.images = [];
@@ -90,6 +90,12 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       .then(function () {
         Collage.getFetcher()();
       });
+      }
 
-  };
-});
+    $scope.settings = function () {
+      $location.path('/settings');
+    }
+
+  });
+
+
