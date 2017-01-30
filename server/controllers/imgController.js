@@ -54,14 +54,20 @@ module.exports = {
     //}
   },
   delete: function (req, res) {
-    var imghash = req.body.imghash;
+    console.log(req.params);
+    var deleteMeHash = req.params.imgurl;
     var data = []
-    db.raw(`DELETE from smartfolio.images where imghash =  '${imghash}'`) //then delete the tags for that imghash
+    db.raw(`select idimages from smartfolio.images where imghash = '${deleteMeHash}'`)
       .then(function (results) {
-        db.raw(`DELETE from smartfolio.tags where idimages = ${image.idimages}`)//check w/ RJ on this
+        console.log(results[0]);
+        db.raw(`DELETE from smartfolio.tags where idimages = '${results[0][0]['idimages']}'`)
+        .then(function(result) {
+          db.raw(`DELETE from smartfolio.images where imghash = '${deleteMeHash}'`) //then delete the tags for that imghash
+//check w/ RJ on this
         .then(function() {
           res.sendStatus(200)
         })
       })
+    })
   }
 };

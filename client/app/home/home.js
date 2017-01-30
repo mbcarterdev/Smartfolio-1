@@ -85,6 +85,7 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       });
     };
     $scope.deleteImage = function (imghash) {
+      console.log(imghash);
       Pics.imageDeleter(imghash)
       .then(function () {
         Collage.getFetcher()();
