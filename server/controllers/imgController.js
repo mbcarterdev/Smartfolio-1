@@ -4,7 +4,7 @@ var path = require('path');
 module.exports = {
   fetch: function (req, res) {
     var username = req.headers.username;
-    var data = [] 
+    var data = []
     db.raw(`select idusers from smartfolio.users where username = '${username}'`) //get userID of the signed in user
       .then(function (userInfo) {
         var userID = userInfo[0][0].idusers;
@@ -35,7 +35,7 @@ module.exports = {
         var userID = results[0][0].idusers;
         db.raw(`INSERT INTO smartfolio.images values (null, '${front}', '${`${username} ${front}`}',
         null, null, '${back}', '${`${username} ${back}`}', ${userID} )`).then(function () {
-          
+
             res.sendStatus(200)
           })
       })
@@ -52,5 +52,22 @@ module.exports = {
     //} else {
     // res.status(401).send('Not Allowed');
     //}
+  },
+  delete: function (req, res) {
+    console.log(req.params);
+    var deleteMeHash = req.params.imgurl;
+    var data = []
+    db.raw(`select idimages from smartfolio.images where imghash = '${deleteMeHash}'`)
+      .then(function (results) {
+        console.log(results[0]);
+        db.raw(`DELETE from smartfolio.tags where idimages = '${results[0][0]['idimages']}'`)
+        .then(function(result) {
+          db.raw(`DELETE from smartfolio.images where imghash = '${deleteMeHash}'`) //then delete the tags for that imghash
+//check w/ RJ on this
+        .then(function() {
+          res.sendStatus(200)
+        })
+      })
+    })
   }
 };

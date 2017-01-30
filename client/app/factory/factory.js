@@ -72,10 +72,20 @@ angular.module('app.factory', [])
       })
     };
 
+    var imageDeleter = function(imghash) {
+      return $http({
+        method: 'DELETE',
+        url: `/photos/${imghash}`
+      }).then(function (resp) {
+        return (resp.data);
+      })
+    };
+
     return ({
       sendPhotos,
       imageFetcher,
       imageList,
+      imageDeleter
     })
   })
   .factory('Collage', function () {
