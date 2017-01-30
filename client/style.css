@@ -128,6 +128,10 @@ footer {
 .home {
     background-image: url("forest-meadow-leaves-autumn.jpg");
 }
+.settings {
+    /*background-image: url("http://maxpixel.freegreatpicture.com/static/photo/1x/Water-Pond-Autumn-Sun-1814368.jpg");*/
+    background-image: url("Paris_raining_autumn_cityscape_(8252181936).jpg");
+}
 
 .head {
     color: rgb(241, 111, 0);
@@ -137,7 +141,7 @@ footer {
 
 .login {
     animation: scaleUp 1s both ease-in;
-    width: 340px;
+    width: 500px;
     margin: 6.9% auto;
     padding: 48px 32px 32px 32px;
     background: #fafafa;
@@ -145,7 +149,9 @@ footer {
     border: 1px solid black;
     box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
 }
-
+.update {
+    width: 500px;
+}
 .signup {
     color: rgb(221, 44, 0);
     width: 100%;
@@ -245,9 +251,10 @@ md-grid-tile-footer{
 .md-chips:not(.md-readonly){
     background: rgba(0, 0, 0, 0);
 }
-md-dialog{
-     background: rgba(0, 0, 0, 0.5);
-}
+
+    /*md-dialog{
+        background: rgba(0, 0, 0, 0.5);
+    }*/
 input[type=file] {
     color: rgb(241, 111, 0);
 }
