@@ -96,6 +96,10 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       $location.path('/settings');
     }
 
+    $scope.settings = function () {
+      $location.path('/settings');
+    }
+
   });
 
 
