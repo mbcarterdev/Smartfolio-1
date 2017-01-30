@@ -61,8 +61,8 @@ module.exports = {
       .then(function (results) {
         console.log(results[0]);
         db.raw(`DELETE from smartfolio.tags where idimages = '${results[0][0]['idimages']}'`)
-        .then(function(result) {
-          db.raw(`DELETE from smartfolio.images where imghash = '${deleteMeHash}'`) //then delete the tags for that imghash
+          .then(function(result) {
+            db.raw(`DELETE from smartfolio.images where imghash = '${deleteMeHash}'`) //then delete the tags for that imghash
 //check w/ RJ on this
         .then(function() {
           res.sendStatus(200)
