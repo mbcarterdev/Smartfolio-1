@@ -18,26 +18,15 @@ console.log(host, user, password)
 var knex = require('knex')({
   client: 'mysql',
   connection: {
-<<<<<<< HEAD
     host,
     user,
     password,
     port,
-=======
-    host: 'smartfolio-mysql.cx8udht8nimv.us-west-2.rds.amazonaws.com',
-    user: 'smartfolioadmin',
-    password: '$martfolio',
->>>>>>> ce4dc034bbd9e41f95627b25e6a6d00d14853e37
     database: 'smartfolio'
   }
 });
 module.exports = knex;
 
-<<<<<<< HEAD
-
-=======
-//
->>>>>>> ce4dc034bbd9e41f95627b25e6a6d00d14853e37
 // create database smartfolio;
 // use smartfolio;
 
