@@ -1,5 +1,6 @@
 var db = require('./../config/db');
 var path = require('path');
+var fs = require('fs');
 
 module.exports = {
   fetch: function (req, res) {
@@ -62,10 +63,15 @@ module.exports = {
         console.log(results[0]);
         db.raw(`DELETE from smartfolio.tags where idimages = '${results[0][0]['idimages']}'`)
           .then(function(result) {
-            db.raw(`DELETE from smartfolio.images where imghash = '${deleteMeHash}'`) //then delete the tags for that imghash
-//check w/ RJ on this
-        .then(function() {
-          res.sendStatus(200)
+            db.raw(`DELETE from smartfolio.images where imghash = '${deleteMeHash}'`)
+            .then(function() {
+              // var filePath = `./server/uploads/${deleteMeHash}`;
+              var filePath = path.join(__dirname, `../uploads/${deleteMeHash}`);
+              fs.unlink(filePath,function(err){
+                if(err) return console.log(err);
+                  console.log('file deleted successfully');
+                });
+              res.sendStatus(200)
         })
       })
     })
