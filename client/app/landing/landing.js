@@ -2,12 +2,12 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
   .controller('LandCtrl', function ($scope, $location, $window, $mdDialog, Auth, $rootScope) {
     $scope.pageClass = 'page landing'
     $scope.user = {}
-    $scope.login = function () {
+    $scope.login = function () { //login function
 
       Auth.login($scope.user)
         .then(function (token) {
-          $window.localStorage.setItem('com.smartfolio', token)
-          $window.localStorage.setItem('username', $scope.user.username)
+          $window.localStorage.setItem('com.smartfolio', token) //save token in the local storage
+          $window.localStorage.setItem('username', $scope.user.username)  //save username in local storage to be sent latered in headers
           $location.path('/home');
         })
         .catch(function (error) {
@@ -15,7 +15,7 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
         })
     }
 
-    $scope.showDialog = function ($event) {
+    $scope.showDialog = function ($event) { //sign up dialog box
       var parentEl = angular.element(document.body);
       $mdDialog.show({
         parent: parentEl,
@@ -45,7 +45,7 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
         controller: DialogController
       });
 
-      function DialogController($scope, $mdDialog, $http) {
+      function DialogController($scope, $mdDialog, $http) { //controller to register first time users
         $scope.user = {};
         $scope.closeDialog = function () {
           if (Object.keys($scope.user).length > 1) {

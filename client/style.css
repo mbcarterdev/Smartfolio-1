@@ -4,21 +4,15 @@
     font-family: 'Raleway', sans-serif;
 }
 
-body {
-    /*background: black;*/
-}
-
 a:link,
 a:visited,
 a:hover,
 a:active {
-
     text-decoration: none;
     color: #f9f9f9;
 }
 
 ul {
-
     list-style: none;
 }
 
@@ -32,7 +26,6 @@ md-toolbar:not(.md-menu-toolbar) {
 md-sidenav {
     background-color: rgba(241, 111, 0, 0.6);
 }
-
 
 h1 {
     color: rgb(241, 111, 0);
@@ -60,7 +53,7 @@ md-grid-list md-grid-tile md-grid-tile-footer h3 {
 }
 
 md-toolbar:not(.md-menu-toolbar) md-icon {
-   color: rgb(241, 111, 0);
+    color: rgb(241, 111, 0);
     height: auto;
     width: auto;
 }
@@ -74,8 +67,7 @@ md-toolbar:not(.md-menu-toolbar) md-icon {
 }
 
 .material-icons {
-
-    font-size:33px;
+    font-size: 33px;
     color: rgb(241, 111, 0);
 }
 
@@ -128,8 +120,8 @@ footer {
 .home {
     background-image: url("forest-meadow-leaves-autumn.jpg");
 }
+
 .settings {
-    /*background-image: url("http://maxpixel.freegreatpicture.com/static/photo/1x/Water-Pond-Autumn-Sun-1814368.jpg");*/
     background-image: url("Paris_raining_autumn_cityscape_(8252181936).jpg");
 }
 
@@ -149,9 +141,11 @@ footer {
     border: 1px solid black;
     box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
 }
+
 .update {
     width: 500px;
 }
+
 .signup {
     color: rgb(221, 44, 0);
     width: 100%;
@@ -223,12 +217,13 @@ md-input-container label {
 search_input {
     color: rgb(241, 111, 0);
 }
+
 md-input-container:not(.md-input-invalid).md-input-focused .md-input {
-        color: rgb(241, 111, 0);
-        border-color: rgb(241, 111, 0);
+    color: rgb(241, 111, 0);
+    border-color: rgb(241, 111, 0);
 }
 
-md-grid-tile-footer{
+md-grid-tile-footer {
     justify-content: center;
 }
 
@@ -236,36 +231,31 @@ md-grid-tile-footer{
     font-size: x-large;
 }
 
-.menu_content{
-        background: rgba(0, 0, 0, 0.92);
+.menu_content {
+    background: rgba(0, 0, 0, 0.92);
 }
 
 .menu_button {
-     color: rgb(241, 111, 0);
-}
-.tags {
-    width: 100%;
-    background:rgba(0, 0, 0, 0)
+    color: rgb(241, 111, 0);
 }
 
-.md-chips:not(.md-readonly){
+.tags {
+    width: 100%;
+    background: rgba(0, 0, 0, 0)
+}
+
+.md-chips:not(.md-readonly) {
     background: rgba(0, 0, 0, 0);
 }
 
-    /*md-dialog{
-        background: rgba(0, 0, 0, 0.5);
-    }*/
 input[type=file] {
     color: rgb(241, 111, 0);
 }
 
-label{
-    color: rgb(241, 111, 0);
-    /*font-size: 30px;*/
-}
-
-.md-button.md-accent{
+label {
     color: rgb(241, 111, 0);
 }
 
-/*rgb(241, 111, 0)*/
+.md-button.md-accent {
+    color: rgb(241, 111, 0);
+}

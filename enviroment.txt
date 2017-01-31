@@ -1,7 +1,0 @@
-$env:RDS_USERNAME = 'rjmohammad'
-$env:RDS_PASSWORD = 'sinite00'
-$env:RDS_HOSTNAME = 'smartfolio.cmr9rmydnbkm.us-west-2.rds.amazonaws.com'
-$env:RDS_PORT = '3306'
-$env:AWSAccessKeyId = 'AKIAJAVL53A2KWVJJRTQ'
-$env:AWSSecretKey = '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'
-$env:api_key = "790f804248571cb7af13e9260d0d47df019b4498"
