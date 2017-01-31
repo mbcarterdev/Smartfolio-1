@@ -9,7 +9,6 @@ var visual_recognition = watson.visual_recognition({
   version_date: '2016-05-20'
 });
 
-
 var watson = function () {
   db.raw(`SELECT images.idimages from smartfolio.images where images.idimages not in  (select tags.idimages from smartfolio.tags)`)
   .then(function (results) {
@@ -67,7 +66,6 @@ var watson = function () {
               console.log(err);
             } else {
               res.images[0].classifiers[0].classes.forEach(function (tagClass) {
-
                 db.raw(`INSERT INTO smartfolio.tags VALUES (null, ${imgid.idimages}, '${tagClass.class}')`)
                   .then(function (results) {
                   })

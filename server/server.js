@@ -8,7 +8,7 @@ var path = require('path');
 var watson = require('./api/watson');
 var app = express();
 
-//Multer Methofs
+//Multer Methods
 var imglocation = path.join(__dirname,'uploads');
 var storage = multer.diskStorage({
   destination: function (req, file, cb){
@@ -27,7 +27,7 @@ var upload = multer({storage: storage}).fields([{
   name: 'front', maxcount: 1
 }, {name: 'back', maxcount: 1}]);
 
-//End Multer Mehtods
+//End Multer Methods
 app.use(bodyParser.json());
 app.use(upload) //Multer Middleware
 

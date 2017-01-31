@@ -1,6 +1,6 @@
 angular.module('app.factory', [])
   .factory('Auth', function ($http, $location, $window) {
-    var login = function (user) {
+    var login = function (user) { //function to login 
       return $http({
           method: 'POST',
           url: '/signin',
@@ -10,7 +10,7 @@ angular.module('app.factory', [])
           return resp.data;
         });
     };
-    var register = function (user) {
+    var register = function (user) { //function to register first time users
       return $http({
           method: 'POST',
           url: '/register',
@@ -21,8 +21,7 @@ angular.module('app.factory', [])
         });
     };
 
-    var isAuth = function () {
-      console.log($window.localStorage.getItem('com.smartfolio'))
+    var isAuth = function () { //fetching the token from local storage and checking if it exisits 
       return !!$window.localStorage.getItem('com.smartfolio');
     }
 
@@ -39,11 +38,11 @@ angular.module('app.factory', [])
   })
    .factory('Pics', function ($http) {
     var sendPhotos = function (files) {
-      return $http({
+      return $http({ //send pictures server 
         method: 'POST',
         url: '/upload/photos',
         headers: {
-          'Content-Type': undefined
+          'Content-Type': undefined //undefined or else gives body parse error
         },
         data: files,
         transformRequest: angular.identity
@@ -55,20 +54,27 @@ angular.module('app.factory', [])
     var imageFetcher = function (imagename) {
       return $http({
         method: 'GET',
-        url: `/photos/${imagename}`
+        url: `/photos/${imagename}` //imagename is the url paramter to fetch the right image from server
       }).then(function (resp) {
         return (resp.data)
       })
     };
 
     var imageList = function () {
-
       return $http({
         method: 'GET',
         url: '/photos'
       }).then(function (res) {
-        console.log(res)
         return res.data;
+      })
+    };
+
+    var imageDeleter = function(imghash) {
+      return $http({ 
+        method: 'DELETE',
+        url: `/photos/${imghash}`
+      }).then(function (resp) {
+        return (resp.data);
       })
     };
 
@@ -76,6 +82,7 @@ angular.module('app.factory', [])
       sendPhotos,
       imageFetcher,
       imageList,
+      imageDeleter
     })
   })
   .factory('Collage', function () {
