@@ -65,13 +65,12 @@ module.exports = {
           .then(function(result) {
             db.raw(`DELETE from smartfolio.images where imghash = '${deleteMeHash}'`)
             .then(function() {
-              // var filePath = `./server/uploads/${deleteMeHash}`;
               var filePath = path.join(__dirname, `../uploads/${deleteMeHash}`);
               fs.unlink(filePath,function(err){
                 if(err) return console.log(err);
                   console.log('file deleted successfully');
                 });
-              res.sendStatus(200)
+              res.sendStatus(200);
         })
       })
     })

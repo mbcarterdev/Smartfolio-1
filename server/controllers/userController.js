@@ -15,27 +15,25 @@ module.exports = {
               var token = jwt.encode(result[0][0], 'secret');
               res.status(200).json(token);
             } else {
-              res.status(401).send('Incorrect Password')
+              res.status(401).send('Incorrect Password');
             }
 
-          } )
+          })
         } else {
-          res.status(400).send('User does not exist. Please Register.')
+          res.status(400).send('User does not exist. Please Register.');
         }
       })
   },
 
   register: function (req, res) {
-   db.raw(`SELECT username from smartfolio.users where username = '${req.body.username}'`)
+    db.raw(`SELECT username from smartfolio.users where username = '${req.body.username}'`)
       .then(function (results) {
-
         if (!!results[0][0]) {
           res.status(401).send('user already exist')
         } else {
-
           bcrypt.hash(req.body.password, null, null, function (err, hash) {
             var hashPassword = hash
-            if(err) {
+            if (err) {
               return console.log('Error hashing ' + err);
             }
             console.log('here', results)
@@ -43,15 +41,15 @@ module.exports = {
               .then(function (results) {
                 var username = req.body.username
                 var password = hashPassword
-                var user =  {username, password}
+                var user = {
+                  username,
+                  password
+                }
                 var token = jwt.encode(user, 'secret');
                 res.status(200).json(token);
               })
           })
-
-          }
-
-        })
-
+        }
+      })
   }
 }
