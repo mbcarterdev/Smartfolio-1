@@ -161,7 +161,7 @@ angular.module('app.factory', [])
       updateAlbum,
       deleteAlbum,
       addImgToAlbum
-    });
+    })
   })
   .factory('Collage', function () {
     var imgObj = {};

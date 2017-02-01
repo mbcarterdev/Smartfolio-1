@@ -13,7 +13,7 @@ module.exports = function (app, express) {
   app.get('/albums', helper.decode, aController.fetch);
   app.get('/albums/:albumurl', aController.serve);
   app.post('/upload/albums', helper.decode, aController.upload);
-  app.put('/albums', helper.decode, aController.update);
+  app.put('/update/albums', helper.decode, aController.update);
   app.delete('/albums/:albumurl', helper.decode, aController.delete);
   app.put('/albums/:imgurl', helper.decode, aController.addImgToAlbum);
   //app.put for changing the front or back img
