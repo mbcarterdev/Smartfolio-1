@@ -54,6 +54,7 @@ module.exports = {
     // res.status(401).send('Not Allowed');
     //}
   },
+  
   delete: function (req, res) {
     console.log(req.params);
     var deleteMeHash = req.params.imgurl;
