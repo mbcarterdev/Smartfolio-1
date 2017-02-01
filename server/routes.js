@@ -10,12 +10,12 @@ module.exports = function (app, express) {
   app.post('/upload/photos', helper.decode, iController.upload);
   app.get('/photos/:imgurl', iController.serve);
   app.delete('/photos/:imgurl', helper.decode, iController.delete);
-  app.get('/albums' /* functions */);
-  app.get('/albums/:albumurl' /* functions */);
-  app.post('/upload/albums' /* functions */);
-  app.put('/albums' /* functions */);
-  app.delete('/albums/:albumurl' /* functions */);
-  app.put('/albums/:imgurl' /* functions */);
+  app.get('/albums', helper.decode, aController.fetch);
+  app.get('/albums/:albumurl', aController.serve);
+  app.post('/upload/albums', helper.decode, aController.upload);
+  app.put('/albums', helper.decode, aController.update);
+  app.delete('/albums/:albumurl', helper.decode, aController.delete);
+  app.put('/albums/:imgurl', helper.decode, aController.addImgToAlbum);
   //app.put for changing the front or back img
     //will this go to /photos or /upload/photos?
     //will need a method on iController for updating images
