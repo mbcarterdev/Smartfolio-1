@@ -51,7 +51,16 @@ module.exports = {
   },
 
   update: function(req, res) {
-    // add photo(s) to existing album
+    // update existing album name/description
+    var username = req.headers.username;
+    var albumID = req.params.album;
+    var newName = req.body.albumName;
+    var newDescription = req.body.albumDescription;
+
+    db.raw(`UPDATE smartfolio.albums SET name='${newName}', description='${newDescription}' WHERE idalbums=${albumID}`)
+    .then(function() {
+      res.sendStatus(202);
+    });
   },
 
   delete: function(req, res) {
