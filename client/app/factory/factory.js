@@ -114,7 +114,7 @@ angular.module('app.factory', [])
         data: albums,
         transformRequest: angular.identity
       }).then(function(resp) {
-        // console.log('album creation complete');
+        console.log('album creation complete');
         return resp.data;
       });
     };

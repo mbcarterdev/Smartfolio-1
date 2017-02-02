@@ -34,7 +34,20 @@ module.exports = {
   },
 
   upload: function(req, res) {
-    // add a new album (empty or full)
+    // add a new album
+    var username = req.headers.username;
+    var albumName = req.body.albumName;
+    var albumDescription = req.body.albumDescription;
+
+    db.raw(`SELECT idusers FROM smartfolio.users WHERE username='${username}'`)
+    .then(function (result) {
+      var userID = results[0][0].idusers;
+      db.raw(`INSERT INTO smartfolio.albums values (null, '${albumName}', '${albumDescription}', ${userID})`)
+      .then(function() {
+        res.sendStatus(201);
+      });
+    });
+
   },
 
   update: function(req, res) {
