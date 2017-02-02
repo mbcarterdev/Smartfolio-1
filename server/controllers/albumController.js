@@ -44,13 +44,14 @@ module.exports = {
     db.raw(`SELECT idusers FROM smartfolio.users WHERE username='${username}'`)
     .then(function (result) {
       var userID = result[0][0].idusers;
-      db.raw(`INSERT INTO smartfolio.albums values (null, ${albumName}, ${albumDescription}, ${userID})`)
+      db.raw(`INSERT INTO smartfolio.albums values (null, '${albumName}', '${albumDescription}', ${userID})`)
       .then(function() {
-        db.raw(`SELECT LAST_INSERT_ID()`)
+        db.raw(`SELECT MAX(idalbums) FROM smartfolio.albums`)
         .then(function(pKey) {
+          var LAST_INSERT_ID = pKey[0][0]['MAX(idalbums)'];
           if(Array.isArray(images)) {
             images.forEach(function(image, index) {
-              db.raw(`INSERT INTO smartfolio.album_image values (null, ${image}, ${pkey})`)
+              db.raw(`INSERT INTO smartfolio.album_image values (null, ${image}, ${LAST_INSERT_ID})`)
               .then(function() {
                 if(index === images.length - 1) {
                   res.sendStatus(200);
