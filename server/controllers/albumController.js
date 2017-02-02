@@ -13,10 +13,12 @@ module.exports = {
       db.raw(`SELECT * FROM smartfolio.albums WHERE userID = '${userID}'`)
       .then(function(albuminfo) {
         albuminfo[0].forEach(function(album, index) {
-          db.raw(`SELECT idimages FROM smartfolio.images INNER JOIN album_image ON album_image.imageID=images.idimages WHERE album_image.albumID=${album.idalbums}`) // need to write a comment here to explain the query string
+          db.raw(`SELECT * FROM album_image WHERE albumID=${album.idalbums}`) // need to write a comment here to explain the query string
           .then(function(images) {
-            album['images'] = images[0].map(function(imageObj) {
-              return tagObj.tag;
+            var actualImage = images[0];
+            console.log('actualImage', actualImage[0].imageID)
+            album['images'] = actualImage.map(function(imageID) {
+              return imageID.imageID;
             });
             data.push(album);
 

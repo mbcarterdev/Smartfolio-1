@@ -17,6 +17,7 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.fetcher = function() {
       Albums.albumList().then(function(result) {
+        console.log('album results', result);
         data = result;
         $scope.albums = result;
       });
