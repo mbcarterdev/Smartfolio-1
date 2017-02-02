@@ -109,10 +109,10 @@ angular.module('app.factory', [])
         method: 'POST',
         url: '/upload/albums',
         headers: {
-          'Content-Type': undefined
+          'Content-Type': 'application/json'
         },
-        data: albums,
-        transformRequest: angular.identity
+        data: albums.album
+        // transformRequest: angular.identity
       }).then(function(resp) {
         console.log('album creation complete');
         return resp.data;
