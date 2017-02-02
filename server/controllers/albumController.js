@@ -13,7 +13,7 @@ module.exports = {
       db.raw(`SELECT * FROM smartfolio.albums WHERE userID = '${userID}'`)
       .then(function(albuminfo) {
         albuminfo[0].forEach(function(album, index) {
-          db.raw(`SELECT idimages FROM smartfolio.images INNER JOIN album-image ON album-image.imageID=images.idimages WHERE album-image.albumID=${album.idalbums}`) // need to write a comment here to explain the query string
+          db.raw(`SELECT idimages FROM smartfolio.images INNER JOIN album_image ON album_image.imageID=images.idimages WHERE album_image.albumID=${album.idalbums}`) // need to write a comment here to explain the query string
           .then(function(images) {
             album['images'] = images[0].map(function(imageObj) {
               return tagObj.tag;
@@ -35,6 +35,7 @@ module.exports = {
 
   upload: function(req, res) {
     // add a new album
+    console.log('req body', req.body);
     var username = req.headers.username;
     var albumName = req.body.albumName;
     var albumDescription = req.body.albumDescription;
@@ -43,13 +44,13 @@ module.exports = {
     db.raw(`SELECT idusers FROM smartfolio.users WHERE username='${username}'`)
     .then(function (result) {
       var userID = result[0][0].idusers;
-      db.raw(`INSERT INTO smartfolio.albums values (null, '${albumName}', '${albumDescription}', ${userID})`)
+      db.raw(`INSERT INTO smartfolio.albums values (null, ${albumName}, ${albumDescription}, ${userID})`)
       .then(function() {
         db.raw(`SELECT LAST_INSERT_ID()`)
         .then(function(pKey) {
           if(Array.isArray(images)) {
             images.forEach(function(image, index) {
-              db.raw(`INSERT INTO smartfolio.album-image values (null, ${image}, ${pkey})`)
+              db.raw(`INSERT INTO smartfolio.album_image values (null, ${image}, ${pkey})`)
               .then(function() {
                 if(index === images.length - 1) {
                   res.sendStatus(200);
