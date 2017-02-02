@@ -33,14 +33,14 @@ angular.module('app', ['app.landing',
 
     $httpProvider.interceptors.push('AttachTokens');
   })
-  .controller('ModalController', function ($scope, close, Collage) {
+  .controller('ModalController', function ($scope, close, Collage, Albums) {
     $scope.url = Collage.get(); //gets the image url from the Collage factory
     $scope.close = function (result) {
       close(result, 500);
     };
   })
-  .controller('UploadCtrl', function ($scope, close, Pics, Collage) { // takes the files from the dialogbox and sends it to server
-    
+  .controller('UploadCtrl', function ($scope, close, Pics, Collage, Albums) { // takes the files from the dialogbox and sends it to server
+
     var fd = new FormData();
     $scope.uploadFile = function (fileType, files) {
       fd.append(fileType, files[0])

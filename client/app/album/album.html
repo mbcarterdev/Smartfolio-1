@@ -1,6 +1,36 @@
 <md-toolbar>
-
+  <div class="md-toolbar-tools toolbar-home">
+    <md-button>
+    <md-tooltip>Menu</md-tooltip>
+    <md-icon class="md-default-theme material-icons" ng-click="toggleLeft()">menu</md-icon>
+    </md-button>
+    <md-input-container class="search" >
+    <label>Search</label>
+    <input type="text" ng-model="search" class="search_input">
+    </md-input-container>
+  </div>
 </md-toolbar>
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="24">
+  <md-toolbar>
+    <h1 class="md-toolbar-tools head">Menu</h1>
+  </md-toolbar>
+  <md-content layout-margin="" layout="column">
+    <md-button ng-click="settings()" class="md-accent">
+      Settings
+    </md-button>
+    <md-button ng-click="logoff()" class="md-accent">
+      Log Off
+    </md-button>
+    <md-button ng-click="toggleLeft()" class="md-accent">
+      Close Menu
+    </md-button>
+  </md-content>
+</md-sidenav>
+<div class="row">
+  <div class="col-sm-offset-5 col-sm-2 text-center">
+    <md-button ng-click="show2()" class="add">Add Photos</md-button>
+  </div>
+</div>
 <div id="grid1" ui-grid="gridOptions" class="grid"></div>
 <md-bottom-sheet>
 

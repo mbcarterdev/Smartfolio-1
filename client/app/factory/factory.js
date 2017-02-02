@@ -104,7 +104,7 @@ angular.module('app.factory', [])
       });
     };
 
-    var sendAlbums = function(albums) {
+    var sendAlbum = function(albums) {
       return $http({
         method: 'POST',
         url: '/albums',
@@ -114,7 +114,8 @@ angular.module('app.factory', [])
         data: albums,
         transformRequest: angular.identity
       }).then(function(resp) {
-        console.log('album creation complete');
+        // console.log('album creation complete');
+        return resp.data;
       });
     };
 
@@ -157,7 +158,7 @@ angular.module('app.factory', [])
     return ({
       albumList,
       albumFetcher,
-      sendAlbums,
+      sendAlbum,
       updateAlbum,
       deleteAlbum,
       addImgToAlbum
