@@ -105,6 +105,7 @@ angular.module('app.factory', [])
     };
 
     var sendAlbum = function(albums) {
+      console.log(albums);
       return $http({
         method: 'POST',
         url: '/upload/albums',
