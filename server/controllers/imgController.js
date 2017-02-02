@@ -37,7 +37,7 @@ module.exports = {
         db.raw(`INSERT INTO smartfolio.images values (null, '${front}', '${`${username} ${front}`}',
         null, null, '${back}', '${`${username} ${back}`}', ${userID} )`).then(function () {
 
-            res.sendStatus(200)
+            res.sendStatus(201);
           })
       })
   },
@@ -54,6 +54,7 @@ module.exports = {
     // res.status(401).send('Not Allowed');
     //}
   },
+
   delete: function (req, res) {
     console.log(req.params);
     var deleteMeHash = req.params.imgurl;
