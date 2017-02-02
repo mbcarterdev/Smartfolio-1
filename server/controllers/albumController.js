@@ -38,13 +38,24 @@ module.exports = {
     var username = req.headers.username;
     var albumName = req.body.albumName;
     var albumDescription = req.body.albumDescription;
+    var images = req.body.images;
 
     db.raw(`SELECT idusers FROM smartfolio.users WHERE username='${username}'`)
     .then(function (result) {
       var userID = results[0][0].idusers;
       db.raw(`INSERT INTO smartfolio.albums values (null, '${albumName}', '${albumDescription}', ${userID})`)
       .then(function() {
-        res.sendStatus(201);
+        db.raw(`SELECT LAST_INSERT_ID()`)
+        .then(function(pKey) {
+          images.forEach(function(image, index) {
+            db.raw(`INSERT INTO smartfolio.album-image values (null, ${image}, ${pkey})`)
+            .then(function() {
+              if(index === images.length - 1) {
+                res.sendStatus(200);
+              }
+            })
+          })
+        })
       });
     });
 
@@ -65,6 +76,13 @@ module.exports = {
 
   delete: function(req, res) {
     // delete a specified album
+    var username = req.headers.username;
+    var albumID = req.params.album;
+
+    db.raw(`DELETE FROM smartfolio.albums WHERE idalbums=${albumID}`)
+    .then(function() {
+      res.sendStatus(200);
+    })
   },
 
   addImgToAlbum: function(req, res) {
