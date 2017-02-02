@@ -202,8 +202,8 @@ img {
 .thumbnail {
     margin: auto;
     width: 100%;
-    /*max-width: 100%;
-    max-height: 100%;*/
+    max-width: 100%;
+    max-height: 100%;
     padding: 0px;
     border: 0px solid #ddd;
     border-radius: 0px;
