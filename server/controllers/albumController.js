@@ -8,14 +8,14 @@ module.exports = {
     var username = req.headers.username;
     var data = [];
     db.raw(`SELECT idusers FROM smartfolio.users WHERE username = '${username}'`)
-    .then(function(userinfo) {
+    .then(function(userInfo) {
       var userID = userInfo[0][0].idusers;
       db.raw(`SELECT * FROM smartfolio.albums WHERE userID = '${userID}'`)
       .then(function(albuminfo) {
         albuminfo[0].forEach(function(album, index) {
           db.raw(`SELECT idimages FROM smartfolio.images INNER JOIN album-image ON album-image.imageID=images.idimages WHERE album-image.albumID=${album.idalbums}`) // need to write a comment here to explain the query string
           .then(function(images) {
-            album['images'] =       images[0].map(function(imageObj) {
+            album['images'] = images[0].map(function(imageObj) {
               return tagObj.tag;
             });
             data.push(album);
@@ -42,19 +42,23 @@ module.exports = {
 
     db.raw(`SELECT idusers FROM smartfolio.users WHERE username='${username}'`)
     .then(function (result) {
-      var userID = results[0][0].idusers;
+      var userID = result[0][0].idusers;
       db.raw(`INSERT INTO smartfolio.albums values (null, '${albumName}', '${albumDescription}', ${userID})`)
       .then(function() {
         db.raw(`SELECT LAST_INSERT_ID()`)
         .then(function(pKey) {
-          images.forEach(function(image, index) {
-            db.raw(`INSERT INTO smartfolio.album-image values (null, ${image}, ${pkey})`)
-            .then(function() {
-              if(index === images.length - 1) {
-                res.sendStatus(200);
-              }
+          if(Array.isArray(images)) {
+            images.forEach(function(image, index) {
+              db.raw(`INSERT INTO smartfolio.album-image values (null, ${image}, ${pkey})`)
+              .then(function() {
+                if(index === images.length - 1) {
+                  res.sendStatus(200);
+                }
+              })
             })
-          })
+          } else {
+            res.status(200).send('No images added to album');
+          }
         })
       });
     });

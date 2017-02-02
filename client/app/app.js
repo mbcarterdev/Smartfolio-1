@@ -39,7 +39,7 @@ angular.module('app', ['app.landing',
       close(result, 500);
     };
   })
-  .controller('UploadCtrl', function ($scope, close, Pics, Collage, Albums) { // takes the files from the dialogbox and sends it to server
+  .controller('UploadCtrl', function ($scope, close, Pics, Collage) { // takes the files from the dialogbox and sends it to server
 
     var fd = new FormData();
     $scope.uploadFile = function (fileType, files) {
@@ -54,6 +54,9 @@ angular.module('app', ['app.landing',
         close(null,500);
       }();
     }
+  })
+  .controller('CreateAlbumCtrl', function($scope, close, Collage, Albums) {
+    
   })
   .run(function ($rootScope, $location, Auth) {
     $rootScope.$on('$routeChangeStart', function (evt, next, current) {
