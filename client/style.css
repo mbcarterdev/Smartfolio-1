@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Raleway', sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 a:link,
@@ -18,8 +19,9 @@ ul {
 
 md-toolbar.md-default-theme:not(.md-menu-toolbar),
 md-toolbar:not(.md-menu-toolbar) {
-    background-color: rgba(247, 247, 242, 1);
-    height: 60px
+    background-color: rgba(250, 250, 250, 1);
+    height: 60px;
+    box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.12);
 }
 
 .md-sidenav-left,
@@ -44,7 +46,8 @@ md-sidenav md-content {
 
 .add {
     justify-content: center;
-    background-color: black;
+    /*background-color: black;*/
+    font-weight: bold;
     color: rgb(241, 111, 0);
 }
 
@@ -125,7 +128,7 @@ footer {
 
 .home {
     /*background-image: url("forest-meadow-leaves-autumn.jpg");*/
-    background-color: #fafafa;
+    background-color: #f4f4f4;
 }
 
 .settings {
@@ -213,8 +216,12 @@ img {
     /*position: relative;*/
     /*float: right;*/
     margin: 50px 0px;
-    width: 33%;
+    width: 5%;
     margin-bottom: 0;
+}
+
+.search.md-input-focused {
+  width: 33%;
 }
 
 md-input-container label {
@@ -228,7 +235,7 @@ search_input {
 md-input-container:not(.md-input-invalid).md-input-focused .md-input {
     color: rgb(241, 111, 0);
     border-color: rgb(241, 111, 0);
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 md-grid-tile-footer {
@@ -274,4 +281,17 @@ md-input-container:not(.md-input-invalid).md-input-focused label {
 
 .toolbar-home {
   justify-content: space-between;
+}
+
+.search .md-input {
+  border-color: rgba(0,0,0,0.0);
+}
+
+.magnify {
+  font-size: 28px;
+}
+
+.logo {
+  color: #2B2B2B;
+  font-size: 1.5em;
 }
