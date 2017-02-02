@@ -17,6 +17,7 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.fetcher = function() {
       Albums.albumList().then(function(result) {
+        console.log('result of creating new album', result);
         data = result;
         $scope.images = result;
       });
@@ -36,7 +37,7 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     };
 
     $scope.fetcher();
-    
+
     $scope.settings = function() {
       $location.path('/settings');
     }

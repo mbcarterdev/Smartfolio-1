@@ -32,6 +32,17 @@
   </div>
 </div>
 <div id="grid1" ui-grid="gridOptions" class="grid"></div>
+
+<form role="form" class="form" onsubmit="return false;">
+  <div class="form-group">
+    <label for="album">Album Name</label>
+    <input type="text" name="albumName" />
+    <label for="album">Album Description</label>
+    <input type="text" name="albumDescription" />
+  </div>
+  <md-button id="upload" type="button" class="btn add" ng-click="createAlbum();" data-dismiss="modal">Create Album</md-button>
+</form>
+
 <md-bottom-sheet>
 
 </md-bottom-sheet>
