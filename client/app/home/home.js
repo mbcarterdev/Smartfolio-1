@@ -1,6 +1,6 @@
 angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularModalService', 'ngMessages', 'material.svgAssetsCache'])
   .controller('HomeCtrl', function ($scope, $mdSidenav, ModalService, Collage, Pics, $window, Auth, $mdDialog, $location) {
-    $scope.toggleLeft = buildToggler('left'); 
+    $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home'; //css style class to have background change and set to the fit the content
     $scope.images = []; // store the images data
      var data; // to access tags in the popup
@@ -17,6 +17,7 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
 
     $scope.fetcher = function () { //fetches results from server an object caitaining results from database for the given user
       Pics.imageList().then(function (result) {
+        console.log(result);
         data = result;
         $scope.images = result;
       });
@@ -25,8 +26,8 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
     $scope.logoff = Auth.signout; //signs off user and destroys the token
     $scope.fetcher(); //fetches the data at the time f intial load
     Collage.setFetcher($scope.fetcher); //picture view modal
-   
-    $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information 
+
+    $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information
       Collage.set({
         image1: $scope.images[index],
         image2: $scope.images[index]
@@ -81,7 +82,7 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       $location.path('/settings');
     }
 
-   
+
 
   });
 
