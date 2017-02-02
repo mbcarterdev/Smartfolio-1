@@ -82,6 +82,14 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       $location.path('/settings');
     }
 
+    $scope.redirectToImageView = function() {
+      $location.path('/home')
+    }
+
+    $scope.redirectToAlbumsView = function() {
+      $location.path('/album')
+    }
+
 
 
   });

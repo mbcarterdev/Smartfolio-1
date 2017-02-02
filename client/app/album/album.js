@@ -30,6 +30,7 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     };
 
     $scope.createAlbumFromImageView = function(albumInfo) {
+      // need something here so that redirect to /home will also pop up drag-drop for album creation
       $location.path('/home');
     };
 
@@ -44,6 +45,14 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.settings = function() {
       $location.path('/settings');
+    }
+
+    $scope.redirectToImageView = function() {
+      $location.path('/home')
+    }
+
+    $scope.redirectToAlbumsView = function() {
+      $location.path('/album')
     }
 
   });
