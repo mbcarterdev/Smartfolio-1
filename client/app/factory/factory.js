@@ -112,7 +112,6 @@ angular.module('app.factory', [])
           'Content-Type': 'application/json'
         },
         data: albums.album
-        // transformRequest: angular.identity
       }).then(function(resp) {
         console.log('album creation complete');
         return resp.data;
