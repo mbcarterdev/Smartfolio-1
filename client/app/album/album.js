@@ -23,10 +23,14 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
       });
     };
 
-    $scope.createAlbum = function(albumInfo) {
+    $scope.createAlbumRaw = function(albumInfo) {
       Albums.sendAlbum(albumInfo).then(function(result) {
         console.log('album creation complete');
       });
+    };
+
+    $scope.createAlbumFromImageView = function(albumInfo) {
+      $location.path('/home');
     };
 
     $scope.addImage = function(image) {
@@ -41,4 +45,5 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     $scope.settings = function() {
       $location.path('/settings');
     }
+
   });
