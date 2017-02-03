@@ -12,31 +12,70 @@ module.exports = {
       var userID = userInfo[0][0].idusers;
       db.raw(`SELECT * FROM smartfolio.shared WHERE shareUserid = '${userID}'`)
       .then(function(sharedinfo) {
-        sharedinfo[0].forEach(function(shared, index) {
-          db.raw(`SELECT * FROM smartfolio.albums WHERE idalbums=${shared.albumid}`) // need to write a comment here to explain the query string
-          .then(function(albuminfo) {
-            shared['name'] = albuminfo[0][0].name;
-            shared['description'] = albuminfo[0][0].description;
-            db.raw(`SELECT * FROM smartfolio.album_image WHERE albumID=${albuminfo[0][0].idalbums}`)
-            .then(function(imagesObj) {
-              var images = imagesObj[0];
-              shared['images'] = images.map(function(image) {
-                return image.imageID;
-              });
-              data.push(shared);
-              if(index === sharedinfo[0].length - 1) {
-                res.status(200).send(data);
-              }
+        if(sharedinfo[0].length === 0) {
+          res.status(404).send(sharedinfo[0]);
+        } else {
+          sharedinfo[0].forEach(function(shared, index) {
+            db.raw(`SELECT * FROM smartfolio.albums WHERE idalbums=${shared.albumid}`) // need to write a comment here to explain the query string
+            .then(function(albuminfo) {
+              shared['name'] = albuminfo[0][0].name;
+              shared['description'] = albuminfo[0][0].description;
+              db.raw(`SELECT * FROM smartfolio.album_image WHERE albumID=${albuminfo[0][0].idalbums}`)
+              .then(function(imagesObj) {
+                var images = imagesObj[0];
+                shared['images'] = images.map(function(image) {
+                  return image.imageID;
+                });
+                data.push(shared);
+                if(index === sharedinfo[0].length - 1) {
+                  res.status(200).send(data);
+                }
+              })
             })
           })
-        })
+        }
       })
+    })
+  },
+
+  getUserId: function(req, res) {
+    var username = req.headers.username;
+    var shareUser = req.params.shareUser;
+    console.log(shareUser);
+    console.log(username);
+
+    db.raw(`SELECT * FROM smartfolio.users WHERE username = '${shareUser}'`)
+    .then(function(userInfo) {
+      if(userInfo[0].length === 0) {
+        res.status(404).send('User Not Found');
+      } else {
+      var userID = userInfo[0][0].idusers;
+      res.status(200).send(userID);
+      }
     })
   },
 
   share: function(req, res) {
     // serve up a specific album that the user designates
+    var username = req.headers.username;
+    var albumID = req.params.album;
+    var shareUsers = req.body.shareUsers;
+
   },
+
+  getSharedList: function(req, res) {
+    var username = req.headers.username;
+    var albumID = req.params.album;
+
+  },
+
+  remove: function(req, res) {
+    var username = req.headers.username;
+    var albumID = req.params.album;
+
+  },
+
+
 
   upload: function(req, res) {
     // add a new album

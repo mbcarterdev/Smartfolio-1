@@ -18,6 +18,7 @@ module.exports = function (app, express) {
   app.delete('/albums/:albumurl', helper.decode, aController.delete);
   app.put('/albums/:imgurl', helper.decode, aController.addImgToAlbum);
   app.get('/shared', sController.fetch);
+  app.get('/shared/users/:shareUser', sController.getUserId);
   //app.put for changing the front or back img
     //will this go to /photos or /upload/photos?
     //will need a method on iController for updating images
