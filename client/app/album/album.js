@@ -17,9 +17,19 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.fetcher = function() {
       Albums.albumList().then(function(result) {
+        $scope.albums = result.map(function(album) {
+          album.imagesPath = album.images.map(function(image) {
+            return $rootScope.images.find(function(photo) {
+              return photo.idimages === image;
+            });
+          });
+          return album;
+        });
         console.log('album results', result);
-        data = result;
-        $scope.albums = result;
+        console.log('root images', $rootScope.images);
+        console.log('in God we trust', $scope.albums);
+        // data = result;
+        // $scope.albums = result;
       });
     };
 

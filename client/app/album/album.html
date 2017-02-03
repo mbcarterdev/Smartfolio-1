@@ -142,13 +142,13 @@
         <md-grid-tile class="flex-item ripplelink" ng-repeat="album in albums |filter: search track by $index">
 
           <md-tooltip>
-            {{albums.name}}
+            {{album.name}}
           </md-tooltip>
-          <md-tooltip>
-            {{albums.description}}
-          </md-tooltip>
+          <!-- <md-tooltip>
+            {{album.description}}
+          </md-tooltip> -->
 
-          <img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" />
+          <img class="thumbnail" ng-src="/photos/{{album.imagesPath[0].imghash}}" ng-click="show($index)" />
 
           <md-grid-tile-footer>
 
