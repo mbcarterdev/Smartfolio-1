@@ -21,9 +21,19 @@ angular.module('app.albumViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
       $mdOpenMenu(ev);
     };
 
-    $scope.showPhotos = function (album) {
-      console.log('something');
-    }
+    $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information
+      Collage.set({
+        image1: $rootScope.images[index],
+        image2: $rootScope.images[index]
+      });
+      ModalService.showModal({
+        templateUrl: 'modal.html',
+        controller: "ModalController"
+      }).then(function (modal) {
+        modal.element.modal();
+
+      });
+    };
 
     $scope.show2 = function () { //show the uplaod file modal
       ModalService.showModal({
