@@ -9,7 +9,7 @@ angular.module('app.albumViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
       return album;
     }
 
-    $scope.IndividualAlbumPhotos = updateState($rootScope.albumID);
+    $scope.individualAlbumPhotos = updateState($rootScope.albumID);
 
     function buildToggler(componentId) {
       return function() {
@@ -20,44 +20,6 @@ angular.module('app.albumViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     $scope.openMenu = function ($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
     };
-
-    // $scope.fetcher = function() {
-    //   Albums.albumList().then(function(result) {
-    //     $rootScope.albums = result.map(function(album) {
-    //       album.imagesPath = album.images.map(function(image) {
-    //         return $rootScope.images.find(function(photo) {
-    //           return photo.idimages === image;
-    //         });
-    //       });
-    //       return album;
-    //     });
-    //     console.log('album results', result);
-    //     console.log('root images', $rootScope.images);
-    //     console.log('in God we trust', $rootScope.albums);
-    //     // data = result;
-    //     // $rootScope.albums = result;
-    //   });
-    // };
-    //
-    // $scope.createAlbumRaw = function(albumInfo) {
-    //   Albums.sendAlbum(albumInfo).then(function(result) {
-    //     console.log('album creation complete');
-    //   });
-    // };
-    //
-    // $scope.createAlbumFromImageView = function(albumInfo) {
-    //   // need something here so that redirect to /home will also pop up drag-drop for album creation
-    //   $location.path('/home');
-    // };
-    //
-    // $scope.addImage = function(image) {
-    //   Albums.addImgToAlbum(image).then(function(result) {
-    //     console.log('successfully added image to album');
-    //     // refresh and/or redirect to albums page with the newly added image
-    //   });
-    // };
-    //
-    // $scope.fetcher();
 
     $scope.showPhotos = function (album) {
       console.log('something');
