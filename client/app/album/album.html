@@ -139,10 +139,13 @@
 
       <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="15px" md-gutter-gt-sm="15px">
 
-        <md-grid-tile class="flex-item ripplelink" ng-repeat="image in images |filter: search track by $index">
+        <md-grid-tile class="flex-item ripplelink" ng-repeat="album in albums |filter: search track by $index">
 
           <md-tooltip>
-            {{image.imgname}}
+            {{albums.name}}
+          </md-tooltip>
+          <md-tooltip>
+            {{albums.description}}
           </md-tooltip>
 
           <img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" />

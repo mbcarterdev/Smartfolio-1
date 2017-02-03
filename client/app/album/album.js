@@ -1,5 +1,5 @@
 angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
-  .controller('AlbumCtrl', function ($scope, $location, Pics, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
+  .controller('AlbumCtrl', function ($scope, $rootScope, $location, Pics, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
     $scope.albums = [];
@@ -55,4 +55,5 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
       $location.path('/album')
     }
 
+    $scope.logoff = Auth.signout;
   });

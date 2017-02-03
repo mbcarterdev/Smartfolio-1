@@ -1,8 +1,8 @@
 angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularModalService', 'ngMessages', 'material.svgAssetsCache'])
-  .controller('HomeCtrl', function ($scope, $mdSidenav, ModalService, Collage, Pics, $window, Auth, $mdDialog, $location) {
+  .controller('HomeCtrl', function ($scope, $rootScope, $mdSidenav, ModalService, Collage, Pics, $window, Auth, $mdDialog, $location) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home'; //css style class to have background change and set to the fit the content
-    $scope.images = []; // store the images data
+    $rootScope.images = []; // store the images data
      var data; // to access tags in the popup
 
     function buildToggler(componentId) { // function for the side nav
@@ -19,7 +19,7 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       Pics.imageList().then(function (result) {
         console.log(result);
         data = result;
-        $scope.images = result;
+        $rootScope.images = result;
       });
     };
 
@@ -29,8 +29,8 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
 
     $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information
       Collage.set({
-        image1: $scope.images[index],
-        image2: $scope.images[index]
+        image1: $rootScope.images[index],
+        image2: $rootScope.images[index]
       });
       ModalService.showModal({
         templateUrl: 'modal.html',

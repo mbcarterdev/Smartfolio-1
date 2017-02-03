@@ -8,7 +8,7 @@ angular.module('app', ['app.landing',
     'ngRoute',
     'ngAnimate'
   ])
-  .config(function ($routeProvider, $httpProvider, $locationProvider) {
+  .config(function ($routeProvider, $httpProvider, $locationProvider, $rootScopeProvider) {
     $locationProvider.hashPrefix('');
     $routeProvider
       .when('/', {
@@ -56,7 +56,7 @@ angular.module('app', ['app.landing',
     }
   })
   .controller('CreateAlbumCtrl', function($scope, close, Collage, Albums) {
-    
+
   })
   .run(function ($rootScope, $location, Auth) {
     $rootScope.$on('$routeChangeStart', function (evt, next, current) {
