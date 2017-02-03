@@ -2,6 +2,7 @@ angular.module('app', ['app.landing',
     'app.factory',
     'app.home',
     'app.album',
+    'app.albumViewer',
     'app.settings',
     'ui.grid',
     'angularModalService',
@@ -28,6 +29,11 @@ angular.module('app', ['app.landing',
       .when('/album', {
         templateUrl: '/app/album/album.html',
         controller: 'AlbumCtrl',
+        authenticate: true
+      })
+      .when('/photosViewer', {
+        templateUrl: '/app/album/albumViewer.html',
+        controller: 'AlbumViewerCtrl',
         authenticate: true
       })
 

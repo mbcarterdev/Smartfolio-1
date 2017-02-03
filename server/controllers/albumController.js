@@ -13,7 +13,7 @@ module.exports = {
       db.raw(`SELECT * FROM smartfolio.albums WHERE userID = '${userID}'`)
       .then(function(albuminfo) {
         albuminfo[0].forEach(function(album, index) {
-          db.raw(`SELECT * FROM album_image WHERE albumID=${album.idalbums}`) // need to write a comment here to explain the query string
+          db.raw(`SELECT * FROM smartfolio.album_image WHERE albumID=${album.idalbums}`) // need to write a comment here to explain the query string
           .then(function(images) {
             var actualImage = images[0];
             console.log('actualImage', actualImage[0].imageID)
