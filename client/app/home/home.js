@@ -3,7 +3,8 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home'; //css style class to have background change and set to the fit the content
     $rootScope.images = []; // store the images data
-     var data; // to access tags in the popup
+    var data; // to access tags in the popup
+    $scope.dragDrop = false;
 
     function buildToggler(componentId) { // function for the side nav
       return function () {
@@ -49,6 +50,11 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
         modal.element.modal();
       });
     };
+
+    $scope.show3 = function () {
+      // switch a 'show create album' flag to true so that the drag-drop box will appear and users can drag-drop to make their album
+      $scope.dragDrop = true;
+    }
 
     $scope.showTags = function (index, $event) { //template to show tags as chips
       $mdDialog.show({
