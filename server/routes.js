@@ -1,6 +1,7 @@
 var uController = require('./controllers/userController.js');
 var iController = require('./controllers/imgController.js');
 var aController = require('./controllers/albumController.js');
+var sController = require('./controllers/sharedController.js');
 var helper = require('./authenticator/authenticator');
 
 module.exports = function (app, express) {
@@ -16,6 +17,7 @@ module.exports = function (app, express) {
   app.put('/update/albums', helper.decode, aController.update);
   app.delete('/albums/:albumurl', helper.decode, aController.delete);
   app.put('/albums/:imgurl', helper.decode, aController.addImgToAlbum);
+  app.get('/shared', sController.fetch);
   //app.put for changing the front or back img
     //will this go to /photos or /upload/photos?
     //will need a method on iController for updating images

@@ -65,6 +65,7 @@ var watson = function () {
             if (err) {
               console.log(err);
             } else {
+              console.log(res.images[0]);
               res.images[0].classifiers[0].classes.forEach(function (tagClass) {
                 db.raw(`INSERT INTO smartfolio.tags VALUES (null, ${imgid.idimages}, '${tagClass.class}')`)
                   .then(function (results) {
