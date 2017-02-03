@@ -1,5 +1,5 @@
 angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
-  .controller('AlbumCtrl', function ($scope, $location, Pics, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
+  .controller('AlbumCtrl', function ($scope, $rootScope, $location, Pics, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
     $scope.albums = [];
@@ -17,16 +17,31 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.fetcher = function() {
       Albums.albumList().then(function(result) {
+        $scope.albums = result.map(function(album) {
+          album.imagesPath = album.images.map(function(image) {
+            return $rootScope.images.find(function(photo) {
+              return photo.idimages === image;
+            });
+          });
+          return album;
+        });
         console.log('album results', result);
-        data = result;
-        $scope.albums = result;
+        console.log('root images', $rootScope.images);
+        console.log('in God we trust', $scope.albums);
+        // data = result;
+        // $scope.albums = result;
       });
     };
 
-    $scope.createAlbum = function(albumInfo) {
+    $scope.createAlbumRaw = function(albumInfo) {
       Albums.sendAlbum(albumInfo).then(function(result) {
         console.log('album creation complete');
       });
+    };
+
+    $scope.createAlbumFromImageView = function(albumInfo) {
+      // need something here so that redirect to /home will also pop up drag-drop for album creation
+      $location.path('/home');
     };
 
     $scope.addImage = function(image) {
@@ -41,4 +56,14 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     $scope.settings = function() {
       $location.path('/settings');
     }
+
+    $scope.redirectToImageView = function() {
+      $location.path('/home')
+    }
+
+    $scope.redirectToAlbumsView = function() {
+      $location.path('/album')
+    }
+
+    $scope.logoff = Auth.signout;
   });
