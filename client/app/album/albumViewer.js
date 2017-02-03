@@ -2,13 +2,14 @@ angular.module('app.albumViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
   .controller('AlbumViewerCtrl', function ($scope, $rootScope, $location, ModalService, Pics, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
-    $scope.IndividualAlbum = [];
     var data;
 
-    function updateState(albumID) {
-
+    function updateState(album) {
+      console.log('the updated state', album);
+      return album;
     }
-    $scope.IndividualAlbum = updateState($scope.albumID);
+
+    $scope.IndividualAlbumPhotos = updateState($rootScope.albumID);
 
     function buildToggler(componentId) {
       return function() {

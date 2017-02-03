@@ -158,7 +158,7 @@
             {{album.description}}
           </md-tooltip> -->
 
-          <img class="thumbnail" ng-src="/photos/{{album.imagesPath[0].imghash}}" ng-click="updateAlbumID(album); redirectToAlbumViewerView();" />
+          <img class="thumbnail" ng-src="/photos/{{album.imagesPath[0].imghash}}" ng-click="updateAlbumID({album}); redirectToAlbumViewerView();" />
 
           <md-grid-tile-footer>
 

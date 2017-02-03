@@ -54,8 +54,9 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.fetcher();
 
-    $scope.showPhotos = function (album) {
-      console.log('something');
+    $scope.updateAlbumID = function (album) {
+      $rootScope.albumID = album;
+      console.log('something', $rootScope.albumID);
     }
 
     $scope.show2 = function () { //show the uplaod file modal
