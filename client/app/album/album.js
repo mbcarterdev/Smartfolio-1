@@ -1,8 +1,9 @@
 angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
-  .controller('AlbumCtrl', function ($scope, $rootScope, $location, Pics, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
+  .controller('AlbumCtrl', function ($scope, $rootScope, $location, ModalService, Pics, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
-    $scope.albums = [];
+    $rootScope.albums = [];
+    $rootScope.albumID = null;
     var data;
 
     function buildToggler(componentId) {
@@ -17,7 +18,7 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.fetcher = function() {
       Albums.albumList().then(function(result) {
-        $scope.albums = result.map(function(album) {
+        $rootScope.albums = result.map(function(album) {
           album.imagesPath = album.images.map(function(image) {
             return $rootScope.images.find(function(photo) {
               return photo.idimages === image;
@@ -27,9 +28,9 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
         });
         console.log('album results', result);
         console.log('root images', $rootScope.images);
-        console.log('in God we trust', $scope.albums);
+        console.log('in God we trust', $rootScope.albums);
         // data = result;
-        // $scope.albums = result;
+        // $rootScope.albums = result;
       });
     };
 
@@ -53,16 +54,33 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.fetcher();
 
+    $scope.showPhotos = function (album) {
+      console.log('something');
+    }
+
+    $scope.show2 = function () { //show the uplaod file modal
+      ModalService.showModal({
+        templateUrl: 'uploader.html',
+        controller: "UploadCtrl"
+      }).then(function (modal) {
+        modal.element.modal();
+      });
+    };
+
     $scope.settings = function() {
       $location.path('/settings');
     }
 
     $scope.redirectToImageView = function() {
-      $location.path('/home')
+      $location.path('/home');
     }
 
     $scope.redirectToAlbumsView = function() {
-      $location.path('/album')
+      $location.path('/album');
+    }
+
+    $scope.redirectToAlbumViewerView = function() {
+      $location.path('/photosViewer');
     }
 
     $scope.logoff = Auth.signout;

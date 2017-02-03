@@ -1,57 +1,3 @@
-<!-- <md-toolbar>
-  <div class="md-toolbar-tools toolbar-home">
-    <md-button>
-    <md-tooltip>Menu</md-tooltip>
-    <md-icon class="md-default-theme material-icons" ng-click="toggleLeft()">menu</md-icon>
-    </md-button>
-    <md-input-container class="search" >
-    <label>Search</label>
-    <input type="text" ng-model="search" class="search_input">
-    </md-input-container>
-  </div>
-</md-toolbar>
-<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="24">
-  <md-toolbar>
-    <h1 class="md-toolbar-tools head">Menu</h1>
-  </md-toolbar>
-  <md-content layout-margin="" layout="column">
-    <md-button ng-click="settings()" class="md-accent">
-      Settings
-    </md-button>
-    <md-button ng-click="logoff()" class="md-accent">
-      Log Off
-    </md-button>
-    <md-button ng-click="toggleLeft()" class="md-accent">
-      Close Menu
-    </md-button>
-  </md-content>
-</md-sidenav>
-<div class="row">
-  <div class="col-sm-offset-5 col-sm-2 text-center">
-    <md-button ng-click="show2()" class="add">Add Photos</md-button>
-  </div>
-</div>
-<div id="grid1" ui-grid="gridOptions" class="grid"></div>
-
-<form role="form" class="form" onsubmit="return false;">
-  <div class="form-group">
-    <label for="album">Album Name</label>
-    <input type="text" name="albumName" ng-model="album.albumName"/>
-    <label for="album">Album Description</label>
-    <input type="text" name="albumDescription" ng-model="album.albumDescription"/>
-    <label for="album">Image IDs (comma separated)</label>
-    <input type="number" name="imageID" ng-model="album.imageIDs"/>
-    <md-button id="upload" type="button" class="btn add" ng-click="createAlbumFromImageView({album});" data-dismiss="modal">Create Album</md-button>
-  </div>
-</form>
-
-<md-bottom-sheet>
-
-</md-bottom-sheet> -->
-
-
-
-
 <md-toolbar>
 
   <div class="md-toolbar-tools toolbar-home">
@@ -136,7 +82,7 @@
   <md-content class="gridList" flex>
 
     <div>
-        <form role="form" class="form" onsubmit="return false;">
+        <!-- <form role="form" class="form" onsubmit="return false;">
           <div class="form-group">
             <label for="album">Album Name</label>
             <input type="text" name="albumName" ng-model="album.albumName"/>
@@ -146,19 +92,19 @@
             <input type="number" name="imageID" ng-model="album.imageIDs"/>
             <md-button id="upload" type="button" class="btn add" ng-click="createAlbumRaw({album});" data-dismiss="modal">Create Album</md-button>
           </div>
-        </form>
+        </form> -->
       <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="15px" md-gutter-gt-sm="15px">
 
         <md-grid-tile class="flex-item ripplelink" ng-repeat="album in albums |filter: search track by $index">
 
-          <md-tooltip>
+          <!-- <md-tooltip>
             {{album.name}}
-          </md-tooltip>
+          </md-tooltip> -->
           <!-- <md-tooltip>
             {{album.description}}
           </md-tooltip> -->
 
-          <img class="thumbnail" ng-src="/photos/{{album.imagesPath[0].imghash}}" ng-click="updateAlbumID(album); redirectToAlbumViewerView();" />
+          <img class="thumbnail" ng-src="/photos/{{album.imagesPath[0].imghash}}" ng-click="show($index)" />
 
           <md-grid-tile-footer>
 
