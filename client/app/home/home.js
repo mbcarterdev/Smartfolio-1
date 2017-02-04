@@ -1,9 +1,10 @@
 angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularModalService', 'ngMessages', 'material.svgAssetsCache'])
-  .controller('HomeCtrl', function ($scope, $rootScope, $mdSidenav, ModalService, Collage, Pics, $window, Auth, $mdDialog, $location) {
+  .controller('HomeCtrl', function ($scope, $rootScope, $mdSidenav, ModalService, Collage, Pics, Albums, $window, Auth, $mdDialog, $location) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home'; //css style class to have background change and set to the fit the content
     $rootScope.images = []; // store the images data
-     var data; // to access tags in the popup
+    var data; // to access tags in the popup
+    $scope.dragDrop = false;
 
     function buildToggler(componentId) { // function for the side nav
       return function () {
@@ -50,6 +51,11 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       });
     };
 
+    $scope.show3 = function () {
+      // switch a 'show create album' flag to true so that the drag-drop box will appear and users can drag-drop to make their album
+      $scope.dragDrop = true;
+    }
+
     $scope.showTags = function (index, $event) { //template to show tags as chips
       $mdDialog.show({
         targetEvent: $event,
@@ -76,7 +82,13 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       .then(function () {
         Collage.getFetcher()();
       });
-      }
+    }
+
+    $scope.createAlbum = function (albumInfo) {
+      Albums.sendAlbum(albumInfo).then(function(result) {
+        console.log('album creation successful');
+      });
+    }
 
     $scope.settings = function () { //function to change the rendered view to settings route
       $location.path('/settings');
