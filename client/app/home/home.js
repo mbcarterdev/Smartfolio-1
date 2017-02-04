@@ -6,10 +6,6 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
     var data; // to access tags in the popup
     $scope.dragDrop = false;
     $scope.newAlbum = [];
-<<<<<<< HEAD
-=======
-
->>>>>>> dragDrop
 
     function buildToggler(componentId) { // function for the side nav
       return function () {
@@ -34,10 +30,7 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
 
     $scope.onDrop = function($event, $data, albumContainer) {
       albumContainer.push($data);
-<<<<<<< HEAD
-=======
       console.log('new image pushed!', albumContainer);
->>>>>>> dragDrop
     }
 
     $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information
