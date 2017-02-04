@@ -165,6 +165,64 @@ angular.module('app.factory', [])
       addImgToAlbum
     })
   })
+  .factory('Shared', function ($http) {
+
+    var fetcher = function() {
+      return $http({
+        method: 'GET',
+        url: '/shared/albums',
+      })
+      .then(function(resp) {
+        return resp.data;
+      })
+    };
+
+    var getId = function(username) {
+      return $http({
+        method: 'GET',
+        url: `/shared/${username}`
+      })
+      .then(function(resp) {
+        return resp.data;
+      })
+    };
+
+    var getList = function(albumId) {
+      return $http({
+        method: 'GET',
+        url: `/shared/list/${albumId}`,
+      })
+      .then(function(resp) {
+        return resp.data;
+      })
+    };
+
+    var addUsers = function() {
+      return $http({
+        method: 'GET',
+        url: '/shared/add',
+      })
+      .then(function(resp) {
+        return resp.data;
+      })
+    };
+
+    var removeUser = function() {
+      return $http({
+        method: 'DELETE',
+        url: '/shared',
+      })
+      .then(function(resp) {
+        return resp.data;
+      })
+    };
+
+    return ({
+      sharedFetcher: sharedFetcher,
+
+
+    })
+  })
   .factory('Collage', function () {
     var imgObj = {};
     var fetch;

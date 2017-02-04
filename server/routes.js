@@ -20,7 +20,7 @@ module.exports = function (app, express) {
   app.delete('/albums/:albumurl', helper.decode, aController.delete);
   app.put('/albums/:imgurl', helper.decode, aController.addImgToAlbum);
 
-  app.get('/shared/ablums', helper.decode, sController.fetch);
+  app.get('/shared/albums', helper.decode, sController.fetch);
   app.get('/shared/:user', helper.decode, sController.getUserId);
   app.get('/shared/list/:albumid', helper.decode, sController.getSharedList);
   app.put('/shared/add', helper.decode, sController.share);
