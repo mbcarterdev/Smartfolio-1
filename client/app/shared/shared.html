@@ -27,6 +27,7 @@
 </md-toolbar>
 
 
+
 <md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="24">
 
   <md-toolbar>
@@ -47,11 +48,8 @@
 
 </md-sidenav>
 
-<!-- <div class="row">
-  <div class="col-sm-offset-5 col-sm-2 text-center">
-    <md-button ng-click="show2()" class="add">Add Photos</md-button>
-  </div>
-</div> -->
+
+
 <div layout="row" style="height: 100%;">
 
   <div layout="column" class="icon-side-menu">
@@ -79,65 +77,61 @@
 
   </div>
 
-  <md-content class="gridList" flex>
-      <div class="logo">{{individualAlbumPhotos.album.name}}</div>
+  <div layout="column" flex>
     <div>
-        <!-- <form role="form" class="form" onsubmit="return false;">
-          <div class="form-group">
-            <label for="album">Album Name</label>
-            <input type="text" name="albumName" ng-model="album.albumName"/>
-            <label for="album">Album Description</label>
-            <input type="text" name="albumDescription" ng-model="album.albumDescription"/>
-            <label for="album">Image IDs (comma separated)</label>
-            <input type="number" name="imageID" ng-model="album.imageIDs"/>
-            <md-button id="upload" type="button" class="btn add" ng-click="createAlbumRaw({album});" data-dismiss="modal">Create Album</md-button>
-          </div>
-        </form> -->
-      <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="15px" md-gutter-gt-sm="15px">
-
-        <md-grid-tile class="flex-item ripplelink" ng-repeat="photo in individualAlbumPhotos.album.imagesPath |filter: search track by $index">
-
-          <md-tooltip>
-            {{photo.imgname}}
-          </md-tooltip>
-          <!-- <md-tooltip>
-            {{album.description}}
-          </md-tooltip> -->
-
-          <img class="thumbnail" ng-src="/photos/{{photo.imghash}}" ng-click="show($index)" />
-
-          <md-grid-tile-footer>
-
-            <md-menu>
-
-              <md-button class="md-default-theme tile material-icons"  ng-click= "openMenu($mdOpenMenu, $event)">
-                <md-icon class="tile1">dehaze</md-icon>
-          <!--<i class="material-icons pic_menu">dehaze</i>-->
-              </md-button>
-
-              <md-menu-content width="4" class="menu_content">
-
-                <md-menu-item class="menu_button">
-                  <md-button ng-click="showTags($index, $event)"> View Tags </md-button>
-                </md-menu-item>
-
-                <md-menu-item class="menu_button">
-                  <md-button ng-click="deleteImage(image.imghash)"> Delete Image </md-button>
-                </md-menu-item>
-
-              </md-menu-content>
-
-            </md-menu>
-
-          </md-grid-tile-footer>
-
-        </md-grid-tile>
-
-      </md-grid-list>
-
+      Shared Albums!
     </div>
 
-  </md-content>
+    <md-content style="height: 100%;" class="gridList">
+
+      <div>
+        <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="15px" md-gutter-gt-sm="15px">
+
+          <md-grid-tile class="flex-item ripplelink" ng-repeat="album in albums |filter: search track by $index">
+
+            <md-tooltip>
+              {{album.name}}
+            </md-tooltip>
+            <!-- <md-tooltip>
+              {{album.description}}
+            </md-tooltip> -->
+
+            <img class="thumbnail" ng-src="/photos/{{album.imagesPath[0].imghash}}" ng-click="updateAlbumID({album}); redirectToAlbumViewerView();" />
+
+            <md-grid-tile-footer>
+
+              <md-menu>
+
+                <md-button class="md-default-theme tile material-icons"  ng-click= "openMenu($mdOpenMenu, $event)">
+                  <md-icon class="tile1">dehaze</md-icon>
+            <!--<i class="material-icons pic_menu">dehaze</i>-->
+                </md-button>
+
+                <md-menu-content width="4" class="menu_content">
+
+                  <md-menu-item class="menu_button">
+                    <md-button ng-click="showTags($index, $event)"> View Tags </md-button>
+                  </md-menu-item>
+
+                  <md-menu-item class="menu_button">
+                    <md-button ng-click="deleteImage(image.imghash)"> Delete Image </md-button>
+                  </md-menu-item>
+
+                </md-menu-content>
+
+              </md-menu>
+
+            </md-grid-tile-footer>
+
+          </md-grid-tile>
+
+        </md-grid-list>
+
+      </div>
+
+    </md-content>
+
+  </div>
 
 </div>
 <!--<ul class="flex-container wrap">

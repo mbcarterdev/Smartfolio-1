@@ -58,7 +58,7 @@ module.exports = {
     var username = req.headers.username;
     var albumID = req.body.albumId;
     var shareUsers = req.body.shareUsers; // expecting and array of userIds
-    var permission = req.body.permission || 'read';
+    var permission = req.body.permission || 'read'; // TODO: Refactor share route to look for a permission for each user
     var count = 0;
 
     console.log(albumID)
@@ -113,70 +113,5 @@ module.exports = {
     .then(function() {
       res.sendStatus(200);
     })
-  },
-
-
-
-  upload: function(req, res) {
-    // add a new album
-    console.log('req body', req.body);
-    var username = req.headers.username;
-    var albumName = req.body.albumName;
-    var albumDescription = req.body.albumDescription;
-    var images = req.body.imageIDs;
-
-    db.raw(`SELECT idusers FROM smartfolio.users WHERE username='${username}'`)
-    .then(function (result) {
-      var userID = result[0][0].idusers;
-      db.raw(`INSERT INTO smartfolio.albums values (null, '${albumName}', '${albumDescription}', ${userID})`)
-      .then(function() {
-        db.raw(`SELECT MAX(idalbums) FROM smartfolio.albums`)
-        .then(function(pKey) {
-          var LAST_INSERT_ID = pKey[0][0]['MAX(idalbums)'];
-          console.log('inside the array to get images', images);
-          if(images) {
-            [images].forEach(function(image, index) {
-              db.raw(`INSERT INTO smartfolio.album_image values (null, ${image}, ${LAST_INSERT_ID})`)
-              .then(function() {
-                if(index === images.length - 1) {
-                  res.sendStatus(200);
-                }
-              })
-            })
-          } else {
-            res.status(200).send('No images added to album');
-          }
-        })
-      });
-    });
-
-  },
-
-  update: function(req, res) {
-    // update existing album name/description
-    var username = req.headers.username;
-    var albumID = req.params.album;
-    var newName = req.body.albumName;
-    var newDescription = req.body.albumDescription;
-
-    db.raw(`UPDATE smartfolio.albums SET name='${newName}', description='${newDescription}' WHERE idalbums=${albumID}`)
-    .then(function() {
-      res.sendStatus(202);
-    });
-  },
-
-  delete: function(req, res) {
-    // delete a specified album
-    var username = req.headers.username;
-    var albumID = req.params.album;
-
-    db.raw(`DELETE FROM smartfolio.albums WHERE idalbums=${albumID}`)
-    .then(function() {
-      res.sendStatus(200);
-    })
-  },
-
-  addImgToAlbum: function(req, res) {
-    // add an img to an album
   }
 };

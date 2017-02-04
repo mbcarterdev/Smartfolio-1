@@ -165,6 +165,75 @@ angular.module('app.factory', [])
       addImgToAlbum
     })
   })
+  .factory('Shared', function ($http) {
+
+    var fetcher = function() {
+      return $http({
+        method: 'GET',
+        url: '/shared/albums',
+      })
+      .then(function(resp) {
+        return resp.data;
+      })
+    };
+
+    var getId = function(username) {
+      return $http({
+        method: 'GET',
+        url: `/shared/${username}`
+      })
+      .then(function(resp) {
+        return resp.data;
+      })
+    };
+
+    var getList = function(albumId) {
+      return $http({
+        method: 'GET',
+        url: `/shared/list/${albumId}`,
+      })
+      .then(function(resp) {
+        return resp.data;
+      })
+    };
+
+    var addUsers = function(albumId, shareArr, permission) {
+      return $http({
+        method: 'PUT',
+        url: '/shared/add',
+        data: {
+          albumId: albumId,
+          shareUsers: shareArr,
+          permission: permission
+        }
+      })
+      .then(function(resp) {
+        return resp.data;
+      })
+    };
+
+    var removeUser = function(albumId, userId) {
+      return $http({
+        method: 'DELETE',
+        url: '/shared',
+        data: {
+          albumId: albumId,
+          sharedUserId: userId
+        }
+      })
+      .then(function(resp) {
+        return resp.data;
+      })
+    };
+
+    return {
+      fetcher: fetcher,
+      getId: getId,
+      getList: getList,
+      addUsers: addUsers,
+      removeUser: removeUser
+    }
+  })
   .factory('Collage', function () {
     var imgObj = {};
     var fetch;

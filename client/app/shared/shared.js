@@ -1,22 +1,20 @@
-angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
-  .controller('AlbumCtrl', function ($scope, $rootScope, $location, ModalService, Pics, Albums, Collage, Shared, Auth, $window, $mdDialog, $mdSidenav) {
+angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
+  .controller('SharedCtrl', function ($scope, $rootScope, $location, ModalService, Pics, Shared, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
-    $rootScope.albums = [];
+    $rootScope.sharedAlbums = [];
     $rootScope.albumID = null;
     var data;
 
-    function buildToggler(componentId) {
-      return function() {
-        $mdSidenav(componentId).toggle();
-      };
-    };
+
 
     $scope.openMenu = function ($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
     };
 
     $scope.fetcher = function() {
+
+
       Albums.albumList().then(function(result) {
         $rootScope.albums = result.map(function(album) {
           album.imagesPath = album.images.map(function(image) {
@@ -25,12 +23,13 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
             });
           });
           return album;
+
         });
         console.log('album results', result);
         console.log('root images', $rootScope.images);
         console.log('in God we trust', $rootScope.albums);
-        // data = result;
-        // $rootScope.albums = result;
+        data = result;
+        $rootScope.albums = result;
       });
     };
 
@@ -86,12 +85,8 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.logoff = Auth.signout;
 
-    $scope.showShared = function () {
-      ModalService.showModal({
-        templateUrl: 'shareModal.html',
-        controller: 'ShareModalCtrl'
-      }).then(function (modal) {
-        modal.element.modal();
-      })
-    }
+    $scope.close = function () {
+      $mdDialog.hide();
+    };
+    
   });

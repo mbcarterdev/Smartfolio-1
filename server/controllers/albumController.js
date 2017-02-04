@@ -16,7 +16,7 @@ module.exports = {
           db.raw(`SELECT * FROM smartfolio.album_image WHERE albumID=${album.idalbums}`) // need to write a comment here to explain the query string
           .then(function(images) {
             var actualImage = images[0];
-            console.log('actualImage', actualImage[0].imageID)
+            // console.log('actualImage', actualImage[0].imageID)
             album['images'] = actualImage.map(function(imageID) {
               return imageID.imageID;
             });

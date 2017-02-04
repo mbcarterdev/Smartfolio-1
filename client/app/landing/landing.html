@@ -14,8 +14,11 @@
     <input type="password" ng-model="user.password" />
   </md-input-container>
   <div layout="column" layout-align="center center" style="padding-top:20px;">
-    <md-button class="btn btn-lg btn-primary btn-block add" ng-click="login()">Login</md-button>
+    <md-button class="btn btn-lg btn-primary btn-block add landing-btn" ng-click="login()">Login</md-button>
     <div flex="flex"></div>
-    <md-button class="btn btn-lg btn-primary btn-block add" ng-click="showDialog($event)" md-no-ink="md-no-ink">Sign Up</md-button>
+    <md-button class="btn btn-lg btn-primary btn-block add landing-btn" ng-click="showDialog($event)" md-no-ink="md-no-ink">Sign Up</md-button>
   </div>
 </form>
+<video id="my-video" class="video" autoplay="autoplay" loop="loop" muted="">
+  <source src="../../photovid.mp4" type="video/mp4" />
+</video>
