@@ -115,7 +115,9 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       $location.path('/album')
     }
 
-
+    $scope.redirectToShared = function() {
+      $location.path('/shared')
+    }
 
   });
 

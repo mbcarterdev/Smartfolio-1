@@ -17,7 +17,10 @@ angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     };
 
     $scope.fetcher = function() {
-      Shared.
+      Shared.fetcher()
+      .then(function(results) {
+        $rootScope.sharedAlbums = results;
+      })
       //
       //
       // Albums.albumList().then(function(result) {
@@ -30,7 +33,7 @@ angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
       //     return album;
       //
       //   });
-      //   console.log('album results', result);
+        // console.log('album results', results);
       //   console.log('root images', $rootScope.images);
       //   console.log('in God we trust', $rootScope.albums);
       //   data = result;

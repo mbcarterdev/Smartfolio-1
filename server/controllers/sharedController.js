@@ -23,13 +23,28 @@ module.exports = {
               db.raw(`SELECT * FROM smartfolio.album_image WHERE albumID=${albuminfo[0][0].idalbums}`)
               .then(function(imagesObj) {
                 var images = imagesObj[0];
-                shared['images'] = images.map(function(image) {
-                  return image.imageID;
-                });
-                data.push(shared);
-                if(index === sharedinfo[0].length - 1) {
-                  res.status(200).send(data);
-                }
+                shared['images'] = [];
+                // shared['images'] = images.map(function(image) {
+                //   return image.imageID;
+                // });
+                images.forEach(function(image) {
+                  db.raw(`SELECT * FROM smartfolio.images WHERE idimages=${image.imageID}`)
+                  .then(function(result) {
+                    var obj = { imageId: image.imageID };
+                    obj['imageURL'] = result[0][0].imghash;
+                    shared['images'].push(obj);
+                    if(images.length === shared['images'].length) {
+                      data.push(shared);
+                      if(data.length === sharedinfo[0].length) {
+                        res.status(200).send(data);
+                      }  
+                    }
+                  })
+                })
+                // data.push(shared);
+                // if(data.length === sharedinfo[0].length) {
+                //   res.status(200).send(data);
+                // }
               })
             })
           })

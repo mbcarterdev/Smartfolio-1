@@ -86,6 +86,10 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.logoff = Auth.signout;
 
+    $scope.redirectToShared = function() {
+      $location.path('/shared');
+    }
+
     $scope.showShared = function () {
       ModalService.showModal({
         templateUrl: 'shareModal.html',
