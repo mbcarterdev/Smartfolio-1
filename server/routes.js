@@ -20,11 +20,11 @@ module.exports = function (app, express) {
   app.delete('/albums/:albumurl', helper.decode, aController.delete);
   app.put('/albums/:imgurl', helper.decode, aController.addImgToAlbum);
 
-  app.get('/shared/ablums', sController.fetch);
-  app.get('/shared/:user', sController.getUserId);
-  app.get('/shared/list/:albumid', sController.getSharedList);
-  app.put('/shared/add', sController.share);
-  app.delete('/shared', sController.remove);
+  app.get('/shared/ablums', helper.decode, sController.fetch);
+  app.get('/shared/:user', helper.decode, sController.getUserId);
+  app.get('/shared/list/:albumid', helper.decode, sController.getSharedList);
+  app.put('/shared/add', helper.decode, sController.share);
+  app.delete('/shared', helper.decode, sController.remove);
 
   //app.put for changing the front or back img
     //will this go to /photos or /upload/photos?
