@@ -40,17 +40,15 @@ module.exports = {
 
   getUserId: function(req, res) {
     var username = req.headers.username;
-    var shareUser = req.params.shareUser;
-    console.log(shareUser);
-    console.log(username);
+    var shareUser = req.params.user;
 
     db.raw(`SELECT * FROM smartfolio.users WHERE username = '${shareUser}'`)
     .then(function(userInfo) {
       if(userInfo[0].length === 0) {
         res.status(404).send('User Not Found');
       } else {
-      var userID = userInfo[0][0].idusers;
-      res.status(200).send(userID);
+        var userID = userInfo[0][0].idusers;
+        res.status(200).send(userID.toString());
       }
     })
   },
@@ -58,8 +56,12 @@ module.exports = {
   share: function(req, res) {
     // serve up a specific album that the user designates
     var username = req.headers.username;
-    var albumID = req.params.album;
+    var albumID = req.body.album;
     var shareUsers = req.body.shareUsers;
+
+
+
+
 
   },
 
