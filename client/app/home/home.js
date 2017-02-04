@@ -90,9 +90,11 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       });
     }
 
-    $scope.createAlbum = function () {
-      var albumContent = $scope.newAlbum;
-      if(albumContent.length !== 0) {
+    $scope.createAlbum = function (albumInformation) {
+      var albumContent = {};
+      albumContent.photos = $scope.newAlbum;
+      albumContent.albumInfo = albumInformation;
+      if(albumContent.photos.length !== 0) {
         Albums.sendAlbum(albumContent).then(function(result) {
           console.log('album creation successful');
         });
