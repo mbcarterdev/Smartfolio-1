@@ -84,9 +84,24 @@ module.exports = {
   },
 
   getSharedList: function(req, res) {
-    var username = req.headers.username;
-    var albumID = req.params.album;
+    var albumID = req.params.albumid;
+    var list = [];
+    console.log(albumID);
 
+    db.raw(`SELECT * FROM smartfolio.shared WHERE albumid = '${albumID}' `)
+    .then(function(sharedInfo) {
+      var sharedGroup = sharedInfo[0];
+      sharedGroup.forEach(function(user) {
+        db.raw(`SELECT * FROM smartfolio.users WHERE idusers = '${user.shareUserid}' `)
+        .then(function(result) {
+          var username = result[0][0].username;
+          list.push(username);
+          if(list.length === sharedGroup.length) {
+            res.status(200).send(list);
+          }
+        })
+      });
+    })
   },
 
   remove: function(req, res) {

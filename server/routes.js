@@ -22,6 +22,7 @@ module.exports = function (app, express) {
 
   app.get('/shared/ablums', sController.fetch);
   app.get('/shared/:user', sController.getUserId);
+  app.get('/shared/list/:albumid', sController.getSharedList);
   app.put('/shared/add', sController.share);
 
   //app.put for changing the front or back img
