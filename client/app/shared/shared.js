@@ -84,4 +84,9 @@ angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     }
 
     $scope.logoff = Auth.signout;
+
+    $scope.close = function () {
+      $mdDialog.hide();
+    };
+    
   });

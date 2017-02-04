@@ -1,5 +1,5 @@
 angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
-  .controller('AlbumCtrl', function ($scope, $rootScope, $location, ModalService, Pics, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
+  .controller('AlbumCtrl', function ($scope, $rootScope, $location, ModalService, Pics, Albums, Collage, Shared, Auth, $window, $mdDialog, $mdSidenav) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
     $rootScope.albums = [];
@@ -85,4 +85,13 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     }
 
     $scope.logoff = Auth.signout;
+
+    $scope.showShared = function () {
+      ModalService.showModal({
+        templateUrl: 'shareModal.html',
+        controller: 'ShareModalCtrl'
+      }).then(function (modal) {
+        modal.element.modal();
+      })
+    }
   });

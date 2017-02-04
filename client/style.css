@@ -361,3 +361,8 @@ md-input-container:not(.md-input-invalid).md-input-focused label {
   margin: 0;
   padding: 0;
 }
+
+.shareModal {
+    width: 100%;
+    background-color: white;
+}

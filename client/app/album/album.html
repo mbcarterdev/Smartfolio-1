@@ -173,7 +173,7 @@
               <md-menu-content width="4" class="menu_content">
 
                 <md-menu-item class="menu_button">
-                  <md-button ng-click="deleteImage(image.imghash)"> Delete Album </md-button>
+                  <md-button ng-click="showShared()"> Share album </md-button>
                 </md-menu-item>
 
               </md-menu-content>
@@ -252,4 +252,38 @@
         </div>
       </div>
     </div>
+</script>
+
+<script type="text/ng-template" id="shareModal.html">
+
+  <div class="modal fade">
+
+    <div class="modal-dialog fullscreen-dialog">
+
+      <div class="modal-content md-padding shareModal">
+
+        <div class="modal-body" layout="column" layout-align="center" layout-xs="column" flex>
+          <h3>Add Users</h3>
+
+          <md-input-container>
+              <input ng-model="usersToAdd" md-separator-keys="semicolon" placeholder="Type username to add"></input>
+          </md-input-container>
+
+          <md-button type="button" class="md-primary">Share</md-button>
+
+            <!-- <md-chip ng-model="usersToAdd" md-separator-keys="semicolon" md-removable="true" placeholder="Type username to add"></md-chip> -->
+
+          <!-- <md-button type="button" class="md-primary">Share</md-button> -->
+
+        </div>
+
+
+        <md-button type="button" ng-click="close()" class="btn btn-primary add" data-dismiss="modal">Close</md-button>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </script>
