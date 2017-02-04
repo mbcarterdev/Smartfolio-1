@@ -1,22 +1,20 @@
 angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
-  .controller('SharedCtrl', function ($scope, $rootScope, $location, ModalService, Pics, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
+  .controller('SharedCtrl', function ($scope, $rootScope, $location, ModalService, Pics, Shared, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
-    $rootScope.albums = [];
+    $rootScope.sharedAlbums = [];
     $rootScope.albumID = null;
     var data;
 
-    function buildToggler(componentId) {
-      return function() {
-        $mdSidenav(componentId).toggle();
-      };
-    };
+
 
     $scope.openMenu = function ($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
     };
 
     $scope.fetcher = function() {
+
+
       Albums.albumList().then(function(result) {
         $rootScope.albums = result.map(function(album) {
           album.imagesPath = album.images.map(function(image) {
@@ -25,12 +23,13 @@ angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
             });
           });
           return album;
+
         });
         console.log('album results', result);
         console.log('root images', $rootScope.images);
         console.log('in God we trust', $rootScope.albums);
-        // data = result;
-        // $rootScope.albums = result;
+        data = result;
+        $rootScope.albums = result;
       });
     };
 

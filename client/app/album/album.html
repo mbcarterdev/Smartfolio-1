@@ -147,6 +147,7 @@
             <md-button id="upload" type="button" class="btn add" ng-click="createAlbumRaw({album});" data-dismiss="modal">Create Album</md-button>
           </div>
         </form>
+
       <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="15px" md-gutter-gt-sm="15px">
 
         <md-grid-tile class="flex-item ripplelink" ng-repeat="album in albums |filter: search track by $index">
@@ -172,11 +173,7 @@
               <md-menu-content width="4" class="menu_content">
 
                 <md-menu-item class="menu_button">
-                  <md-button ng-click="showTags($index, $event)"> View Tags </md-button>
-                </md-menu-item>
-
-                <md-menu-item class="menu_button">
-                  <md-button ng-click="deleteImage(image.imghash)"> Delete Image </md-button>
+                  <md-button ng-click="deleteImage(image.imghash)"> Delete Album </md-button>
                 </md-menu-item>
 
               </md-menu-content>
