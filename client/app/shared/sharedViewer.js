@@ -9,7 +9,7 @@ angular.module('app.sharedViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
       return album;
     }
 
-    $scope.individualAlbumPhotos = updateState($rootScope.albumID);
+    $scope.individualAlbumPhotos = updateState($rootScope.sharedAlbumID);
 
     function buildToggler(componentId) {
       return function() {
@@ -23,8 +23,8 @@ angular.module('app.sharedViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information
       Collage.set({
-        image1: $scope.individualAlbumPhotos.album.imagesPath[index],
-        image2: $scope.individualAlbumPhotos.album.imagesPath[index]
+        image1: $scope.individualAlbumPhotos.album.images[index],
+        image2: $scope.individualAlbumPhotos.album.images[index]
       });
       ModalService.showModal({
         templateUrl: 'modal.html',

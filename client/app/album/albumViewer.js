@@ -56,5 +56,9 @@ angular.module('app.albumViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
       $location.path('/album')
     }
 
+    $scope.redirectToShared = function() {
+      $location.path('/shared');
+    }
+
     $scope.logoff = Auth.signout;
   });

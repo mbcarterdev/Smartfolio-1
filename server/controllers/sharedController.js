@@ -31,13 +31,14 @@ module.exports = {
                   db.raw(`SELECT * FROM smartfolio.images WHERE idimages=${image.imageID}`)
                   .then(function(result) {
                     var obj = { imageId: image.imageID };
-                    obj['imageURL'] = result[0][0].imghash;
+                    obj['imghash'] = result[0][0].imghash;
+                    obj['imgname'] = result[0][0].imgname;
                     shared['images'].push(obj);
                     if(images.length === shared['images'].length) {
                       data.push(shared);
                       if(data.length === sharedinfo[0].length) {
                         res.status(200).send(data);
-                      }  
+                      }
                     }
                   })
                 })
