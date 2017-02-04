@@ -84,8 +84,9 @@
 
     <div>
       <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="15px" md-gutter-gt-sm="15px" ng-show="dragDrop">
-          <md-grid-tile md-colspan="2" md-colspan-md="3">
+          <md-grid-tile md-colspan="2" md-colspan-md="3" ui-on-Drop="onDrop($event, $data, newAlbum)">
               <img class="thumbnail" ng-src="http://i.huffpost.com/gen/2714370/images/o-POOP-EMOJI-ICE-CREAM-facebook.jpg" />
+              <md-button class="add" ng-click="createAlbum();">Create</md-button>
           </md-grid-tile>
 
       </md-grid-list>
