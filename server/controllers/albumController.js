@@ -1,6 +1,7 @@
 var db = require('../config/db');
 var path = require('path');
 var fs = require('fs');
+var promise = require('bluebird');
 
 module.exports = {
   fetch: function(req, res) {
@@ -21,7 +22,7 @@ module.exports = {
             });
             data.push(album);
 
-            if(index === albuminfo[0].length - 1) {
+            if(data.length === albuminfo[0].length) {
               res.status(200).send(data);
             }
           })
