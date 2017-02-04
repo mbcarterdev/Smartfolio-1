@@ -5,6 +5,8 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
     $rootScope.images = []; // store the images data
     var data; // to access tags in the popup
     $scope.dragDrop = false;
+    $scope.newAlbum = [];
+
 
     function buildToggler(componentId) { // function for the side nav
       return function () {
@@ -27,6 +29,10 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
     $scope.logoff = Auth.signout; //signs off user and destroys the token
     $scope.fetcher(); //fetches the data at the time f intial load
     Collage.setFetcher($scope.fetcher); //picture view modal
+
+    $scope.onDrop = function($event, $data, albumContainer) {
+      albumContainer.push($data);
+    }
 
     $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information
       Collage.set({
@@ -84,10 +90,15 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       });
     }
 
-    $scope.createAlbum = function (albumInfo) {
-      Albums.sendAlbum(albumInfo).then(function(result) {
-        console.log('album creation successful');
-      });
+    $scope.createAlbum = function () {
+      var albumContent = $scope.newAlbum;
+      if(albumContent.length !== 0) {
+        Albums.sendAlbum(albumContent).then(function(result) {
+          console.log('album creation successful');
+        });
+      } else {
+        console.log('cannot create album, no photos selected');
+      }
     }
 
     $scope.settings = function () { //function to change the rendered view to settings route
