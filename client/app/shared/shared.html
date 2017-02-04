@@ -1,0 +1,209 @@
+<md-toolbar>
+
+  <div class="md-toolbar-tools toolbar-home">
+
+    <div layout="row" layout-align="space-between">
+
+      <md-button>
+        <md-tooltip>Menu</md-tooltip>
+        <md-icon class="md-default-theme material-icons" ng-click="toggleLeft()">menu</md-icon>
+      </md-button>
+
+      <div class="logo">Smartfolio</div>
+
+      <md-button ng-click="show2()" class="add">Upload</md-button>
+      <!-- Add Create Album Functionality Here -->
+      <md-button ng-click="createAlbumFromImageView();" class="add">Create Album</md-button>
+
+    </div>
+
+    <md-input-container class="search" >
+      <label>Search</label>
+      <input type="text" ng-model="search" class="search_input">
+    </md-input-container>
+
+  </div>
+
+</md-toolbar>
+
+
+
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="24">
+
+  <md-toolbar>
+    <h1  class="md-toolbar-tools head">Menu</h1>
+  </md-toolbar>
+
+  <md-content layout-margin="" layout="column">
+    <md-button ng-click="settings()" class="md-accent font-side">
+      Settings
+    </md-button>
+    <md-button ng-click="logoff()" class="md-accent font-side">
+      Log Off
+    </md-button>
+    <md-button ng-click="toggleLeft()" class="md-accent font-side">
+      Close Menu
+    </md-button>
+  </md-content>
+
+</md-sidenav>
+
+
+
+<div layout="row" style="height: 100%;">
+
+  <div layout="column" class="icon-side-menu">
+
+    <md-button class="icon-side-button" ng-click="redirectToImageView();">
+      <div layout="column" layout-align="start center">
+        <i class="material-icons md-36">image</i>
+        <div class="icon-side-text">Photos</div>
+      </div>
+    </md-button>
+
+    <md-button class="icon-side-button" ng-click="redirectToAlbumsView();">
+      <div layout="column" layout-align="start center">
+        <i class="material-icons md-36">collections</i>
+        <div class="icon-side-text">Albums</div>
+      </div>
+    </md-button>
+
+    <md-button class="icon-side-button">
+      <div layout="column" layout-align="start center">
+        <i class="material-icons md-36">collections_bookmark</i>
+        <div class="icon-side-text" ng-click="">Shared</div>
+      </div>
+    </md-button>
+
+  </div>
+
+  <div layout="column" flex>
+    <div>
+      Shared Albums!
+    </div>
+
+    <md-content style="height: 100%;" class="gridList">
+
+      <div>
+          <!-- <form role="form" class="form" onsubmit="return false;">
+            <div class="form-group">
+              <label for="album">Album Name</label>
+              <input type="text" name="albumName" ng-model="album.albumName"/>
+              <label for="album">Album Description</label>
+              <input type="text" name="albumDescription" ng-model="album.albumDescription"/>
+              <label for="album">Image IDs (comma separated)</label>
+              <input type="number" name="imageID" ng-model="album.imageIDs"/>
+              <md-button id="upload" type="button" class="btn add" ng-click="createAlbumRaw({album});" data-dismiss="modal">Create Album</md-button>
+            </div>
+          </form> -->
+        <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="15px" md-gutter-gt-sm="15px">
+
+          <md-grid-tile class="flex-item ripplelink" ng-repeat="album in albums |filter: search track by $index">
+
+            <md-tooltip>
+              {{album.name}}
+            </md-tooltip>
+            <!-- <md-tooltip>
+              {{album.description}}
+            </md-tooltip> -->
+
+            <img class="thumbnail" ng-src="/photos/{{album.imagesPath[0].imghash}}" ng-click="updateAlbumID({album}); redirectToAlbumViewerView();" />
+
+            <md-grid-tile-footer>
+
+              <md-menu>
+
+                <md-button class="md-default-theme tile material-icons"  ng-click= "openMenu($mdOpenMenu, $event)">
+                  <md-icon class="tile1">dehaze</md-icon>
+            <!--<i class="material-icons pic_menu">dehaze</i>-->
+                </md-button>
+
+                <md-menu-content width="4" class="menu_content">
+
+                  <md-menu-item class="menu_button">
+                    <md-button ng-click="showTags($index, $event)"> View Tags </md-button>
+                  </md-menu-item>
+
+                  <md-menu-item class="menu_button">
+                    <md-button ng-click="deleteImage(image.imghash)"> Delete Image </md-button>
+                  </md-menu-item>
+
+                </md-menu-content>
+
+              </md-menu>
+
+            </md-grid-tile-footer>
+
+          </md-grid-tile>
+
+        </md-grid-list>
+
+      </div>
+
+    </md-content>
+
+  </div>
+
+</div>
+<!--<ul class="flex-container wrap">
+  <li class="flex-item ripplelink" md-whiteframe="24" ng-repeat="image in images track by $index"><img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" /></li>
+</ul>-->
+
+<script type="text/ng-template" id="modal.html">
+  <div class="modal fade">
+    <div class="modal-dialog fullscreen-dialog">
+      <div class="modal-content">
+        <div class="modal-body" layout="row" layout-xs="column">
+          <div class="box">
+            <img ng-src="/photos/{{url.image1.imghash}}" />
+          </div>
+          <div class="box">
+            <img ng-src="/photos/{{url.image2.backimghash}}" />
+          </div>
+        </div>
+        <md-button type="button" ng-click="close()" class="btn btn-primary add" data-dismiss="modal">Close</md-button>
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- <script type="text/ng-template" id="modal.html">
+  <div class="modal fade">
+    <div class="modal-dialog fullscreen-dialog">
+      <div class="modal-content">
+        <div class="modal-body" layout="row" layout-xs="column">
+          <div class="box">
+            <img ng-src="/photos/{{url.image1.imghash}}" />
+          </div>
+          <div class="box">
+            <img ng-src="/photos/{{url.image2.backimghash}}" />
+          </div>
+        </div>
+        <md-button type="button" ng-click="close()" class="btn btn-primary add" data-dismiss="modal">Close</md-button>
+      </div>
+    </div>
+  </div>
+</script> -->
+
+<script type="text/ng-template" id="uploader.html">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="container">
+          <h1>Upload Photos</h1>
+          <form role="form" class="form" onsubmit="return false;">
+            <div class="form-group">
+              <label for="file">Front</label>
+              <input type="file" name="front" onchange="angular.element(this).scope().uploadFile('front',this.files)" />
+              <label for="file">Back</label>
+              <input type="file" name="back" onchange="angular.element(this).scope().uploadFile('back',this.files)" />
+            </div>
+            <md-button id="upload" type="button" class="btn  add" ng-click="connection()" data-dismiss="modal">Upload</md-button>
+          </form>
+        </div>
+        <div class="modal-footer" style="border: none;">
+           <md-button type="button" ng-click="close()" class="btn  add" data-dismiss="modal">Close</md-button>
+        </div>
+      </div>
+    </div>
+</script>
