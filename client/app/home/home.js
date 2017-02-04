@@ -56,9 +56,13 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       });
     };
 
-    $scope.show3 = function () {
+    $scope.show3toggler = function () {
       // switch a 'show create album' flag to true so that the drag-drop box will appear and users can drag-drop to make their album
-      $scope.dragDrop = true;
+      if($scope.dragDrop) {
+        $scope.dragDrop = false;
+      } else {
+        $scope.dragDrop = true;
+      }
     }
 
     $scope.showTags = function (index, $event) { //template to show tags as chips
@@ -95,7 +99,8 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       albumContent.albumInfo = albumInformation;
       if(albumContent.photos.length !== 0) {
         Albums.sendAlbum(albumContent).then(function(result) {
-          console.log('album creation successful');
+          $window.alert('album creation successful');
+          $scope.show3toggler();
           $scope.newAlbum = [];
         });
       } else {
