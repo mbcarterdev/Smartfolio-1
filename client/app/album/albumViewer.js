@@ -23,8 +23,8 @@ angular.module('app.albumViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information
       Collage.set({
-        image1: $rootScope.images[index],
-        image2: $rootScope.images[index]
+        image1: $scope.individualAlbumPhotos.album.imagesPath[index],
+        image2: $scope.individualAlbumPhotos.album.imagesPath[index]
       });
       ModalService.showModal({
         templateUrl: 'modal.html',

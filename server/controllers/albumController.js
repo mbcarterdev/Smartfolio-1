@@ -1,6 +1,7 @@
 var db = require('../config/db');
 var path = require('path');
 var fs = require('fs');
+var promise = require('bluebird');
 
 module.exports = {
   fetch: function(req, res) {
@@ -16,13 +17,12 @@ module.exports = {
           db.raw(`SELECT * FROM smartfolio.album_image WHERE albumID=${album.idalbums}`) // need to write a comment here to explain the query string
           .then(function(images) {
             var actualImage = images[0];
-            // console.log('actualImage', actualImage[0].imageID)
             album['images'] = actualImage.map(function(imageID) {
               return imageID.imageID;
             });
             data.push(album);
 
-            if(index === albuminfo[0].length - 1) {
+            if(data.length === albuminfo[0].length) {
               res.status(200).send(data);
             }
           })
@@ -39,9 +39,11 @@ module.exports = {
     // add a new album
     console.log('req body', req.body);
     var username = req.headers.username;
-    var albumName = req.body.albumName;
-    var albumDescription = req.body.albumDescription;
-    var images = req.body.imageIDs;
+    var albumName = req.body.albumInfo.album.albumName;
+    var albumDescription = req.body.albumInfo.album.albumDescription;
+    var images = req.body.photos.map(function(photo) {
+      return photo.idimages;
+    });
 
     db.raw(`SELECT idusers FROM smartfolio.users WHERE username='${username}'`)
     .then(function (result) {
@@ -53,7 +55,7 @@ module.exports = {
           var LAST_INSERT_ID = pKey[0][0]['MAX(idalbums)'];
           console.log('inside the array to get images', images);
           if(images) {
-            [images].forEach(function(image, index) {
+            images.forEach(function(image, index) {
               db.raw(`INSERT INTO smartfolio.album_image values (null, ${image}, ${LAST_INSERT_ID})`)
               .then(function() {
                 if(index === images.length - 1) {
