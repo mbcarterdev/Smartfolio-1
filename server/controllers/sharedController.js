@@ -56,13 +56,31 @@ module.exports = {
   share: function(req, res) {
     // serve up a specific album that the user designates
     var username = req.headers.username;
-    var albumID = req.body.album;
-    var shareUsers = req.body.shareUsers;
+    var albumID = req.body.albumId;
+    var shareUsers = req.body.shareUsers; // expecting and array of userIds
+    var permission = req.body.permission || 'read';
+    var count = 0;
 
+    console.log(albumID)
+    console.log(shareUsers)
 
-
-
-
+    if(shareUsers.length > 0) {
+      db.raw(`SELECT idusers FROM smartfolio.users WHERE username='${username}'`)
+      .then(function(userInfo) {
+        var userID = userInfo[0][0].idusers;
+        shareUsers.forEach(function(user) {
+          db.raw(`INSERT INTO smartfolio.shared values (null, ${userID}, ${albumID}, ${user}, "${permission}")`)
+          .then(function() {
+            count++
+            if(count === shareUsers.length) {
+              res.status(200).send('Successfully shared ablum');
+            }
+          })
+        });
+      })
+    } else {
+      res.status(404).send('Could not detect users to share content with')
+    }
   },
 
   getSharedList: function(req, res) {
