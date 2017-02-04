@@ -1,6 +1,7 @@
 var db = require('../config/db');
 var path = require('path');
 var fs = require('fs');
+var promise = require('bluebird');
 
 module.exports = {
   fetch: function(req, res) {
@@ -16,14 +17,12 @@ module.exports = {
           db.raw(`SELECT * FROM smartfolio.album_image WHERE albumID=${album.idalbums}`) // need to write a comment here to explain the query string
           .then(function(images) {
             var actualImage = images[0];
-            console.log('inner most place where getting imgaes...', actualImage)
-            console.log('actualImage', actualImage[0].imageID)
             album['images'] = actualImage.map(function(imageID) {
               return imageID.imageID;
             });
             data.push(album);
 
-            if(index === albuminfo[0].length - 1) {
+            if(data.length === albuminfo[0].length) {
               res.status(200).send(data);
             }
           })
