@@ -6,31 +6,36 @@ angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     $rootScope.albumID = null;
     var data;
 
-
+    function buildToggler(componentId) {
+      return function() {
+        $mdSidenav(componentId).toggle();
+      };
+    };
 
     $scope.openMenu = function ($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
     };
 
     $scope.fetcher = function() {
-
-
-      Albums.albumList().then(function(result) {
-        $rootScope.albums = result.map(function(album) {
-          album.imagesPath = album.images.map(function(image) {
-            return $rootScope.images.find(function(photo) {
-              return photo.idimages === image;
-            });
-          });
-          return album;
-
-        });
-        console.log('album results', result);
-        console.log('root images', $rootScope.images);
-        console.log('in God we trust', $rootScope.albums);
-        data = result;
-        $rootScope.albums = result;
-      });
+      Shared.
+      //
+      //
+      // Albums.albumList().then(function(result) {
+      //   $rootScope.albums = result.map(function(album) {
+      //     album.imagesPath = album.images.map(function(image) {
+      //       return $rootScope.images.find(function(photo) {
+      //         return photo.idimages === image;
+      //       });
+      //     });
+      //     return album;
+      //
+      //   });
+      //   console.log('album results', result);
+      //   console.log('root images', $rootScope.images);
+      //   console.log('in God we trust', $rootScope.albums);
+      //   data = result;
+      //   $rootScope.albums = result;
+      // });
     };
 
     $scope.createAlbumRaw = function(albumInfo) {
@@ -88,5 +93,5 @@ angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     $scope.close = function () {
       $mdDialog.hide();
     };
-    
+
   });
