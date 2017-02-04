@@ -111,7 +111,10 @@
                       </form>
                   </div>
                   <div flex layout="row" class="md-padding">
-                      <img class="thumbnail" ng-src="http://i.huffpost.com/gen/2714370/images/o-POOP-EMOJI-ICE-CREAM-facebook.jpg" />
+                      <md-grid-tile class="flex-item ripplelink" md-colspan="2" md-colspan-md="3" ui-on-Drop="onDrop($event, $data, newAlbum)" ng-repeat="photo in newAlbum track by $index">
+                          {{photo.imghash}}
+                          <img class="thumbnail" ng-src="https://pbs.twimg.com/profile_images/662417124812394496/kP-tNcj9_reasonably_small.png" />
+                      </md-grid-tile>
 
                   </div>
               </div>

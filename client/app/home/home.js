@@ -20,7 +20,6 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
 
     $scope.fetcher = function () { //fetches results from server an object caitaining results from database for the given user
       Pics.imageList().then(function (result) {
-        console.log(result);
         data = result;
         $rootScope.images = result;
       });
@@ -32,6 +31,7 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
 
     $scope.onDrop = function($event, $data, albumContainer) {
       albumContainer.push($data);
+      console.log('new image pushed!', albumContainer);
     }
 
     $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information
@@ -97,6 +97,7 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       if(albumContent.photos.length !== 0) {
         Albums.sendAlbum(albumContent).then(function(result) {
           console.log('album creation successful');
+          $scope.newAlbum = [];
         });
       } else {
         console.log('cannot create album, no photos selected');
