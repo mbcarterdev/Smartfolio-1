@@ -12,15 +12,18 @@ describe('Smartfolio app', function() {
     element(by.model('user.password')).sendKeys('rishi');
 
     element(by.id('login')).click();
+
+    expect(browser.getCurrentUrl()).toEqual('http://localhost:8000/#/home');
   });
 
-  it('should allow user to successfully signup and redirect to home page', function() {
-    element(by.id('signup')).click();
-
-    element(by.id('input_3')).sendKeys('magical@magical.com');
-    element(by.id('input_4')).sendKeys('magical');
-
-  });
+  // it('should allow user to successfully signup and redirect to home page', function() {
+  //   element(by.id('signup')).click();
+  //
+  //   element(by.id('input_3')).sendKeys('beans@beans.com');
+  //   element(by.id('input_4')).sendKeys('beans');
+  //
+  //   expect(browser.getCurrentUrl()).toEqual('http://localhost:8000/#/home');
+  // });
 
     // element(by.model('todoList.todoText')).sendKeys('write first protractor test');
     // element(by.css('[value="add"]')).click();
