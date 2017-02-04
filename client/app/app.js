@@ -8,7 +8,8 @@ angular.module('app', ['app.landing',
     'ui.grid',
     'angularModalService',
     'ngRoute',
-    'ngAnimate'
+    'ngAnimate',
+    'ang-drag-drop'
   ])
   .config(function ($routeProvider, $httpProvider, $locationProvider, $rootScopeProvider) {
     $locationProvider.hashPrefix('');

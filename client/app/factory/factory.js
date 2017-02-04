@@ -105,14 +105,14 @@ angular.module('app.factory', [])
     };
 
     var sendAlbum = function(albums) {
-      console.log(albums);
+      console.log('making a new album', albums);
       return $http({
         method: 'POST',
         url: '/upload/albums',
         headers: {
           'Content-Type': 'application/json'
         },
-        data: albums.album
+        data: albums
       }).then(function(resp) {
         console.log('album creation complete');
         return resp.data;
