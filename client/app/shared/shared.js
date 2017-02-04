@@ -3,7 +3,7 @@ angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
     $rootScope.sharedAlbums = [];
-    $rootScope.albumID = null;
+    $rootScope.sharedAlbumID = null;
     var data;
 
     function buildToggler(componentId) {
@@ -20,6 +20,7 @@ angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
       Shared.fetcher()
       .then(function(results) {
         $rootScope.sharedAlbums = results;
+        console.log(results);
       })
       //
       //
@@ -62,8 +63,8 @@ angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     $scope.fetcher();
 
     $scope.updateAlbumID = function (album) {
-      $rootScope.albumID = album;
-      console.log('something', $rootScope.albumID);
+      $rootScope.sharedAlbumID = album;
+      console.log('something', $rootScope.sharedAlbumID);
     }
 
     $scope.show2 = function () { //show the uplaod file modal
@@ -88,7 +89,11 @@ angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     }
 
     $scope.redirectToAlbumViewerView = function() {
-      $location.path('/photosViewer');
+      $location.path('/sharedViewer');
+    }
+
+    $scope.redirectToShared = function() {
+      $location.path('/shared');
     }
 
     $scope.logoff = Auth.signout;

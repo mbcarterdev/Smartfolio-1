@@ -1,5 +1,5 @@
-angular.module('app.albumViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
-  .controller('AlbumViewerCtrl', function ($scope, $rootScope, $location, ModalService, Pics, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
+angular.module('app.sharedViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
+  .controller('SharedViewerCtrl', function ($scope, $rootScope, $location, ModalService, Pics, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
     var data;
@@ -9,7 +9,7 @@ angular.module('app.albumViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
       return album;
     }
 
-    $scope.individualAlbumPhotos = updateState($rootScope.albumID);
+    $scope.individualAlbumPhotos = updateState($rootScope.sharedAlbumID);
 
     function buildToggler(componentId) {
       return function() {
@@ -23,8 +23,8 @@ angular.module('app.albumViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information
       Collage.set({
-        image1: $scope.individualAlbumPhotos.album.imagesPath[index],
-        image2: $scope.individualAlbumPhotos.album.imagesPath[index]
+        image1: $scope.individualAlbumPhotos.album.images[index],
+        image2: $scope.individualAlbumPhotos.album.images[index]
       });
       ModalService.showModal({
         templateUrl: 'modal.html',
@@ -54,10 +54,6 @@ angular.module('app.albumViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.redirectToAlbumsView = function() {
       $location.path('/album')
-    }
-
-    $scope.redirectToShared = function() {
-      $location.path('/shared');
     }
 
     $scope.logoff = Auth.signout;
