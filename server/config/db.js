@@ -88,6 +88,16 @@ module.exports = knex;
 //     ON DELETE NO ACTION
 //     ON UPDATE NO ACTION);
 
+// ALTER TABLE `smartfolio`.`album_image` 
+// ADD INDEX `albumid_idx` (`albumID` ASC);
+// ALTER TABLE `smartfolio`.`album_image`
+// ADD CONSTRAINT `albumid`
+//   FOREIGN KEY (`albumID`)
+//   REFERENCES `smartfolio`.`albums` (`userID`)
+//   ON DELETE NO ACTION
+//   ON UPDATE NO ACTION;
+
+
 // CREATE TABLE `smartfolio`.`shared` (
 //   `idshared` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 //   `ownerid` INT(11) NULL,

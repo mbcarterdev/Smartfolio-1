@@ -80,13 +80,48 @@
 
   </div>
 
+  <!-- <form role="form" class="form" onsubmit="return false;">
+    <div class="form-group">
+      <label for="album">Album Name</label>
+      <input type="text" name="albumName" ng-model="album.albumName"/>
+      <label for="album">Album Description</label>
+      <input type="text" name="albumDescription" ng-model="album.albumDescription"/>
+      <label for="album">Image IDs (comma separated)</label>
+      <input type="number" name="imageID" ng-model="album.imageIDs"/>
+      <md-button id="upload" type="button" class="btn add" ng-click="createAlbumRaw({album});" data-dismiss="modal">Create Album</md-button>
+    </div>
+  </form> -->
+
+
+
   <md-content class="gridList" flex>
 
     <div>
       <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="15px" md-gutter-gt-sm="15px" ng-show="dragDrop">
+
+          <md-grid-tile md-colspan="2" md-colspan-md="3">
+              <div layout="column" layout-fill>
+                  <div layout="row" layout-padding layout-align="left">
+                      <form role="form" class="form" onsubmit="return false;">
+                          <label for="album">Album Name</label>
+                          <input type="text" name="albumName" ng-model="album.albumName"/>
+                          <label for="album">Album Description</label>
+                          <input type="text" name="albumDescription" ng-model="album.albumDescription" />
+                          <md-button type="button" class="btn add" ng-click="createAlbum({album});">Create</md-button>
+                      </form>
+                  </div>
+                  <div flex layout="row" class="md-padding">
+                      <md-grid-tile class="flex-item ripplelink" md-colspan="2" md-colspan-md="3" ui-on-Drop="onDrop($event, $data, newAlbum)" ng-repeat="photo in newAlbum track by $index">
+                          {{photo.imghash}}
+                          <img class="thumbnail" ng-src="https://pbs.twimg.com/profile_images/662417124812394496/kP-tNcj9_reasonably_small.png" />
+                      </md-grid-tile>
+
+                  </div>
+              </div>
+
+          </md-grid-tile>
+
           <md-grid-tile md-colspan="2" md-colspan-md="3" ui-on-Drop="onDrop($event, $data, newAlbum)">
-              <img class="thumbnail" ng-src="http://i.huffpost.com/gen/2714370/images/o-POOP-EMOJI-ICE-CREAM-facebook.jpg" />
-              <md-button class="add" ng-click="createAlbum();">Create</md-button>
 
           </md-grid-tile>
 

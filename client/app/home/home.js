@@ -6,6 +6,10 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
     var data; // to access tags in the popup
     $scope.dragDrop = false;
     $scope.newAlbum = [];
+<<<<<<< HEAD
+=======
+
+>>>>>>> dragDrop
 
     function buildToggler(componentId) { // function for the side nav
       return function () {
@@ -19,7 +23,6 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
 
     $scope.fetcher = function () { //fetches results from server an object caitaining results from database for the given user
       Pics.imageList().then(function (result) {
-        console.log(result);
         data = result;
         $rootScope.images = result;
       });
@@ -31,6 +34,10 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
 
     $scope.onDrop = function($event, $data, albumContainer) {
       albumContainer.push($data);
+<<<<<<< HEAD
+=======
+      console.log('new image pushed!', albumContainer);
+>>>>>>> dragDrop
     }
 
     $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information
@@ -89,11 +96,14 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       });
     }
 
-    $scope.createAlbum = function () {
-      var albumContent = $scope.newAlbum;
-      if(albumContent.length !== 0) {
+    $scope.createAlbum = function (albumInformation) {
+      var albumContent = {};
+      albumContent.photos = $scope.newAlbum;
+      albumContent.albumInfo = albumInformation;
+      if(albumContent.photos.length !== 0) {
         Albums.sendAlbum(albumContent).then(function(result) {
           console.log('album creation successful');
+          $scope.newAlbum = [];
         });
       } else {
         console.log('cannot create album, no photos selected');

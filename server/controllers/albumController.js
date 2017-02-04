@@ -39,9 +39,11 @@ module.exports = {
     // add a new album
     console.log('req body', req.body);
     var username = req.headers.username;
-    var albumName = req.body.albumName;
-    var albumDescription = req.body.albumDescription;
-    var images = req.body.imageIDs;
+    var albumName = req.body.albumInfo.album.albumName;
+    var albumDescription = req.body.albumInfo.album.albumDescription;
+    var images = req.body.photos.map(function(photo) {
+      return photo.idimages;
+    });
 
     db.raw(`SELECT idusers FROM smartfolio.users WHERE username='${username}'`)
     .then(function (result) {
@@ -53,7 +55,7 @@ module.exports = {
           var LAST_INSERT_ID = pKey[0][0]['MAX(idalbums)'];
           console.log('inside the array to get images', images);
           if(images) {
-            [images].forEach(function(image, index) {
+            images.forEach(function(image, index) {
               db.raw(`INSERT INTO smartfolio.album_image values (null, ${image}, ${LAST_INSERT_ID})`)
               .then(function() {
                 if(index === images.length - 1) {

@@ -112,7 +112,7 @@ angular.module('app.factory', [])
         headers: {
           'Content-Type': 'application/json'
         },
-        data: albums.album
+        data: albums
       }).then(function(resp) {
         console.log('album creation complete');
         return resp.data;
