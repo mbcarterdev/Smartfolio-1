@@ -5,6 +5,7 @@ angular.module('app', ['app.landing',
     'app.albumViewer',
     'app.settings',
     'app.shared',
+    'app.sharedViewer',
     'ui.grid',
     'angularModalService',
     'ngRoute',
@@ -41,6 +42,11 @@ angular.module('app', ['app.landing',
       .when('/shared', {
         templateUrl: '/app/shared/shared.html',
         controller: 'SharedCtrl',
+        authenticate: true
+      })
+      .when('/sharedViewer', {
+        templateUrl: '/app/shared/sharedViewer.html',
+        controller: 'SharedViewerCtrl',
         authenticate: true
       })
 
