@@ -24,6 +24,7 @@ module.exports = function (app, express) {
   app.get('/shared/:user', sController.getUserId);
   app.get('/shared/list/:albumid', sController.getSharedList);
   app.put('/shared/add', sController.share);
+  app.delete('/shared', sController.remove);
 
   //app.put for changing the front or back img
     //will this go to /photos or /upload/photos?

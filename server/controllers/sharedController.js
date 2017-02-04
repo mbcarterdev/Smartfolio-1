@@ -94,8 +94,8 @@ module.exports = {
       sharedGroup.forEach(function(user) {
         db.raw(`SELECT * FROM smartfolio.users WHERE idusers = '${user.shareUserid}' `)
         .then(function(result) {
-          var username = result[0][0].username;
-          list.push(username);
+          user['username'] = result[0][0].username;
+          list.push(user);
           if(list.length === sharedGroup.length) {
             res.status(200).send(list);
           }
@@ -106,8 +106,13 @@ module.exports = {
 
   remove: function(req, res) {
     var username = req.headers.username;
-    var albumID = req.params.album;
+    var albumID = req.body.albumId;
+    var sharedUserID = req.body.sharedUserId;
 
+    db.raw(`DELETE FROM smartfolio.shared WHERE albumid=${albumID} AND shareUserid=${sharedUserID}`)
+    .then(function() {
+      res.sendStatus(200);
+    })
   },
 
 
