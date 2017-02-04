@@ -58,7 +58,7 @@ module.exports = {
     var username = req.headers.username;
     var albumID = req.body.albumId;
     var shareUsers = req.body.shareUsers; // expecting and array of userIds
-    var permission = req.body.permission || 'read';
+    var permission = req.body.permission || 'read'; // TODO: Refactor share route to look for a permission for each user
     var count = 0;
 
     console.log(albumID)

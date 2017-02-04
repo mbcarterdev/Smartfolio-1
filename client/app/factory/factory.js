@@ -197,31 +197,42 @@ angular.module('app.factory', [])
       })
     };
 
-    var addUsers = function() {
+    var addUsers = function(albumId, shareArr, permission) {
       return $http({
-        method: 'GET',
+        method: 'PUT',
         url: '/shared/add',
+        data: {
+          albumId: albumId,
+          shareUsers: shareArr,
+          permission: permission
+        }
       })
       .then(function(resp) {
         return resp.data;
       })
     };
 
-    var removeUser = function() {
+    var removeUser = function(albumId, userId) {
       return $http({
         method: 'DELETE',
         url: '/shared',
+        data: {
+          albumId: albumId,
+          sharedUserId: userId
+        }
       })
       .then(function(resp) {
         return resp.data;
       })
     };
 
-    return ({
-      sharedFetcher: sharedFetcher,
-
-
-    })
+    return {
+      fetcher: fetcher,
+      getId: getId,
+      getList: getList,
+      addUsers: addUsers,
+      removeUser: removeUser
+    }
   })
   .factory('Collage', function () {
     var imgObj = {};
