@@ -1,8 +1,26 @@
-describe('smartfolio homepage login', function() {
-  it('should add a todo', function() {
-    browser.get('http://localhost:8000/');
+describe('Smartfolio app', function() {
+  beforeEach(function() {
+    browser.get('http://localhost:8000');
+  });
 
+  it('should have a title that matches "Smartfolio"', function() {
     expect(browser.getTitle()).toEqual('Smartfolio');
+  });
+
+  it('should login with Rishi\'s credentials', function() {
+    element(by.model('user.username')).sendKeys('rishi@rishi.com');
+    element(by.model('user.password')).sendKeys('rishi');
+
+    element(by.id('login')).click();
+  });
+
+  it('should allow user to successfully signup and redirect to home page', function() {
+    element(by.id('signup')).click();
+
+    element(by.id('input_3')).sendKeys('magical@magical.com');
+    element(by.id('input_4')).sendKeys('magical');
+
+  });
 
     // element(by.model('todoList.todoText')).sendKeys('write first protractor test');
     // element(by.css('[value="add"]')).click();
@@ -15,5 +33,4 @@ describe('smartfolio homepage login', function() {
     // todoList.get(2).element(by.css('input')).click();
     // var completedAmount = element.all(by.css('.done-true'));
     // expect(completedAmount.count()).toEqual(2);
-  });
 });
