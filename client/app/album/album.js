@@ -2,6 +2,7 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
   .controller('AlbumCtrl', function ($scope, $rootScope, $location, ModalService, Pics, Albums, Collage, Shared, Auth, $window, $mdDialog, $mdSidenav) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
+    // save all album and photo information in $rootScope so that all parts of the app module can have access
     $rootScope.albums = [];
     $rootScope.albumID = null;
     var data;
@@ -26,11 +27,6 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
           });
           return album;
         });
-        console.log('album results', result);
-        console.log('root images', $rootScope.images);
-        console.log('in God we trust', $rootScope.albums);
-        // data = result;
-        // $rootScope.albums = result;
       });
     };
 
@@ -41,7 +37,7 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     };
 
     $scope.createAlbumFromImageView = function(albumInfo) {
-      // need something here so that redirect to /home will also pop up drag-drop for album creation
+      // redirect to /home so user can drag-drop to create new album
       $location.path('/home');
     };
 
@@ -56,7 +52,6 @@ angular.module('app.album', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
 
     $scope.updateAlbumID = function (album) {
       $rootScope.albumID = album;
-      console.log('something', $rootScope.albumID);
     }
 
     $scope.show2 = function () { //show the uplaod file modal

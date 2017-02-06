@@ -5,7 +5,6 @@ angular.module('app.albumViewer', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
     var data;
 
     function updateState(album) {
-      console.log('the updated state', album);
       return album;
     }
 

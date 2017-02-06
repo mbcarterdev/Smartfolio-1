@@ -21,7 +21,7 @@ angular.module('app.factory', [])
         });
     };
 
-    var isAuth = function () { //fetching the token from local storage and checking if it exisits
+    var isAuth = function () { //fetching the token from local storage and checking if it exists
       return !!$window.localStorage.getItem('com.smartfolio');
     }
 
