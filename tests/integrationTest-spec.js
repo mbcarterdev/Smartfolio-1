@@ -19,14 +19,15 @@ describe('Smartfolio app', function() {
     expect(browser.getCurrentUrl()).toEqual('http://localhost:8000/#/home');
   });
 
-/* **** This commented-out signup test doesn't seem to work due to signup residing in a modal **** */
+  it('should allow user to successfully signup and redirect to home page', function() {
+    element(by.id('signup')).click();
 
-  // it('should allow user to successfully signup and redirect to home page', function() {
-  //   element(by.id('signup')).click();
-  //
-  //   element(by.id('input_3')).sendKeys('beans@beans.com');
-  //   element(by.id('input_4')).sendKeys('beans');
-  //
-  //   expect(browser.getCurrentUrl()).toEqual('http://localhost:8000/#/home');
-  // });
+    element(by.id('signupUSN')).sendKeys('beans@beans.com');
+    element(by.id('signupPW')).sendKeys('beans');
+
+    element(by.id('signupBTN')).click();
+
+    expect(browser.getCurrentUrl()).toEqual('http://localhost:8000/#/home');
+    done();
+  });
 });

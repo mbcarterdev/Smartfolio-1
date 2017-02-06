@@ -34,7 +34,7 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
                             <input id="signupPW" type="password" ng-model="user.password" />
                         </md-input-container>
                         <md-dialog-actions>
-                            <md-button ng-click="closeDialog()" class="md-primary signup">
+                            <md-button id="signupBTN" ng-click="closeDialog()" class="md-primary signup">
                               Sign Up
                             </md-button>
                         </md-dialog-actions>
