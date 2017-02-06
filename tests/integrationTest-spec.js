@@ -1,4 +1,7 @@
+// initial tests for the smartfolio app.
+
 describe('Smartfolio app', function() {
+  // if app is not deployed, make sure to run the app on localhost first
   beforeEach(function() {
     browser.get('http://localhost:8000');
   });
@@ -16,6 +19,8 @@ describe('Smartfolio app', function() {
     expect(browser.getCurrentUrl()).toEqual('http://localhost:8000/#/home');
   });
 
+/* **** This commented-out signup test doesn't seem to work due to signup residing in a modal **** */
+
   // it('should allow user to successfully signup and redirect to home page', function() {
   //   element(by.id('signup')).click();
   //
@@ -24,16 +29,4 @@ describe('Smartfolio app', function() {
   //
   //   expect(browser.getCurrentUrl()).toEqual('http://localhost:8000/#/home');
   // });
-
-    // element(by.model('todoList.todoText')).sendKeys('write first protractor test');
-    // element(by.css('[value="add"]')).click();
-    //
-    // var todoList = element.all(by.repeater('todo in todoList.todos'));
-    // expect(todoList.count()).toEqual(3);
-    // expect(todoList.get(2).getText()).toEqual('write first protractor test');
-    //
-    // // You wrote your first test, cross it off the list
-    // todoList.get(2).element(by.css('input')).click();
-    // var completedAmount = element.all(by.css('.done-true'));
-    // expect(completedAmount.count()).toEqual(2);
 });
