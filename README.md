@@ -48,6 +48,7 @@ see package.json file/run npm install
  - allow users to create their own tags and save the tags in database
  - Hook up with Facebook API so that users can share pictures/albums on their facebook account
  - Increase code coverage to allow users more flexibility at every layer of the application
+ - Change up code structure, especially in route controllers, so as to avoid so many nested raw queries
 
 ## Contributing
 

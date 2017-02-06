@@ -14,8 +14,9 @@ module.exports = {
       db.raw(`SELECT * FROM smartfolio.albums WHERE userID = '${userID}'`)
       .then(function(albuminfo) {
         albuminfo[0].forEach(function(album, index) {
-          db.raw(`SELECT * FROM smartfolio.album_image WHERE albumID=${album.idalbums}`) // need to write a comment here to explain the query string
+          db.raw(`SELECT * FROM smartfolio.album_image WHERE albumID=${album.idalbums}`) // fetch all photo records that have a relationship with the album(s)
           .then(function(images) {
+            // include all the photo information as a property of the data array that is sent back to client
             var actualImage = images[0];
             album['images'] = actualImage.map(function(imageID) {
               return imageID.imageID;
@@ -26,6 +27,7 @@ module.exports = {
               res.status(200).send(data);
             }
           })
+          // TODO: create catch statements for more code robustness
         })
       })
     })
@@ -37,7 +39,6 @@ module.exports = {
 
   upload: function(req, res) {
     // add a new album
-    console.log('req body', req.body);
     var username = req.headers.username;
     var albumName = req.body.albumInfo.album.albumName;
     var albumDescription = req.body.albumInfo.album.albumDescription;
@@ -45,6 +46,7 @@ module.exports = {
       return photo.idimages;
     });
 
+    // TODO: include catch statements at every layer of queries
     db.raw(`SELECT idusers FROM smartfolio.users WHERE username='${username}'`)
     .then(function (result) {
       var userID = result[0][0].idusers;

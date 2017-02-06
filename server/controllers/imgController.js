@@ -4,8 +4,10 @@ var fs = require('fs');
 
 module.exports = {
   fetch: function (req, res) {
+    // retrieve all photos that belong to the logged-in user
     var username = req.headers.username;
     var data = []
+    // TODO: create catch statements
     db.raw(`select idusers from smartfolio.users where username = '${username}'`) //get userID of the signed in user
       .then(function (userInfo) {
         var userID = userInfo[0][0].idusers;
@@ -27,10 +29,12 @@ module.exports = {
       });
   },
   upload: function (req, res) {
+    // Add information about a photo to the database
     var username = req.headers.username;
     var front = req.files.front[0].originalname;
     var back = req.files.back[0].originalname
-    console.log(front)
+
+    // TODO: catch statements
     db.raw(`select idusers from smartfolio.users where username = '${username}'`)
       .then(function (results) {
         var userID = results[0][0].idusers;
@@ -56,12 +60,12 @@ module.exports = {
   },
 
   delete: function (req, res) {
-    console.log(req.params);
+    // delete a photo from the database
+    // TODO: catch statements at every layer
     var deleteMeHash = req.params.imgurl;
     var data = []
     db.raw(`select idimages from smartfolio.images where imghash = '${deleteMeHash}'`)
       .then(function (results) {
-        console.log(results[0]);
         db.raw(`DELETE from smartfolio.tags where idimages = '${results[0][0]['idimages']}'`)
           .then(function(result) {
             db.raw(`DELETE from smartfolio.images where imghash = '${deleteMeHash}'`)
