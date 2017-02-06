@@ -27,18 +27,18 @@ angular.module('app.landing', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
                         <h1>Smartfolio</h1>
                         <md-input-container>
                             <label>EmailAddress</label>
-                            <input type="email" ng-model="user.username" />
+                            <input id="signupUSN" type="email" ng-model="user.username" />
                         </md-input-container>
                         <md-input-container>
                             <label>Password</label>
-                            <input type="password" ng-model="user.password" />
+                            <input id="signupPW" type="password" ng-model="user.password" />
                         </md-input-container>
                         <md-dialog-actions>
-                            <md-button ng-click="closeDialog()" class="md-primary signup">
+                            <md-button id="signupBTN" ng-click="closeDialog()" class="md-primary signup">
                               Sign Up
                             </md-button>
                         </md-dialog-actions>
-                       
+
                     </form>
                  </md-dialog-content>
                 </md-dialog>`,

@@ -1,57 +1,4 @@
-<!-- <md-toolbar>
-  <div class="md-toolbar-tools toolbar-home">
-    <md-button>
-    <md-tooltip>Menu</md-tooltip>
-    <md-icon class="md-default-theme material-icons" ng-click="toggleLeft()">menu</md-icon>
-    </md-button>
-    <md-input-container class="search" >
-    <label>Search</label>
-    <input type="text" ng-model="search" class="search_input">
-    </md-input-container>
-  </div>
-</md-toolbar>
-<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="24">
-  <md-toolbar>
-    <h1 class="md-toolbar-tools head">Menu</h1>
-  </md-toolbar>
-  <md-content layout-margin="" layout="column">
-    <md-button ng-click="settings()" class="md-accent">
-      Settings
-    </md-button>
-    <md-button ng-click="logoff()" class="md-accent">
-      Log Off
-    </md-button>
-    <md-button ng-click="toggleLeft()" class="md-accent">
-      Close Menu
-    </md-button>
-  </md-content>
-</md-sidenav>
-<div class="row">
-  <div class="col-sm-offset-5 col-sm-2 text-center">
-    <md-button ng-click="show2()" class="add">Add Photos</md-button>
-  </div>
-</div>
-<div id="grid1" ui-grid="gridOptions" class="grid"></div>
-
-<form role="form" class="form" onsubmit="return false;">
-  <div class="form-group">
-    <label for="album">Album Name</label>
-    <input type="text" name="albumName" ng-model="album.albumName"/>
-    <label for="album">Album Description</label>
-    <input type="text" name="albumDescription" ng-model="album.albumDescription"/>
-    <label for="album">Image IDs (comma separated)</label>
-    <input type="number" name="imageID" ng-model="album.imageIDs"/>
-    <md-button id="upload" type="button" class="btn add" ng-click="createAlbumFromImageView({album});" data-dismiss="modal">Create Album</md-button>
-  </div>
-</form>
-
-<md-bottom-sheet>
-
-</md-bottom-sheet> -->
-
-
-
-
+<!-- page with all user albums displayed -->
 <md-toolbar>
 
   <div class="md-toolbar-tools toolbar-home">
@@ -101,11 +48,6 @@
 
 </md-sidenav>
 
-<!-- <div class="row">
-  <div class="col-sm-offset-5 col-sm-2 text-center">
-    <md-button ng-click="show2()" class="add">Add Photos</md-button>
-  </div>
-</div> -->
 <div layout="row" style="height: 100%;">
 
   <div layout="column" class="icon-side-menu">
@@ -191,9 +133,6 @@
   </md-content>
 
 </div>
-<!--<ul class="flex-container wrap">
-  <li class="flex-item ripplelink" md-whiteframe="24" ng-repeat="image in images track by $index"><img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" /></li>
-</ul>-->
 
 <script type="text/ng-template" id="modal.html">
   <div class="modal fade">
@@ -212,24 +151,6 @@
     </div>
   </div>
 </script>
-
-<!-- <script type="text/ng-template" id="modal.html">
-  <div class="modal fade">
-    <div class="modal-dialog fullscreen-dialog">
-      <div class="modal-content">
-        <div class="modal-body" layout="row" layout-xs="column">
-          <div class="box">
-            <img ng-src="/photos/{{url.image1.imghash}}" />
-          </div>
-          <div class="box">
-            <img ng-src="/photos/{{url.image2.backimghash}}" />
-          </div>
-        </div>
-        <md-button type="button" ng-click="close()" class="btn btn-primary add" data-dismiss="modal">Close</md-button>
-      </div>
-    </div>
-  </div>
-</script> -->
 
 <script type="text/ng-template" id="uploader.html">
   <div class="modal fade">

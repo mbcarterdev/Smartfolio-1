@@ -4,6 +4,8 @@ var jwt = require('jwt-simple');
 
 module.exports = {
   signin: function (req, res) {
+    // compare user input password and send back jwt
+    // TODO: catch statements
     db.raw(`SELECT username, password from smartfolio.users where username = '${req.body.username}'`)
       .then(function (result) {
         if (result[0][0]) {
@@ -26,30 +28,32 @@ module.exports = {
   },
 
   register: function (req, res) {
+    // create new user in database
+    // TODO: catch statements
     db.raw(`SELECT username from smartfolio.users where username = '${req.body.username}'`)
       .then(function (results) {
         if (!!results[0][0]) {
           res.status(401).send('user already exist')
         } else {
           bcrypt.hash(req.body.password, null, null, function (err, hash) {
-            var hashPassword = hash
+            var hashPassword = hash;
             if (err) {
               return console.log('Error hashing ' + err);
             }
-            console.log('here', results)
             db.raw(`INSERT INTO smartfolio.users VALUES (NULL, '${req.body.username}', '${hash}');`)
               .then(function (results) {
-                var username = req.body.username
-                var password = hashPassword
+                var username = req.body.username;
+                var password = hashPassword;
                 var user = {
                   username,
                   password
-                }
+                };
+                // create a token and send it back to client to be stored in localStorage
                 var token = jwt.encode(user, 'secret');
                 res.status(200).json(token);
-              })
-          })
+              });
+          });
         }
-      })
+      });
   }
-}
+};

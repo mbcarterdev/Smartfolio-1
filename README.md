@@ -4,9 +4,9 @@ Smartfolio
 
 ## Team
 
-  - __Product Owner__: Michelle Carter
-  - __Scrum Master__: RJ Mohammad
-  - __Development Team Members__: Michelle Carter, RJ Mohammad
+  - __Product Owner__: Tony Xu
+  - __Scrum Master__: Rishi Shah
+  - __Development Team Members__: Rishi Shah, Tony Xu
 
 ## Table of Contents
 
@@ -33,14 +33,23 @@ Smartfolio
 
 see package.json file/run npm install
 
-### Roadmap
+### Previous Roadmap
 
--Additional functionality to consider for version 2.0
-  -We intended to provide an optional description field in place of a second image. The database is built to store that field, but there are several front-end issues that would need to be overcome.
-  -Add an albums page, with the ability to add multiple images to an album and for users to have multiple albums.
-  -Add a social networking feature where users can share their albums with friends. This functionality has NOT been built into the database.
-  -Strengthen the IBM Watson features by teaching Watson how to recognize emotions and then maybe enhance albums with AI functionality that would choose songs to play when viewing specific images, based on the emotion or content of the images.
+- Additional functionality to consider for version 2.0
+  - We intended to provide an optional description field in place of a second image. The database is built to store that field, but there are several front-end issues that would need to be overcome.
+  - Add an albums page, with the ability to add multiple images to an album and for users to have multiple albums.
+  - Add a social networking feature where users can share their albums with friends. This functionality has NOT been built into the database.
+  - Strengthen the IBM Watson features by teaching Watson how to recognize emotions and then maybe enhance albums with AI functionality that would choose songs to play when viewing specific images, based on the emotion or content of the images.
 
+
+### Current Roadmap
+
+- Additional functionality to consider for version 3.0
+ - Allow users to create their own tags and save the tags in database
+ - Implement 'change password' functionality
+ - Hook up with Facebook API so that users can share pictures/albums on their facebook account
+ - Increase code coverage to allow users more flexibility at every layer of the application
+ - Change up code structure, especially in route controllers, so as to avoid so many nested raw queries
 
 ## Contributing
 
