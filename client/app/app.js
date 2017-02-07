@@ -74,7 +74,14 @@ angular.module('app', ['app.landing',
       }();
     }
   })
-  .controller('ShareModalCtrl', function ($scope, close, Pics, Collage) { // takes the files from the dialogbox and sends it to server
+  .controller('CreateAlbumCtrl', function($scope, close, Collage, Albums) {
+
+  })
+  .controller('ShareModalCtrl', function ($scope, close, Shared, Pics, Collage) { // takes the files from the dialogbox and sends it to server
+
+    $scope.input = '';
+
+    $scope.usersToAdd = [];
 
     var fd = new FormData();
     $scope.uploadFile = function (fileType, files) {
