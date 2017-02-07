@@ -76,19 +76,6 @@ angular.module('app', ['app.landing',
   })
   .controller('ShareModalCtrl', function ($scope, close, Shared, Pics, Collage) { // takes the files from the dialogbox and sends it to server
 
-    $scope.input = '';
-
-    $scope.usersToAdd = [];
-
-    var fd = new FormData();
-    $scope.uploadFile = function (fileType, files) {
-      fd.append(fileType, files[0])
-    }
-    $scope.connection = function () {
-      Pics.sendPhotos(fd)
-      .then(function () {
-        Collage.getFetcher()();
-      });
       $scope.close = function () {
         close(null,500);
       }();
