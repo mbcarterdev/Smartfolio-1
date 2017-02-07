@@ -2,11 +2,11 @@ angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
   .controller('SharedCtrl', function ($scope, $rootScope, $location, ModalService, Pics, Shared, Albums, Collage, Auth, $window, $mdDialog, $mdSidenav) {
     $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home';
-    $rootScope.sharedAlbums = [];
-    $rootScope.sharedAlbumID = null;
+    $rootScope.sharedAlbums = []; // stores shared album objects in rootscope
+    $rootScope.sharedAlbumID = null; // stores album id for sharedViewer in rootscope
     var data;
 
-    function buildToggler(componentId) {
+    function buildToggler(componentId) {  // side menu toggler
       return function() {
         $mdSidenav(componentId).toggle();
       };
@@ -22,47 +22,11 @@ angular.module('app.shared', ['ngMaterial', "ng", "ngAnimate", "ngAria"])
         $rootScope.sharedAlbums = results;
         console.log(results);
       })
-      //
-      //
-      // Albums.albumList().then(function(result) {
-      //   $rootScope.albums = result.map(function(album) {
-      //     album.imagesPath = album.images.map(function(image) {
-      //       return $rootScope.images.find(function(photo) {
-      //         return photo.idimages === image;
-      //       });
-      //     });
-      //     return album;
-      //
-      //   });
-        // console.log('album results', results);
-      //   console.log('root images', $rootScope.images);
-      //   console.log('in God we trust', $rootScope.albums);
-      //   data = result;
-      //   $rootScope.albums = result;
-      // });
-    };
-
-    $scope.createAlbumRaw = function(albumInfo) {
-      Albums.sendAlbum(albumInfo).then(function(result) {
-        console.log('album creation complete');
-      });
-    };
-
-    $scope.createAlbumFromImageView = function(albumInfo) {
-      // need something here so that redirect to /home will also pop up drag-drop for album creation
-      $location.path('/home');
-    };
-
-    $scope.addImage = function(image) {
-      Albums.addImgToAlbum(image).then(function(result) {
-        console.log('successfully added image to album');
-        // refresh and/or redirect to albums page with the newly added image
-      });
     };
 
     $scope.fetcher();
 
-    $scope.updateAlbumID = function (album) {
+    $scope.updateAlbumID = function (album) { // adds or updates sharedAlbumID scope variable
       $rootScope.sharedAlbumID = album;
       console.log('something', $rootScope.sharedAlbumID);
     }
