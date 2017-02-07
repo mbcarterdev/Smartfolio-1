@@ -167,7 +167,7 @@ angular.module('app.factory', [])
   })
   .factory('Shared', function ($http) {
 
-    var fetcher = function() {
+    var fetcher = function() { // fetches shared albums from server
       return $http({
         method: 'GET',
         url: '/shared/albums',
@@ -177,7 +177,7 @@ angular.module('app.factory', [])
       })
     };
 
-    var getId = function(username) {
+    var getId = function(username) { // helper function that fetches userId of entered username from server if it exists TODO: Implement
       return $http({
         method: 'GET',
         url: `/shared/${username}`
@@ -187,7 +187,7 @@ angular.module('app.factory', [])
       })
     };
 
-    var getList = function(albumId) {
+    var getList = function(albumId) { // helper function that fetches list of users an ablum is shared with TODO: Implement
       return $http({
         method: 'GET',
         url: `/shared/list/${albumId}`,
@@ -197,7 +197,7 @@ angular.module('app.factory', [])
       })
     };
 
-    var addUsers = function(albumId, shareArr, permission) {
+    var addUsers = function(albumId, shareArr, permission) { // put request to share an album with a user TODO: Implement
       return $http({
         method: 'PUT',
         url: '/shared/add',
@@ -212,7 +212,7 @@ angular.module('app.factory', [])
       })
     };
 
-    var removeUser = function(albumId, userId) {
+    var removeUser = function(albumId, userId) { // delete request to unshare an album with user TODO: Implement
       return $http({
         method: 'DELETE',
         url: '/shared',
