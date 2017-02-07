@@ -92,27 +92,8 @@
             <md-tooltip>
               {{album.name}}
             </md-tooltip>
-            <!-- <md-tooltip>
-              {{album.description}}
-            </md-tooltip> -->
 
             <img class="thumbnail" ng-src="/photos/{{album.images[0].imghash}}" ng-click="updateAlbumID({album}); redirectToAlbumViewerView();" />
-
-            <!-- <md-grid-tile-footer>
-
-              <md-menu>
-
-                <md-button class="md-default-theme tile material-icons"  ng-click= "openMenu($mdOpenMenu, $event)">
-                  <md-icon class="tile1">dehaze</md-icon>
-                </md-button>
-
-                <md-menu-content width="4" class="menu_content">
-
-                </md-menu-content>
-
-              </md-menu>
-
-            </md-grid-tile-footer> -->
 
           </md-grid-tile>
 
