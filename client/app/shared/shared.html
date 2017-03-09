@@ -1,4 +1,3 @@
-
 <md-toolbar>
 
   <div class="md-toolbar-tools toolbar-home">
@@ -14,7 +13,7 @@
 
       <md-button ng-click="show2()" class="add">Upload</md-button>
       <!-- Add Create Album Functionality Here -->
-      <md-button ng-click="show3toggler();" class="add">Create Album</md-button>
+      <md-button ng-click="createAlbumFromImageView();" class="add">Create Album</md-button>
 
     </div>
 
@@ -26,6 +25,7 @@
   </div>
 
 </md-toolbar>
+
 
 
 <md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="24">
@@ -48,6 +48,8 @@
 
 </md-sidenav>
 
+
+
 <div layout="row" style="height: 100%;">
 
   <div layout="column" class="icon-side-menu">
@@ -66,88 +68,45 @@
       </div>
     </md-button>
 
-    <md-button id="search-side-btn" class="icon-side-button" ng-click="redirectToShared()">
+    <md-button class="icon-side-button" ng-click="redirectToShared();">
       <div layout="column" layout-align="start center">
         <i class="material-icons md-36">collections_bookmark</i>
-        <div class="icon-side-text">Shared</div>
+        <div class="icon-side-text" ng-click="">Shared</div>
       </div>
     </md-button>
 
   </div>
 
-
-  <md-content class="gridList" flex>
-
-    <div>
-      <div layout="row" ng-show="dragDrop">
-        <div layout="column">
-            <div layout="row" layout-padding layout-align="left">
-                <form role="form" class="form" onsubmit="return false;">
-                    <label for="album">Album Name</label>
-                    <input type="text" name="albumName" ng-model="album.albumName"/>
-                    <label for="album">Album Description</label>
-                    <input type="text" name="albumDescription" ng-model="album.albumDescription" />
-                    <md-button type="button" class="btn add" ng-click="createAlbum({album});">Create</md-button>
-                </form>
-            </div>
-            <div layout="row" layout-align="center center" style="background-color: rgba(100,100,100,.1); height:200px; margin: 16px; border-radius: 10px;" ui-on-Drop="onDrop($event, $data, newAlbum)">
-                DROP IMAGE HERE!!!
-            </div>
-        </div>
-        <div layout="column" layout-fill>
-            <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="15px" md-gutter-gt-sm="15px" ng-show="dragDrop">
-                <md-grid-tile md-colspan="2" md-colspan-md="3" class="flex-item ripplelink" ng-repeat="photo in newAlbum track by $index">
-                    <img class="thumbnail" ng-src="/photos/{{photo.imghash}}" />
-                </md-grid-tile>
-            </md-grid-list>
-        </div>
-      </div>
-
-
-
-      <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="15px" md-gutter-gt-sm="15px">
-
-        <md-grid-tile class="flex-item ripplelink" ui-draggable="true" drag="image" ng-repeat="image in images |filter: search track by $index">
-
-          <md-tooltip>
-            {{image.imgname}}
-          </md-tooltip>
-
-          <img class="thumbnail" ng-src="/photos/{{image.imghash}}" ng-click="show($index)" />
-
-          <md-grid-tile-footer>
-
-            <md-menu>
-
-              <md-button class="md-default-theme tile material-icons"  ng-click= "openMenu($mdOpenMenu, $event)">
-                <md-icon class="tile1">dehaze</md-icon>
-              </md-button>
-
-              <md-menu-content width="4" class="menu_content">
-
-                <md-menu-item class="menu_button">
-                  <md-button ng-click="showTags($index, $event)"> View Tags </md-button>
-                </md-menu-item>
-
-                <md-menu-item class="menu_button">
-                  <md-button ng-click="deleteImage(image.imghash)"> Delete Image </md-button>
-                </md-menu-item>
-
-              </md-menu-content>
-
-            </md-menu>
-
-          </md-grid-tile-footer>
-
-        </md-grid-tile>
-
-      </md-grid-list>
-
+  <div layout="column" flex>
+    <div class="md-padding" style="background-color: white;">
+      <h3>Shared Albums</h3>
     </div>
 
-  </md-content>
+    <md-content style="height: 100%;" class="gridList">
+
+      <div>
+        <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="15px" md-gutter-gt-sm="15px">
+
+          <md-grid-tile class="flex-item ripplelink" ng-repeat="album in sharedAlbums |filter: search track by $index">
+
+            <md-tooltip>
+              {{album.name}}
+            </md-tooltip>
+
+            <img class="thumbnail" ng-src="/photos/{{album.images[0].imghash}}" ng-click="updateAlbumID({album}); redirectToAlbumViewerView();" />
+
+          </md-grid-tile>
+
+        </md-grid-list>
+
+      </div>
+
+    </md-content>
+
+  </div>
 
 </div>
+
 
 <script type="text/ng-template" id="modal.html">
   <div class="modal fade">

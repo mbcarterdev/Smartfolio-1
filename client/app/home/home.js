@@ -1,9 +1,11 @@
 angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularModalService', 'ngMessages', 'material.svgAssetsCache'])
-  .controller('HomeCtrl', function ($scope, $mdSidenav, ModalService, Collage, Pics, $window, Auth, $mdDialog, $location) {
-    $scope.toggleLeft = buildToggler('left'); 
+  .controller('HomeCtrl', function ($scope, $rootScope, $mdSidenav, ModalService, Collage, Pics, Albums, $window, Auth, $mdDialog, $location) {
+    $scope.toggleLeft = buildToggler('left');
     $scope.pageClass = 'page home'; //css style class to have background change and set to the fit the content
-    $scope.images = []; // store the images data
-     var data; // to access tags in the popup
+    $rootScope.images = []; // store the images data
+    var data; // to access tags in the popup
+    $scope.dragDrop = false;
+    $scope.newAlbum = [];
 
     function buildToggler(componentId) { // function for the side nav
       return function () {
@@ -18,18 +20,23 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
     $scope.fetcher = function () { //fetches results from server an object caitaining results from database for the given user
       Pics.imageList().then(function (result) {
         data = result;
-        $scope.images = result;
+        $rootScope.images = result;
       });
     };
 
     $scope.logoff = Auth.signout; //signs off user and destroys the token
     $scope.fetcher(); //fetches the data at the time f intial load
     Collage.setFetcher($scope.fetcher); //picture view modal
-   
-    $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information 
+
+    $scope.onDrop = function($event, $data, albumContainer) {
+      albumContainer.push($data);
+      console.log('new image pushed!', albumContainer);
+    }
+
+    $scope.show = function (index) { //takes the index of the image clicked and sets an object with the images information
       Collage.set({
-        image1: $scope.images[index],
-        image2: $scope.images[index]
+        image1: $rootScope.images[index],
+        image2: $rootScope.images[index]
       });
       ModalService.showModal({
         templateUrl: 'modal.html',
@@ -48,6 +55,15 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
         modal.element.modal();
       });
     };
+
+    $scope.show3toggler = function () {
+      // switch a 'show create album' flag to true so that the drag-drop box will appear and users can drag-drop to make their album
+      if($scope.dragDrop) {
+        $scope.dragDrop = false;
+      } else {
+        $scope.dragDrop = true;
+      }
+    }
 
     $scope.showTags = function (index, $event) { //template to show tags as chips
       $mdDialog.show({
@@ -75,13 +91,38 @@ angular.module('app.home', ['ngMaterial', "ng", "ngAnimate", "ngAria", 'angularM
       .then(function () {
         Collage.getFetcher()();
       });
+    }
+
+    $scope.createAlbum = function (albumInformation) {
+      var albumContent = {};
+      albumContent.photos = $scope.newAlbum;
+      albumContent.albumInfo = albumInformation;
+      if(albumContent.photos.length !== 0) {
+        Albums.sendAlbum(albumContent).then(function(result) {
+          $window.alert('album creation successful');
+          $scope.show3toggler();
+          $scope.newAlbum = [];
+        });
+      } else {
+        console.log('cannot create album, no photos selected');
       }
+    }
 
     $scope.settings = function () { //function to change the rendered view to settings route
       $location.path('/settings');
     }
 
-   
+    $scope.redirectToImageView = function() {
+      $location.path('/home')
+    }
+
+    $scope.redirectToAlbumsView = function() {
+      $location.path('/album')
+    }
+
+    $scope.redirectToShared = function() {
+      $location.path('/shared')
+    }
 
   });
 

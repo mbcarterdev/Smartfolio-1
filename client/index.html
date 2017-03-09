@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Smartfolio</title>
 
-  <link href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.css" rel="stylesheet">
+  <link href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-grid/4.0.2/ui-grid.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <div ng-view class="{{pageClass}}"></div>
+  <div ng-view style="height: 100%;" class="{{pageClass}}"></div>
 
   <footer>
     <div id="social">
@@ -43,12 +43,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-grid/4.0.2/ui-grid.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
+  <script src="resource/draganddrop.min.js"></script>
   <script src="app/app.js"></script>
   <script src="app/landing/landing.js"></script>
   <script src="app/home/home.js"></script>
   <script src="app/album/album.js"></script>
+  <script src="app/album/albumViewer.js"></script>
+  <script src="app/shared/shared.js"></script>
+  <script src="app/shared/sharedViewer.js"></script>
   <script src="app/settings/settings.js"></script>
   <script src="app/factory/factory.js"></script>
+  <script src="app/app.js"></script>
 </body>
 
 </html>
